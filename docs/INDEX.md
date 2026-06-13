@@ -19,6 +19,15 @@ This is the canonical registry of project documents.
 | `docs/TESTING.md` | Testing layers and evidence requirements | Draft |
 | `docs/RELEASE.md` | Release-readiness checklist | Draft |
 
+## Universal reusable pipeline
+
+| File | Purpose | Status |
+|---|---|---|
+| `universal-pipeline/README.md` | Canonical common pipeline source and future trigger | Active |
+| `universal-pipeline/BOOTSTRAP_CONTRACT.md` | Safe rules for applying the pipeline to another repository | Active |
+| `universal-pipeline/MANIFEST.md` | Required common files and activation conditions | Active |
+| `prompts/bootstrap-project.md` | Reusable instruction for setting up a future repository | Active |
+
 ## Change documents
 
 Every meaningful feature or repair will live under:
@@ -34,3 +43,4 @@ Use the templates in `templates/change/`.
 - Git history stores prior versions.
 - Temporary logs and recordings are not permanent documentation.
 - Planned tools must be recorded in `docs/TOOLING.md` even when they cannot yet be activated.
+- Future projects should apply the common pipeline from `universal-pipeline/` rather than recreating it from chat memory.
