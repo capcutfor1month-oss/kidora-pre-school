@@ -10,6 +10,8 @@ Development-pipeline setup only.
 
 ## Completed
 
+- GitHub repository created
+- Pipeline scaffold committed to `main`
 - Project name selected
 - Canonical documentation structure prepared
 - Multi-agent responsibilities defined
@@ -29,12 +31,12 @@ Development-pipeline setup only.
 
 ## Current blocker
 
-An empty GitHub repository must be created before this scaffold can become the repository source of truth.
+None for the repository scaffold.
 
 ## Next action
 
-Create an empty private GitHub repository named `kidora-pre-school`, then add this scaffold as the initial commit.
+Audit and understand the pipeline structure, then configure the local CLI tools without starting product development.
 
 ## Boundary
 
-Do not begin product design or implementation during pipeline setup.
+Do not begin product design, architecture selection, or implementation during pipeline setup.
