@@ -4,9 +4,9 @@ This folder is reserved for specification-driven changes.
 
 ## Current status
 
-OpenSpec tooling is not yet initialized because the GitHub repository and local tool environment do not yet exist.
+The GitHub repository and pipeline scaffold now exist.
 
-No product specification has been created.
+OpenSpec CLI tooling has **not** yet been initialized in a local development environment. No product specification has been created, and no product work should begin during pipeline setup.
 
 ## Future change structure
 
