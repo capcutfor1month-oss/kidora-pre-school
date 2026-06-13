@@ -37,3 +37,13 @@
 **Reason:** This preserves role separation and reserves Claude's context for high-value implementation.
 
 **Status:** Active
+
+---
+
+## DEC-005 — Universal pipeline source
+
+**Decision:** Store a project-independent bootstrap pipeline in `universal-pipeline/` and apply it to future repositories when the founder shares a GitHub URL and asks to use the common pipeline.
+
+**Reason:** Every new project should begin with the same prerequisites without depending on an old chat or rebuilding the process from memory.
+
+**Status:** Active
