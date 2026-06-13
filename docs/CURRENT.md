@@ -18,6 +18,8 @@ Development-pipeline setup only.
 - Anti-duplication rules defined
 - Change and report templates prepared
 - Documentation validation workflow prepared
+- Complete end-to-end pipeline recorded in `docs/PIPELINE.md`
+- All planned tools and activation conditions recorded in `docs/TOOLING.md`
 
 ## Not started
 
@@ -35,7 +37,7 @@ None for the repository scaffold.
 
 ## Next action
 
-Audit and understand the pipeline structure, then configure the local CLI tools without starting product development.
+Configure the local CLI tools and verify that each agent reads the repository rules. Do not begin product development.
 
 ## Boundary
 
