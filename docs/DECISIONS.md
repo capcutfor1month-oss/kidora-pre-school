@@ -59,3 +59,33 @@
 **Important:** This is an initial roadmap, not approval to build every module. Each phase requires discovery, founder approval, specification, implementation, testing, and audit.
 
 **Status:** Proposed direction active
+
+---
+
+## DEC-007 — Approved external skill sources
+
+**Decision:** Approve `phuryn/pm-skills`, `mattpocock/skills`, and `coreyhaines31/marketingskills` as specialist capability sources for Kidora.
+
+**Reason:** Together they provide structured product discovery, engineering discipline, and marketing/growth workflows while preserving the existing Kidora pipeline and founder authority.
+
+**Status:** Active
+
+---
+
+## DEC-008 — Phase-based skill activation
+
+**Decision:** Kidora will use skills lazily by phase. PM and clarification skills are active for Phase 1 discovery; engineering skills wait for an approved implementation change; marketing skills wait for validated product context and launch work.
+
+**Reason:** This keeps the full capability available without bloating context, creating conflicting instructions, or using launch and coding frameworks too early.
+
+**Status:** Active
+
+---
+
+## DEC-009 — Child-data and marketing safety
+
+**Decision:** External skills may not automate admission, medical, behavioural, disciplinary, or child-development decisions, and may not invent school claims, evidence, testimonials, accreditation, pricing, or educational outcomes.
+
+**Reason:** Kidora will handle sensitive child and parent information and must preserve human approval, truthfulness, consent, and role-based access.
+
+**Status:** Active
