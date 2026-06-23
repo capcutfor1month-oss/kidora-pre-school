@@ -4,6 +4,10 @@
 
 ## Tasks completed
 
+## Skills used
+
+List the selected skill source and skill names, or state `None`.
+
 ## Files changed
 
 ## Tests added or updated
@@ -15,6 +19,10 @@
 ## Checks failed
 
 ## Deviations from the approved design
+
+## Skill-related scope check
+
+Confirm that no skill expanded scope, changed architecture, or overrode the approved specification.
 
 ## Remaining uncertainty
 
