@@ -1,11 +1,12 @@
-# Tooling Registry
+# Tooling and Skills Registry
 
-This registry records every planned tool now. A tool may be documented before it can be activated.
+This registry records every planned tool and approved skill source. A tool or skill library may be documented before it can be activated.
 
 ## Status meanings
 
 - **Active:** Usable now
 - **Ready to configure:** Can be installed without product architecture
+- **Approved source:** Available for selective use when its stage is active
 - **Blocked by architecture:** Requires an approved application stack
 - **Blocked by working app:** Requires actual screens or runtime behaviour
 - **Blocked by real users:** Requires production usage
@@ -23,6 +24,9 @@ This registry records every planned tool now. A tool may be documented before it
 | GitHub Actions | Automated repository checks | Active for pipeline documents | Application checks added after stack selection | CI |
 | Playwright | Repeatable browser testing | Blocked by architecture | Web application stack and runnable app exist | CI / QA |
 | Antigravity | Exploratory browser and UX verification | Blocked by working app | Preview or local app exists | Antigravity |
+| `phuryn/pm-skills` | Product discovery, strategy, execution, research, metrics, and launch frameworks | Approved source | Selective use during discovery, strategy, specification, metrics, or launch | Founder + ChatGPT |
+| `mattpocock/skills` | Clarification, shared language, TDD, debugging, codebase design, Git guardrails, and handoffs | Approved source | Selective use during discovery, planning, implementation, or debugging | ChatGPT + engineering agents |
+| `coreyhaines31/marketingskills` | Product marketing, customer research, copy, CRO, SEO, analytics, launch, retention, and growth | Approved source | Product context and relevant marketing task exist | Founder + ChatGPT |
 | Design OS | Optional UX and product-design workflow | Optional | A complex user journey needs design support | Founder + ChatGPT |
 | Agent OS | Permanent standards workflow | Partially represented | Existing rules prove insufficient | Founder + ChatGPT |
 | Task Master | Large task dependency management | Optional | OpenSpec tasks become too large to manage | Orchestrator |
@@ -34,18 +38,39 @@ This registry records every planned tool now. A tool may be documented before it
 | PostHog | Product analytics and behaviour evidence | Blocked by real users | Privacy-safe events are defined | Product |
 | GitHub Agentic Workflows | Low-risk recurring repository automation | Optional | Manual pipeline is understood and stable | Repository operations |
 
+## Current Kidora skill activation
+
+The canonical project-specific selection is in `docs/SKILLS.md`.
+
+### Active for Phase 1 discovery
+
+- PM discovery, assumption, interview, vision, value-proposition, roadmap, PRD, user-story, test-scenario, pre-mortem, and strategy-red-team skills
+- `grill-with-docs`, `grill-me`, `domain-modeling`, `to-prd`, `to-issues`, and `handoff`
+
+### Waiting for implementation approval
+
+- `tdd`
+- `diagnosing-bugs`
+- `codebase-design`
+- Git guardrails
+- Pre-commit feedback loops
+
+### Waiting for validated product context or launch work
+
+- Product marketing
+- Customer research
+- Copywriting and CRO
+- Signup and onboarding
+- Analytics and experimentation
+- SEO, email, SMS, social, launch, referrals, pricing, sales, and retention
+
 ## Important distinction
 
-**Captured now** does not always mean **installed now**.
+**Captured now** does not always mean **installed or loaded now**.
 
-Some tools cannot be truthfully configured before the application stack exists. For example:
+Some tools cannot be configured before the application stack exists. Some skills are intentionally deferred until Kidora reaches their stage.
 
-- Playwright needs a runnable web application and package manager.
-- Sentry needs a real framework and runtime.
-- PostHog needs approved user events and privacy rules.
-- Preview and production deployment require an approved hosting architecture.
-
-Their intended role and activation conditions are recorded here now, so they cannot be forgotten.
+Their intended role and activation conditions are recorded now so they are not forgotten.
 
 ## Local setup target
 
@@ -56,24 +81,29 @@ The initial local setup may include:
 3. Configure Gemini CLI.
 4. Configure Claude Code.
 5. Optionally configure OpenCode.
-6. Verify each agent reads the canonical repository rules.
-7. Run the existing pipeline-document check.
-8. Stop before product discovery or application implementation.
+6. Review `docs/SKILLS.md` and install only the selected current-phase skills.
+7. Verify each agent reads the canonical repository rules.
+8. Run the pipeline-document check.
+9. Stop before application implementation until the Phase 1 change is approved.
 
 ## Tool-selection rule
 
-Do not use every agent for every task.
+Do not use every agent or skill for every task.
 
 - Product decision: Founder + ChatGPT
+- Discovery support: Selected PM and clarification skills
 - Specification: ChatGPT + Founder
 - Investigation: Gemini CLI or OpenCode
-- Production coding: Claude
+- Production coding: Claude with selected engineering skills
 - Repeatable technical checks: GitHub Actions
 - Browser automation: Playwright
 - Exploratory UX checks: Antigravity
 - Independent audit: Codex
 - Final approval: Founder
+- Marketing and growth: Selected marketing skills after product context exists
 
 ## Token-efficiency rule
 
 Reserve Claude for high-value implementation. Use deterministic scripts, GitHub Actions, Gemini CLI, or OpenCode for repository exploration, repetitive checks, and log summarization.
+
+Load skills lazily. Do not copy or inject entire upstream libraries into Kidora's working context.
