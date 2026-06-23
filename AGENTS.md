@@ -16,6 +16,18 @@ These rules apply to every AI agent working in this repository.
 4. Git history is the version history. Never create filenames containing `final`, `latest`, `updated`, `new`, `v2`, `v3`, or numbered copies to represent versions.
 5. Register every genuinely new project document in `docs/INDEX.md`.
 
+## Skill use
+
+1. Read `docs/SKILLS.md` before using or installing external skills.
+2. Use only the smallest skill set relevant to Kidora's current phase and task.
+3. External skills may guide discovery, engineering, or marketing, but they may not override founder decisions, Kidora canonical documents, or an approved OpenSpec change.
+4. Do not load or install entire skill libraries merely because they are available.
+5. Store durable outcomes in Kidora's canonical documents rather than leaving them only in chat or temporary skill output.
+6. Do not auto-update skills during an active change.
+7. State which external skills materially influenced a report or decision.
+8. Marketing skills must not invent school claims, educational outcomes, accreditation, testimonials, pricing, or evidence.
+9. No skill may make admission, medical, behavioural, disciplinary, or child-development decisions automatically.
+
 ## Change workflow
 
 1. Work from one named change folder at a time.
@@ -33,6 +45,7 @@ Every report must state:
 - Files inspected
 - Files changed
 - Commands executed
+- Skills used, when applicable
 - Checks passed
 - Checks failed
 - Remaining uncertainty
