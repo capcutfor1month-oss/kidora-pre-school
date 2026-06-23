@@ -7,7 +7,7 @@ This is the canonical registry of Kidora project documents.
 | File | Purpose | Status |
 |---|---|---|
 | `README.md` | Repository introduction and current setup boundary | Active |
-| `AGENTS.md` | Rules shared by all agents | Active |
+| `AGENTS.md` | Rules shared by all agents, including skill governance | Active |
 | `CLAUDE.md` | Claude-specific implementation rules | Active |
 | `GEMINI.md` | Gemini CLI investigation rules | Active |
 | `docs/PRODUCT.md` | Proposed product definition and target users | Initial direction recorded |
@@ -16,13 +16,22 @@ This is the canonical registry of Kidora project documents.
 | `docs/CURRENT.md` | Concise current project state and next action | Active |
 | `docs/DECISIONS.md` | Durable approved decisions | Active |
 | `docs/PIPELINE.md` | Complete end-to-end development workflow | Active |
-| `docs/TOOLING.md` | Full tool registry, roles, and activation conditions | Active |
+| `docs/TOOLING.md` | Full tool and skill-source registry | Active |
+| `docs/SKILLS.md` | Kidora phase-based skill activation and safety rules | Active |
 | `docs/TESTING.md` | Testing layers and evidence requirements | Draft |
 | `docs/RELEASE.md` | Release-readiness checklist | Draft |
 
+## Approved external skill sources
+
+- `phuryn/pm-skills`
+- `mattpocock/skills`
+- `coreyhaines31/marketingskills`
+
+The selected current-phase skills and deferred capabilities are recorded in `docs/SKILLS.md`.
+
 ## Common pipeline source
 
-The canonical reusable pipeline now lives in:
+The canonical reusable pipeline lives in:
 
 `capcutfor1month-oss/project-Pipline`
 
@@ -43,4 +52,5 @@ Use the templates in `templates/change/`.
 - Git history stores prior versions.
 - Temporary logs and recordings are not permanent documentation.
 - Planned tools must be recorded in `docs/TOOLING.md` even when they cannot yet be activated.
+- Skill activation and safety rules belong in `docs/SKILLS.md`.
 - Project decisions belong in Kidora's repository; common workflow rules belong in `project-Pipline`.
