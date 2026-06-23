@@ -42,8 +42,20 @@
 
 ## DEC-005 — Universal pipeline source
 
-**Decision:** Store a project-independent bootstrap pipeline in `universal-pipeline/` and apply it to future repositories when the founder shares a GitHub URL and asks to use the common pipeline.
+**Decision:** Use `capcutfor1month-oss/project-Pipline` as the canonical common pipeline for Kidora and future projects.
 
-**Reason:** Every new project should begin with the same prerequisites without depending on an old chat or rebuilding the process from memory.
+**Reason:** The shared operating method should live independently from any single product repository.
 
 **Status:** Active
+
+---
+
+## DEC-006 — Initial product direction
+
+**Decision:** Record the proposed Kidora direction as a preschool operating system, beginning with QR-based parent registration and admission enquiry management.
+
+**Reason:** The founder wants the first registration app to fit into a clear long-term product rather than become an isolated form.
+
+**Important:** This is an initial roadmap, not approval to build every module. Each phase requires discovery, founder approval, specification, implementation, testing, and audit.
+
+**Status:** Proposed direction active
