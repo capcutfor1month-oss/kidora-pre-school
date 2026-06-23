@@ -1,6 +1,6 @@
 # Documentation Index
 
-This is the canonical registry of project documents.
+This is the canonical registry of Kidora project documents.
 
 ## Permanent documents
 
@@ -10,7 +10,8 @@ This is the canonical registry of project documents.
 | `AGENTS.md` | Rules shared by all agents | Active |
 | `CLAUDE.md` | Claude-specific implementation rules | Active |
 | `GEMINI.md` | Gemini CLI investigation rules | Active |
-| `docs/PRODUCT.md` | Product definition and target user | Not started |
+| `docs/PRODUCT.md` | Proposed product definition and target users | Initial direction recorded |
+| `docs/ROADMAP.md` | Initial phased product roadmap | Proposed, not locked |
 | `docs/ARCHITECTURE.md` | Approved current architecture | Not selected |
 | `docs/CURRENT.md` | Concise current project state and next action | Active |
 | `docs/DECISIONS.md` | Durable approved decisions | Active |
@@ -19,14 +20,13 @@ This is the canonical registry of project documents.
 | `docs/TESTING.md` | Testing layers and evidence requirements | Draft |
 | `docs/RELEASE.md` | Release-readiness checklist | Draft |
 
-## Universal reusable pipeline
+## Common pipeline source
 
-| File | Purpose | Status |
-|---|---|---|
-| `universal-pipeline/README.md` | Canonical common pipeline source and future trigger | Active |
-| `universal-pipeline/BOOTSTRAP_CONTRACT.md` | Safe rules for applying the pipeline to another repository | Active |
-| `universal-pipeline/MANIFEST.md` | Required common files and activation conditions | Active |
-| `prompts/bootstrap-project.md` | Reusable instruction for setting up a future repository | Active |
+The canonical reusable pipeline now lives in:
+
+`capcutfor1month-oss/project-Pipline`
+
+The local `universal-pipeline/README.md` is only a reference to that dedicated repository and must not become a competing source.
 
 ## Change documents
 
@@ -43,4 +43,4 @@ Use the templates in `templates/change/`.
 - Git history stores prior versions.
 - Temporary logs and recordings are not permanent documentation.
 - Planned tools must be recorded in `docs/TOOLING.md` even when they cannot yet be activated.
-- Future projects should apply the common pipeline from `universal-pipeline/` rather than recreating it from chat memory.
+- Project decisions belong in Kidora's repository; common workflow rules belong in `project-Pipline`.
