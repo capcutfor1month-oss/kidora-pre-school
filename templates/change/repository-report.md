@@ -4,6 +4,10 @@
 
 ## Files inspected
 
+## Skills used
+
+List the selected skill source and skill names, or state `None`.
+
 ## Current behaviour and data flow
 
 ## Existing tests
