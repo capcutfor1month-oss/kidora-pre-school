@@ -16,177 +16,82 @@
     }
 
     /* HEADER */
-    header {
-      border-bottom: 1px solid #e2e8f0;
-      background: #ffffff;
-    }
+    header { border-bottom: 1px solid #e2e8f0; background: #ffffff; }
     .nav {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+      min-height: 58px; display: flex; align-items: center; gap: 10px;
     }
     .brand-mark {
-      width: 34px; height: 34px;
-      border-radius: 8px;
-      background: #2563eb;
-      color: #fff;
-      font-weight: 800;
-      font-size: 17px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 8px;
+      background: #2563eb; color: #fff; font-weight: 800; font-size: 17px;
+      display: grid; place-items: center; flex-shrink: 0;
     }
     .brand-title { font-weight: 800; font-size: 15px; line-height: 1.2; }
     .brand-subtitle { font-size: 11px; color: #64748b; }
     .tool-badge {
-      margin-left: auto;
-      font-size: 12px;
-      color: #475569;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 3px 10px;
-      font-weight: 600;
+      margin-left: auto; font-size: 12px; color: #475569;
+      background: #f1f5f9; border: 1px solid #e2e8f0;
+      border-radius: 6px; padding: 3px 10px; font-weight: 600;
     }
 
     /* WORKSPACE */
     .workspace {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 24px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
-      gap: 24px;
-      align-items: start;
+      max-width: 1280px; margin: 0 auto; padding: 24px;
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+      gap: 24px; align-items: start;
     }
 
     /* CARDS */
     .card {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+      border: 1px solid #e2e8f0; border-radius: 12px;
+      background: #ffffff; box-shadow: 0 1px 3px rgba(15,23,42,0.06);
     }
-    .card-head {
-      padding: 20px 24px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .card-head h1 {
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: -0.02em;
-    }
-    .card-head p {
-      margin: 4px 0 0;
-      color: #64748b;
-      font-size: 13px;
-    }
-    .form-body {
-      padding: 24px;
-      display: grid;
-      gap: 28px;
-    }
+    .card-head { padding: 20px 24px; border-bottom: 1px solid #e2e8f0; }
+    .card-head h1 { margin: 0; font-size: 20px; letter-spacing: -0.02em; }
+    .card-head p { margin: 4px 0 0; color: #64748b; font-size: 13px; }
+    .form-body { padding: 24px; display: grid; gap: 28px; }
 
     /* FORM ELEMENTS */
-    .form-section h2 {
-      margin: 0 0 14px;
-      font-size: 15px;
-      color: #1e293b;
-      font-weight: 700;
-    }
-    .field-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
+    .form-section h2 { margin: 0 0 14px; font-size: 15px; color: #1e293b; font-weight: 700; }
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     .span-2 { grid-column: 1 / -1; }
-    .label-text {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #1e293b;
-    }
+    .label-text { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; color: #1e293b; }
     input[type="text"],
     input[type="number"],
     input[type="date"],
     textarea,
     select {
-      width: 100%;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      min-height: 40px;
-      padding: 8px 12px;
-      font: inherit;
-      font-size: 14px;
-      color: #020817;
-      background: #ffffff;
-      transition: border-color 0.15s;
+      width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;
+      min-height: 40px; padding: 8px 12px; font: inherit;
+      font-size: 14px; color: #020817; background: #ffffff; transition: border-color 0.15s;
     }
     textarea { min-height: 72px; resize: vertical; }
     input:focus, textarea:focus, select:focus {
-      outline: 2px solid #bfdbfe;
-      outline-offset: 0;
-      border-color: #2563eb;
+      outline: 2px solid #bfdbfe; outline-offset: 0; border-color: #2563eb;
     }
-    input.invalid, textarea.invalid, select.invalid {
-      border-color: #dc2626;
-    }
-    input.invalid:focus, textarea.invalid:focus, select.invalid:focus {
-      outline-color: #fecaca;
-    }
-    .field-error {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: #dc2626;
-      min-height: 16px;
-    }
+    input.invalid, textarea.invalid, select.invalid { border-color: #dc2626; }
+    input.invalid:focus, textarea.invalid:focus, select.invalid:focus { outline-color: #fecaca; }
+    .field-error { display: block; margin-top: 4px; font-size: 12px; color: #dc2626; min-height: 16px; }
 
-    /* LOGO UPLOAD */
+    /* UPLOAD LOGO */
     .upload-box {
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 14px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
+      border: 1px solid #e2e8f0; background: #f8fafc;
+      border-radius: 8px; padding: 14px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
     }
     .upload-thumb {
-      width: 96px; height: 68px;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      background: #ffffff;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      color: #94a3b8;
-      font-size: 11px;
-      font-weight: 700;
-      text-align: center;
-      flex-shrink: 0;
+      width: 96px; height: 68px; border: 1px solid #e2e8f0;
+      border-radius: 6px; background: #ffffff;
+      display: grid; place-items: center; overflow: hidden;
+      color: #94a3b8; font-size: 11px; font-weight: 700; text-align: center; flex-shrink: 0;
     }
     .upload-thumb img { width: 100%; height: 100%; object-fit: contain; }
     .upload-actions { display: flex; flex-direction: column; gap: 6px; }
     .upload-btn {
-      display: inline-flex;
-      min-height: 38px;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      background: #ffffff;
-      padding: 0 16px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      color: #020817;
+      display: inline-flex; min-height: 38px; align-items: center;
+      justify-content: center; border: 1px solid #e2e8f0; border-radius: 6px;
+      background: #ffffff; padding: 0 16px; font-weight: 700; font-size: 13px;
+      cursor: pointer; color: #020817;
     }
     .upload-btn:hover { background: #f8fafc; }
     .upload-btn:focus-within { outline: 2px solid #bfdbfe; border-color: #2563eb; }
@@ -194,48 +99,22 @@
     .help { margin: 4px 0 0; color: #64748b; font-size: 12px; line-height: 1.5; }
 
     /* FEE ITEMS */
-    .fee-item {
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-    .fee-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+    .fee-item { border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+    .fee-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .fee-head h3 { margin: 0; font-size: 13px; color: #475569; font-weight: 700; }
     .remove-btn {
-      border: 0;
-      background: transparent;
-      color: #dc2626;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: 4px;
-      min-height: 32px;
+      border: 0; background: transparent; color: #dc2626;
+      font-weight: 700; font-size: 13px; cursor: pointer;
+      padding: 4px 8px; border-radius: 4px; min-height: 32px;
     }
     .remove-btn:hover { background: #fef2f2; }
     .remove-btn:focus { outline: 2px solid #fecaca; outline-offset: 1px; }
-    .fee-grid {
-      display: grid;
-      grid-template-columns: 1fr 160px;
-      gap: 14px;
-    }
+    .fee-grid { display: grid; grid-template-columns: 1fr 160px; gap: 14px; }
 
     /* TOTAL */
     .total-row {
-      margin-top: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 12px 16px;
+      margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px;
     }
     .total-label { font-weight: 700; color: #1e293b; font-size: 14px; }
     .total-amount { font-size: 20px; font-weight: 800; color: #2563eb; }
@@ -243,128 +122,108 @@
 
     /* BUTTONS */
     .secondary-btn, .primary-btn {
-      width: 100%;
-      min-height: 42px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; min-height: 42px; border-radius: 6px;
+      font-weight: 700; font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
     }
-    .secondary-btn {
-      border: 1px solid #e2e8f0;
-      background: #ffffff;
-      color: #020817;
-    }
+    .secondary-btn { border: 1px solid #e2e8f0; background: #ffffff; color: #020817; }
     .secondary-btn:hover { background: #f8fafc; }
-    .primary-btn {
-      border: 0;
-      background: #2563eb;
-      color: #ffffff;
-    }
+    .primary-btn { border: 0; background: #2563eb; color: #ffffff; }
     .primary-btn:hover { background: #1d4ed8; }
-    .primary-btn:focus, .secondary-btn:focus {
-      outline: 2px solid #bfdbfe;
-      outline-offset: 2px;
-    }
+    .primary-btn:focus, .secondary-btn:focus { outline: 2px solid #bfdbfe; outline-offset: 2px; }
 
-    /* PAGE SIZE SELECTOR */
-    .size-selector {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 8px;
+    /* ── SIGNATURE TABS ── */
+    .sig-tabs {
+      display: flex; gap: 4px; margin-bottom: 14px;
+      background: #f1f5f9; border-radius: 8px; padding: 4px;
     }
-    .size-selector-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
+    .sig-tab {
+      flex: 1; border: 0; background: transparent; border-radius: 6px;
+      padding: 8px 12px; font-weight: 700; font-size: 13px;
+      color: #64748b; cursor: pointer;
     }
-    .size-options {
-      display: flex;
-      gap: 4px;
+    .sig-tab.active { background: #ffffff; color: #020817; box-shadow: 0 1px 2px rgba(15,23,42,0.08); }
+    .sig-tab:focus { outline: 2px solid #bfdbfe; outline-offset: 1px; }
+
+    /* Signature upload preview */
+    .sig-upload-preview {
+      width: 100%; max-width: 260px; height: 60px;
+      border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc;
+      display: none; margin-top: 10px;
+      object-fit: contain;
     }
+    .sig-upload-preview.visible { display: block; }
+
+    /* Canvas draw area */
+    .sig-canvas-wrap {
+      border: 1px dashed #cbd5e1; border-radius: 6px;
+      background: #ffffff; overflow: hidden; touch-action: none;
+    }
+    #sigCanvas {
+      display: block; width: 100%; height: 120px;
+      cursor: crosshair; background: #ffffff;
+    }
+    .sig-canvas-actions { display: flex; gap: 8px; margin-top: 10px; }
+    .sig-canvas-actions button { width: auto; min-height: 36px; font-size: 13px; padding: 0 16px; }
+
+    /* PAGE SIZE + ORIENTATION SELECTOR */
+    .size-row {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+    .size-row-label { font-size: 13px; font-weight: 700; color: #475569; white-space: nowrap; }
+    .size-options { display: flex; gap: 4px; }
     .size-options label { display: flex; align-items: center; }
     .size-options input[type="radio"] { display: none; }
     .size-btn {
-      display: inline-block;
-      padding: 5px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 5px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
-      cursor: pointer;
-      user-select: none;
-      background: #ffffff;
+      display: inline-block; padding: 5px 13px; border: 1px solid #cbd5e1; border-radius: 5px;
+      font-size: 13px; font-weight: 700; color: #475569; cursor: pointer;
+      user-select: none; background: #ffffff;
     }
     .size-btn:hover { background: #f8fafc; }
     .size-options input[type="radio"]:checked + .size-btn {
-      background: #2563eb;
-      color: #ffffff;
-      border-color: #2563eb;
+      background: #2563eb; color: #ffffff; border-color: #2563eb;
     }
-    .size-options input[type="radio"]:focus + .size-btn {
-      outline: 2px solid #bfdbfe;
-      outline-offset: 1px;
+    .size-options input[type="radio"]:focus + .size-btn { outline: 2px solid #bfdbfe; outline-offset: 1px; }
+
+    /* Landscape toggle */
+    .orient-toggle {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border: 1px solid #cbd5e1; border-radius: 5px;
+      background: #ffffff; cursor: pointer; user-select: none; font-size: 13px; font-weight: 700; color: #475569;
     }
-    .size-note {
-      font-size: 11px;
-      color: #94a3b8;
-      margin: 0 0 10px;
-      line-height: 1.5;
-    }
+    .orient-toggle:focus-within { outline: 2px solid #bfdbfe; border-color: #2563eb; }
+    .orient-toggle input[type="checkbox"] { accent-color: #2563eb; width: 14px; height: 14px; cursor: pointer; }
+    .orient-toggle.disabled { opacity: 0.4; pointer-events: none; }
+    .orient-toggle.active { border-color: #2563eb; color: #1d4ed8; background: #eff6ff; }
+
+    .size-note { font-size: 11px; color: #94a3b8; margin: 0 0 10px; line-height: 1.5; }
 
     /* PREVIEW */
-    .preview-shell {
-      position: sticky;
-      top: 24px;
-    }
+    .preview-shell { position: sticky; top: 24px; }
     .preview-card { padding: 16px; }
     .preview-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
     }
     .preview-head h2 { margin: 0; font-size: 17px; }
     .preview-head p { margin: 3px 0 0; font-size: 12px; color: #64748b; }
     .preview-frame {
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      background: #f1f5f9;
-      padding: 12px;
-      overflow: auto;
+      border: 1px solid #e2e8f0; border-radius: 8px;
+      background: #f1f5f9; padding: 12px; overflow: auto;
     }
 
-    /* A6 OVERFLOW WARNING */
-    .a6-warning {
-      display: none;
-      margin-bottom: 10px;
-      padding: 10px 12px;
-      background: #fef9c3;
-      border: 1px solid #fde047;
-      border-radius: 6px;
-      font-size: 12px;
-      color: #713f12;
-      line-height: 1.5;
+    /* OVERFLOW WARNING */
+    .overflow-warning {
+      display: none; margin-bottom: 10px; padding: 10px 12px;
+      background: #fef9c3; border: 1px solid #fde047; border-radius: 6px;
+      font-size: 12px; color: #713f12; line-height: 1.5;
     }
-    .a6-warning.visible { display: block; }
+    .overflow-warning.visible { display: block; }
 
     /* VALIDATION SUMMARY */
     .validation-summary {
-      display: none;
-      padding: 12px 16px;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #991b1b;
+      display: none; padding: 12px 16px; background: #fef2f2;
+      border: 1px solid #fecaca; border-radius: 8px; font-size: 13px; color: #991b1b;
     }
     .validation-summary.visible { display: block; }
     .validation-summary ul { margin: 8px 0 0; padding-left: 18px; }
@@ -372,146 +231,146 @@
 
     /* PRINT NOTE */
     .print-note {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
-      border-radius: 6px;
-      font-size: 11px;
-      color: #0c4a6e;
-      line-height: 1.5;
+      margin-top: 10px; padding: 8px 12px; background: #f0f9ff;
+      border: 1px solid #bae6fd; border-radius: 6px; font-size: 11px; color: #0c4a6e; line-height: 1.5;
     }
 
-    /* ============================================================
-       RECEIPT — on-screen sizes
-       ============================================================ */
-    .receipt {
-      margin: 0 auto;
-      background: #ffffff;
-      color: #020817;
-    }
-    .receipt.size-a4 { width: 595px; font-size: 14px; }
-    .receipt.size-a5 { width: 420px; font-size: 12px; }
-    .receipt.size-a6 { width: 298px; font-size: 10px; }
+    /* ================================================================
+       RECEIPT — on-screen preview sizes
+       ================================================================ */
+    .receipt { margin: 0 auto; background: #ffffff; color: #020817; }
+
+    /* Portrait sizes */
+    .receipt.size-a4            { width: 595px; font-size: 14px; }
+    .receipt.size-a5            { width: 420px; font-size: 12px; }
+    .receipt.size-a6            { width: 298px; font-size: 10px; }
+    /* Landscape sizes (width = landscape paper width in mm * px/mm) */
+    .receipt.size-a5-landscape  { width: 595px; font-size: 13px; }  /* 210mm wide, like A4 portrait */
+    .receipt.size-a6-landscape  { width: 420px; font-size: 11px; }  /* 148mm wide, like A5 portrait */
 
     .receipt-border { border: 1px solid #cbd5e1; }
 
+    /* Receipt top — per size */
     .receipt-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      border-bottom: 1px solid #cbd5e1;
-      flex-wrap: nowrap;
+      display: flex; justify-content: space-between; gap: 14px;
+      border-bottom: 1px solid #cbd5e1; flex-wrap: nowrap;
     }
-    .size-a4 .receipt-top { padding: 20px 22px; }
-    .size-a5 .receipt-top { padding: 14px 16px; }
-    .size-a6 .receipt-top { padding: 8px 10px; gap: 8px; }
+    .size-a4           .receipt-top { padding: 20px 22px; }
+    .size-a5           .receipt-top { padding: 14px 16px; }
+    .size-a6           .receipt-top { padding: 8px 10px; gap: 8px; }
+    .size-a5-landscape .receipt-top { padding: 16px 20px; }
+    .size-a6-landscape .receipt-top { padding: 10px 12px; gap: 10px; }
 
     .school-block { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
-    .size-a6 .school-block { gap: 7px; }
+    .size-a6           .school-block { gap: 7px; }
+    .size-a6-landscape .school-block { gap: 8px; }
 
+    /* Logo */
     .receipt-logo {
-      border: 1px solid #cbd5e1;
-      border-radius: 4px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      color: #94a3b8;
-      font-weight: 700;
-      text-align: center;
-      flex-shrink: 0;
+      border: 1px solid #cbd5e1; border-radius: 4px;
+      display: grid; place-items: center; overflow: hidden;
+      color: #94a3b8; font-weight: 700; text-align: center; flex-shrink: 0;
     }
-    .size-a4 .receipt-logo { width: 76px; height: 76px; font-size: 9px; }
-    .size-a5 .receipt-logo { width: 58px; height: 58px; font-size: 8px; }
-    .size-a6 .receipt-logo { width: 40px; height: 40px; font-size: 7px; }
+    .size-a4           .receipt-logo { width: 76px; height: 76px; font-size: 9px; }
+    .size-a5           .receipt-logo { width: 58px; height: 58px; font-size: 8px; }
+    .size-a6           .receipt-logo { width: 40px; height: 40px; font-size: 7px; }
+    .size-a5-landscape .receipt-logo { width: 70px; height: 70px; font-size: 9px; }
+    .size-a6-landscape .receipt-logo { width: 50px; height: 50px; font-size: 8px; }
     .receipt-logo img { width: 100%; height: 100%; object-fit: contain; }
 
     .school-info { min-width: 0; }
     .school-name {
-      margin: 0;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.2;
-      word-break: break-word;
+      margin: 0; font-weight: 900; text-transform: uppercase;
+      line-height: 1.2; word-break: break-word;
     }
-    .size-a4 .school-name { font-size: 18px; }
-    .size-a5 .school-name { font-size: 14px; }
-    .size-a6 .school-name { font-size: 10px; }
+    .size-a4           .school-name { font-size: 18px; }
+    .size-a5           .school-name { font-size: 14px; }
+    .size-a6           .school-name { font-size: 10px; }
+    .size-a5-landscape .school-name { font-size: 16px; }
+    .size-a6-landscape .school-name { font-size: 12px; }
 
-    .school-address {
-      margin: 5px 0 0;
-      color: #64748b;
-      line-height: 1.4;
-      text-transform: uppercase;
-      word-break: break-word;
-    }
-    .size-a4 .school-address { font-size: 11px; }
-    .size-a5 .school-address { font-size: 10px; }
-    .size-a6 .school-address { font-size: 8px; margin-top: 2px; }
+    .school-address { margin: 5px 0 0; color: #64748b; line-height: 1.4; text-transform: uppercase; word-break: break-word; }
+    .size-a4           .school-address { font-size: 11px; }
+    .size-a5           .school-address { font-size: 10px; }
+    .size-a6           .school-address { font-size: 8px; margin-top: 2px; }
+    .size-a5-landscape .school-address { font-size: 11px; }
+    .size-a6-landscape .school-address { font-size: 9px; margin-top: 3px; }
 
     .receipt-meta { text-align: right; flex-shrink: 0; }
     .meta-group + .meta-group { margin-top: 10px; }
-    .size-a6 .meta-group + .meta-group { margin-top: 6px; }
+    .size-a6           .meta-group + .meta-group { margin-top: 6px; }
+    .size-a6-landscape .meta-group + .meta-group { margin-top: 7px; }
     .meta-label { color: #64748b; font-weight: 700; }
     .meta-value { font-weight: 800; margin-top: 3px; }
-    .size-a4 .meta-label { font-size: 11px; }
-    .size-a4 .meta-value { font-size: 13px; }
-    .size-a5 .meta-label { font-size: 10px; }
-    .size-a5 .meta-value { font-size: 12px; }
-    .size-a6 .meta-label { font-size: 8px; }
-    .size-a6 .meta-value { font-size: 10px; margin-top: 2px; }
+    .size-a4           .meta-label { font-size: 11px; }
+    .size-a4           .meta-value { font-size: 13px; }
+    .size-a5           .meta-label { font-size: 10px; }
+    .size-a5           .meta-value { font-size: 12px; }
+    .size-a6           .meta-label { font-size: 8px; }
+    .size-a6           .meta-value { font-size: 10px; margin-top: 2px; }
+    .size-a5-landscape .meta-label { font-size: 11px; }
+    .size-a5-landscape .meta-value { font-size: 13px; }
+    .size-a6-landscape .meta-label { font-size: 9px; }
+    .size-a6-landscape .meta-value { font-size: 11px; margin-top: 2px; }
 
     .receipt-title {
-      background: #f1f5f9;
-      border-bottom: 1px solid #cbd5e1;
-      text-align: center;
-      font-weight: 900;
-      letter-spacing: 0.15em;
+      background: #f1f5f9; border-bottom: 1px solid #cbd5e1;
+      text-align: center; font-weight: 900; letter-spacing: 0.15em;
     }
-    .size-a4 .receipt-title { padding: 12px; font-size: 16px; }
-    .size-a5 .receipt-title { padding: 9px; font-size: 13px; }
-    .size-a6 .receipt-title { padding: 5px; font-size: 9px; letter-spacing: 0.1em; }
+    .size-a4           .receipt-title { padding: 12px; font-size: 16px; }
+    .size-a5           .receipt-title { padding: 9px;  font-size: 13px; }
+    .size-a6           .receipt-title { padding: 5px;  font-size: 9px; letter-spacing: 0.1em; }
+    .size-a5-landscape .receipt-title { padding: 10px; font-size: 14px; }
+    .size-a6-landscape .receipt-title { padding: 7px;  font-size: 11px; letter-spacing: 0.12em; }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid #cbd5e1;
-    }
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #cbd5e1; }
     .detail-cell { border-bottom: 1px solid #cbd5e1; }
     .detail-cell:nth-child(odd) { border-right: 1px solid #cbd5e1; }
     .detail-cell:nth-last-child(-n+2) { border-bottom: 0; }
-    .size-a4 .detail-cell { padding: 12px 16px; }
-    .size-a5 .detail-cell { padding: 9px 12px; }
-    .size-a6 .detail-cell { padding: 5px 7px; }
+    .size-a4           .detail-cell { padding: 12px 16px; }
+    .size-a5           .detail-cell { padding: 9px 12px; }
+    .size-a6           .detail-cell { padding: 5px 7px; }
+    .size-a5-landscape .detail-cell { padding: 10px 14px; }
+    .size-a6-landscape .detail-cell { padding: 6px 9px; }
 
-    .detail-label {
-      color: #64748b;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+    .detail-label { color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
     .detail-value { font-weight: 800; margin-top: 5px; word-break: break-word; }
-    .size-a4 .detail-label { font-size: 10px; }
-    .size-a4 .detail-value { font-size: 13px; }
-    .size-a5 .detail-label { font-size: 9px; }
-    .size-a5 .detail-value { font-size: 11px; }
-    .size-a6 .detail-label { font-size: 7px; }
-    .size-a6 .detail-value { font-size: 9px; margin-top: 2px; }
+    .size-a4           .detail-label { font-size: 10px; }
+    .size-a4           .detail-value { font-size: 13px; }
+    .size-a5           .detail-label { font-size: 9px; }
+    .size-a5           .detail-value { font-size: 11px; }
+    .size-a6           .detail-label { font-size: 7px; }
+    .size-a6           .detail-value { font-size: 9px; margin-top: 2px; }
+    .size-a5-landscape .detail-label { font-size: 10px; }
+    .size-a5-landscape .detail-value { font-size: 12px; }
+    .size-a6-landscape .detail-label { font-size: 8px; }
+    .size-a6-landscape .detail-value { font-size: 10px; margin-top: 3px; }
 
     .receipt-body { }
-    .size-a4 .receipt-body { padding: 18px 20px; }
-    .size-a5 .receipt-body { padding: 12px 14px; }
-    .size-a6 .receipt-body { padding: 7px 8px; }
+    .size-a4           .receipt-body { padding: 18px 20px; }
+    .size-a5           .receipt-body { padding: 12px 14px; }
+    .size-a6           .receipt-body { padding: 7px 8px; }
+    .size-a5-landscape .receipt-body { padding: 14px 18px; }
+    .size-a6-landscape .receipt-body { padding: 9px 10px; }
 
     .fee-table { width: 100%; border-collapse: collapse; }
-    .size-a4 .fee-table { font-size: 13px; }
-    .size-a5 .fee-table { font-size: 11px; }
-    .size-a6 .fee-table { font-size: 9px; }
+    .size-a4           .fee-table { font-size: 13px; }
+    .size-a5           .fee-table { font-size: 11px; }
+    .size-a6           .fee-table { font-size: 9px; }
+    .size-a5-landscape .fee-table { font-size: 12px; }
+    .size-a6-landscape .fee-table { font-size: 10px; }
 
     .fee-table th, .fee-table td { border: 1px solid #cbd5e1; }
-    .size-a4 .fee-table th, .size-a4 .fee-table td { padding: 9px 11px; }
-    .size-a5 .fee-table th, .size-a5 .fee-table td { padding: 7px 8px; }
-    .size-a6 .fee-table th, .size-a6 .fee-table td { padding: 4px 5px; }
+    .size-a4           .fee-table th,
+    .size-a4           .fee-table td { padding: 9px 11px; }
+    .size-a5           .fee-table th,
+    .size-a5           .fee-table td { padding: 7px 8px; }
+    .size-a6           .fee-table th,
+    .size-a6           .fee-table td { padding: 4px 5px; }
+    .size-a5-landscape .fee-table th,
+    .size-a5-landscape .fee-table td { padding: 8px 10px; }
+    .size-a6-landscape .fee-table th,
+    .size-a6-landscape .fee-table td { padding: 5px 7px; }
 
     .fee-table th { background: #f1f5f9; text-align: left; font-weight: 700; }
     .fee-table th:last-child, .fee-table td:last-child { text-align: right; white-space: nowrap; }
@@ -519,61 +378,76 @@
     .fee-table .total-tr td:first-child { text-align: right; }
 
     .receipt-boxes { display: grid; }
-    .size-a4 .receipt-boxes { margin-top: 14px; gap: 10px; }
-    .size-a5 .receipt-boxes { margin-top: 10px; gap: 8px; }
-    .size-a6 .receipt-boxes { margin-top: 7px; gap: 5px; }
+    .size-a4           .receipt-boxes { margin-top: 14px; gap: 10px; }
+    .size-a5           .receipt-boxes { margin-top: 10px; gap: 8px; }
+    .size-a6           .receipt-boxes { margin-top: 7px;  gap: 5px; }
+    .size-a5-landscape .receipt-boxes { margin-top: 12px; gap: 8px; }
+    .size-a6-landscape .receipt-boxes { margin-top: 9px;  gap: 6px; }
 
-    .receipt-box {
-      border: 1px solid #cbd5e1;
-      border-radius: 3px;
-      line-height: 1.5;
-      word-break: break-word;
-    }
-    .size-a4 .receipt-box { padding: 9px 11px; font-size: 12px; }
-    .size-a5 .receipt-box { padding: 7px 8px; font-size: 10px; }
-    .size-a6 .receipt-box { padding: 4px 5px; font-size: 8px; }
+    .receipt-box { border: 1px solid #cbd5e1; border-radius: 3px; line-height: 1.5; word-break: break-word; }
+    .size-a4           .receipt-box { padding: 9px 11px;  font-size: 12px; }
+    .size-a5           .receipt-box { padding: 7px 8px;   font-size: 10px; }
+    .size-a6           .receipt-box { padding: 4px 5px;   font-size: 8px; }
+    .size-a5-landscape .receipt-box { padding: 7px 9px;   font-size: 11px; }
+    .size-a6-landscape .receipt-box { padding: 5px 7px;   font-size: 10px; }
 
     .box-row { display: grid; grid-template-columns: 1fr 1fr; }
-    .size-a4 .box-row { gap: 10px; }
-    .size-a5 .box-row { gap: 8px; }
-    .size-a6 .box-row { gap: 5px; }
+    .size-a4           .box-row { gap: 10px; }
+    .size-a5           .box-row { gap: 8px; }
+    .size-a6           .box-row { gap: 5px; }
+    .size-a5-landscape .box-row { gap: 8px; }
+    .size-a6-landscape .box-row { gap: 6px; }
 
-    .sign-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .size-a4 .sign-row { margin-top: 44px; }
-    .size-a5 .sign-row { margin-top: 28px; }
-    .size-a6 .sign-row { margin-top: 16px; }
+    .sign-row { display: flex; justify-content: space-between; align-items: flex-end; }
+    .size-a4           .sign-row { margin-top: 44px; }
+    .size-a5           .sign-row { margin-top: 28px; }
+    .size-a6           .sign-row { margin-top: 16px; }
+    /* Landscape: reduced top margin — page is shorter */
+    .size-a5-landscape .sign-row { margin-top: 20px; }
+    .size-a6-landscape .sign-row { margin-top: 12px; }
 
     .receipt-footer-note { color: #94a3b8; }
-    .size-a4 .receipt-footer-note { font-size: 10px; }
-    .size-a5 .receipt-footer-note { font-size: 9px; }
-    .size-a6 .receipt-footer-note { font-size: 7px; }
+    .size-a4           .receipt-footer-note { font-size: 10px; }
+    .size-a5           .receipt-footer-note { font-size: 9px; }
+    .size-a6           .receipt-footer-note { font-size: 7px; }
+    .size-a5-landscape .receipt-footer-note { font-size: 10px; }
+    .size-a6-landscape .receipt-footer-note { font-size: 8px; }
 
     .sign-block { text-align: center; }
-    .sign-name {
-      font-style: italic;
-      color: #334155;
-      border-bottom: 1px solid #475569;
-      padding-bottom: 5px;
-      display: inline-block;
+
+    /* sign-content holds either italic text or a signature image */
+    .sign-content {
+      display: inline-block; text-align: center;
+      border-bottom: 1px solid #475569; padding-bottom: 5px;
+      font-style: italic; color: #334155;
     }
-    .size-a4 .sign-name { font-size: 20px; min-width: 130px; }
-    .size-a5 .sign-name { font-size: 15px; min-width: 100px; }
-    .size-a6 .sign-name { font-size: 10px; min-width: 65px; padding-bottom: 2px; }
+    .sign-content.sig-image-mode { font-style: normal; }
+    .sign-content img {
+      display: block; object-fit: contain;
+      max-width: 200px; margin: 0 auto;
+    }
+
+    .size-a4           .sign-content { font-size: 20px; min-width: 130px; }
+    .size-a4           .sign-content img { max-height: 52px; }
+    .size-a5           .sign-content { font-size: 15px; min-width: 100px; }
+    .size-a5           .sign-content img { max-height: 40px; }
+    .size-a6           .sign-content { font-size: 10px; min-width: 65px; padding-bottom: 2px; }
+    .size-a6           .sign-content img { max-height: 28px; }
+    .size-a5-landscape .sign-content { font-size: 16px; min-width: 110px; }
+    .size-a5-landscape .sign-content img { max-height: 44px; }
+    .size-a6-landscape .sign-content { font-size: 11px; min-width: 75px; padding-bottom: 3px; }
+    .size-a6-landscape .sign-content img { max-height: 32px; }
+
     .sign-label { font-weight: 700; margin-top: 5px; }
-    .size-a4 .sign-label { font-size: 11px; }
-    .size-a5 .sign-label { font-size: 9px; }
-    .size-a6 .sign-label { font-size: 7px; margin-top: 2px; }
+    .size-a4           .sign-label { font-size: 11px; }
+    .size-a5           .sign-label { font-size: 9px; }
+    .size-a6           .sign-label { font-size: 7px; margin-top: 2px; }
+    .size-a5-landscape .sign-label { font-size: 10px; }
+    .size-a6-landscape .sign-label { font-size: 8px; margin-top: 2px; }
 
     /* MOBILE */
     @media (max-width: 960px) {
-      .workspace {
-        grid-template-columns: 1fr;
-        padding: 16px;
-      }
+      .workspace { grid-template-columns: 1fr; padding: 16px; }
       .preview-shell { position: static; }
       .field-grid { grid-template-columns: 1fr; }
       .fee-grid { grid-template-columns: 1fr; }
@@ -586,72 +460,39 @@
       .card-head { padding: 14px 16px; }
     }
 
-    /* ============================================================
+    /* ================================================================
        PRINT
-       ============================================================ */
+       ================================================================ */
     @media print {
-      * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-      }
-
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
       body { background: white; }
 
-      /* Hide everything except the receipt */
       header,
       .workspace > .card,
       .preview-head,
-      .size-selector,
+      .size-row,
       .size-note,
-      .a6-warning,
+      .overflow-warning,
       .print-note,
-      .validation-summary {
-        display: none !important;
-      }
+      .validation-summary { display: none !important; }
 
-      /* Flatten layout */
-      .workspace {
-        display: block !important;
-        padding: 0 !important;
-        max-width: none !important;
-        margin: 0 !important;
-      }
+      .workspace { display: block !important; padding: 0 !important; max-width: none !important; margin: 0 !important; }
+      .preview-shell { position: static !important; width: 100% !important; }
+      .preview-shell .card { border: none !important; box-shadow: none !important; background: transparent !important; padding: 0 !important; }
+      .preview-frame { border: none !important; background: transparent !important; padding: 0 !important; overflow: visible !important; }
 
-      .preview-shell {
-        position: static !important;
-        width: 100% !important;
-      }
-
-      .preview-shell .card {
-        border: none !important;
-        box-shadow: none !important;
-        background: transparent !important;
-        padding: 0 !important;
-      }
-
-      .preview-frame {
-        border: none !important;
-        background: transparent !important;
-        padding: 0 !important;
-        overflow: visible !important;
-      }
-
-      /* Receipt fills the @page printable area */
       .receipt,
       .receipt.size-a4,
       .receipt.size-a5,
-      .receipt.size-a6 {
-        width: 100% !important;
-        margin: 0 !important;
-      }
+      .receipt.size-a6,
+      .receipt.size-a5-landscape,
+      .receipt.size-a6-landscape { width: 100% !important; margin: 0 !important; }
 
-      /* Prevent orphaned rows */
       .fee-table tr { page-break-inside: avoid; }
       .sign-row { page-break-inside: avoid; }
     }
   </style>
 
-  <!-- Page size rule updated dynamically by JS when user changes the selector -->
   <style id="page-size-css">@page { size: A4 portrait; margin: 12mm; }</style>
 </head>
 
@@ -678,7 +519,6 @@
         </div>
         <div class="form-body">
 
-          <!-- Validation summary -->
           <div id="validationSummary" class="validation-summary" role="alert" aria-live="polite"></div>
 
           <!-- ── School Information ── -->
@@ -698,9 +538,7 @@
               <div class="span-2">
                 <span class="label-text">School Logo</span>
                 <div class="upload-box">
-                  <div class="upload-thumb" id="logoThumb">
-                    <span>No logo</span>
-                  </div>
+                  <div class="upload-thumb" id="logoThumb"><span>No logo</span></div>
                   <div class="upload-actions">
                     <label class="upload-btn">
                       Upload Logo
@@ -782,9 +620,7 @@
               <span class="total-label">Total Amount</span>
               <span class="total-amount" id="formTotal" aria-live="polite">₹0.00</span>
             </div>
-            <p class="words-row">
-              In Words: <strong id="formWords" aria-live="polite">—</strong>
-            </p>
+            <p class="words-row">In Words: <strong id="formWords" aria-live="polite">—</strong></p>
           </section>
 
           <!-- ── Payment ── -->
@@ -817,11 +653,51 @@
           <!-- ── Signature ── -->
           <section class="form-section" aria-labelledby="sec-sig">
             <h2 id="sec-sig">Authorized Signature</h2>
-            <label>
-              <span class="label-text">Signature Name</span>
-              <input id="signatureName" type="text" value="Administrator"
-                     placeholder="Name that appears on the signature line" />
-            </label>
+
+            <!-- Mode tabs -->
+            <div class="sig-tabs" role="tablist" aria-label="Signature mode">
+              <button class="sig-tab active" type="button" role="tab"
+                      aria-selected="true" data-sig-mode="type">Type</button>
+              <button class="sig-tab" type="button" role="tab"
+                      aria-selected="false" data-sig-mode="upload">Upload</button>
+              <button class="sig-tab" type="button" role="tab"
+                      aria-selected="false" data-sig-mode="draw">Draw</button>
+            </div>
+
+            <!-- Type panel -->
+            <div id="sigTypePanel" role="tabpanel" aria-labelledby="sig-tab-type">
+              <label>
+                <span class="label-text">Signature Name</span>
+                <input id="signatureName" type="text" value="Administrator"
+                       placeholder="Name that appears on the signature line" />
+              </label>
+            </div>
+
+            <!-- Upload panel -->
+            <div id="sigUploadPanel" role="tabpanel" aria-labelledby="sig-tab-upload" style="display:none;">
+              <label class="upload-btn" style="width:fit-content;">
+                Choose Signature Image
+                <input id="sigImageInput" type="file"
+                       accept="image/png,image/jpeg,image/gif,image/webp"
+                       aria-label="Upload signature image" />
+              </label>
+              <p class="help">PNG with transparent background works best — max 2 MB.</p>
+              <img id="sigUploadPreview" class="sig-upload-preview" alt="Uploaded signature preview" />
+              <span class="field-error" id="err-sigUpload" role="alert"></span>
+            </div>
+
+            <!-- Draw panel -->
+            <div id="sigDrawPanel" role="tabpanel" aria-labelledby="sig-tab-draw" style="display:none;">
+              <div class="sig-canvas-wrap">
+                <canvas id="sigCanvas" width="600" height="150"
+                        aria-label="Signature drawing area"></canvas>
+              </div>
+              <div class="sig-canvas-actions">
+                <button class="secondary-btn" type="button" id="sigClearBtn">Clear</button>
+                <button class="primary-btn" type="button" id="sigApplyBtn">Apply Signature</button>
+              </div>
+              <p class="help">Draw your signature above, then click Apply.</p>
+            </div>
           </section>
 
           <button class="primary-btn" type="button" id="printBtn">
@@ -852,35 +728,38 @@
             </button>
           </div>
 
-          <!-- Page size selector -->
-          <div class="size-selector" aria-label="Paper size">
-            <span class="size-selector-label" id="size-label">Paper size:</span>
-            <div class="size-options" role="radiogroup" aria-labelledby="size-label">
-              <label title="210 × 297 mm">
+          <!-- Size selector -->
+          <div class="size-row" aria-label="Paper size and orientation">
+            <span class="size-selector-label size-row-label" id="size-grp-label">Paper:</span>
+            <div class="size-options" role="radiogroup" aria-labelledby="size-grp-label">
+              <label title="A4 portrait — 210×297 mm">
                 <input type="radio" name="pageSize" value="a4" checked />
                 <span class="size-btn">A4</span>
               </label>
-              <label title="148 × 210 mm">
+              <label title="A5 portrait — 148×210 mm">
                 <input type="radio" name="pageSize" value="a5" />
                 <span class="size-btn">A5</span>
               </label>
-              <label title="105 × 148 mm">
+              <label title="A6 portrait — 105×148 mm">
                 <input type="radio" name="pageSize" value="a6" />
                 <span class="size-btn">A6</span>
               </label>
             </div>
+            <!-- Landscape toggle — only active for A5 / A6 -->
+            <label class="orient-toggle disabled" id="landscapeToggle"
+                   title="Rotate paper to horizontal (landscape). A4 landscape is not a standard receipt size.">
+              <input type="checkbox" id="landscapeCheck" disabled />
+              ↔ Landscape
+            </label>
           </div>
           <p class="size-note">
-            A4 = 210×297 mm &nbsp;·&nbsp; A5 = 148×210 mm &nbsp;·&nbsp; A6 = 105×148 mm — portrait.<br>
-            In the Print dialog, manually select the matching paper size for a correct printed output.
+            A4 portrait (default) · A5 = 148×210 mm · A6 = 105×148 mm · Landscape rotates A5/A6 to horizontal.<br>
+            In the Print dialog, manually select the matching paper size and orientation.
           </p>
 
-          <div class="a6-warning" id="a6Warning" role="alert">
-            <strong>A6 size warning:</strong> The current content may exceed one A6 page.
-            Consider using A4 or A5, or shorten the notes and address before printing.
-          </div>
+          <div class="overflow-warning" id="overflowWarning" role="alert"></div>
 
-          <!-- Receipt article — only this is printed -->
+          <!-- Receipt article — only this element is printed -->
           <div class="preview-frame">
             <article class="receipt size-a4" id="receipt" aria-label="Receipt preview">
               <div class="receipt-border">
@@ -890,7 +769,7 @@
                     <div class="receipt-logo" id="receiptLogo" role="img"
                          aria-label="School logo placeholder"></div>
                     <div class="school-info">
-                      <p class="school-name" id="pSchoolName"></p>
+                      <p class="school-name"    id="pSchoolName"></p>
                       <p class="school-address" id="pSchoolAddress"></p>
                     </div>
                   </div>
@@ -940,29 +819,25 @@
 
                   <div class="receipt-boxes">
                     <div class="receipt-box">
-                      <strong>Amount in Words:</strong>
-                      <span id="pWords">—</span>
+                      <strong>Amount in Words:</strong> <span id="pWords">—</span>
                     </div>
                     <div class="box-row">
                       <div class="receipt-box">
-                        <strong>Payment Method:</strong>
-                        <span id="pPaymentMethod">—</span>
+                        <strong>Payment Method:</strong> <span id="pPaymentMethod">—</span>
                       </div>
                       <div class="receipt-box">
-                        <strong>Receipt Date:</strong>
-                        <span id="pReceiptDateBox">—</span>
+                        <strong>Receipt Date:</strong> <span id="pReceiptDateBox">—</span>
                       </div>
                     </div>
                     <div class="receipt-box" id="pNotesBox" style="display:none;">
-                      <strong>Notes:</strong>
-                      <span id="pNotes"></span>
+                      <strong>Notes:</strong> <span id="pNotes"></span>
                     </div>
                   </div>
 
                   <div class="sign-row">
                     <div class="receipt-footer-note">Fee receipt for school records.</div>
                     <div class="sign-block">
-                      <div class="sign-name" id="pSignature">Administrator</div>
+                      <div class="sign-content" id="pSignatureContent">Administrator</div>
                       <div class="sign-label">Authorized Signature</div>
                     </div>
                   </div>
@@ -973,10 +848,10 @@
           </div><!-- /preview-frame -->
 
           <div class="print-note">
-            When the Print dialog opens, select <strong>Save as PDF</strong> as destination.
-            Manually select the matching paper size (A4&nbsp;/&nbsp;A5&nbsp;/&nbsp;A6).
-            To hide browser-added headers and footers, uncheck "Headers and footers" in Print settings.
-            This tool cannot control those from inside the browser.
+            When the Print dialog opens, choose <strong>Save as PDF</strong> as destination.
+            Select the matching paper size <em>and orientation</em> in the dialog.
+            To remove browser headers/footers, uncheck "Headers and footers" in Print settings —
+            this tool cannot control that setting.
           </div>
 
         </div><!-- /preview-card -->
@@ -991,8 +866,17 @@
     // ================================================================
     var state = {
       fees: [{ id: uid(), description: "", paise: 0 }],
-      pageSize: "a4",
+      paperSize: "a4",          // "a4" | "a5" | "a6"
+      landscape: false,          // only meaningful for a5 and a6
+      signatureMode: "type",     // "type" | "upload" | "draw"
+      signatureImageUrl: null,   // data URL used in upload or draw mode
     };
+
+    // Derive the CSS class key from paper size + orientation
+    function sizeKey() {
+      if (state.paperSize === "a4") return "a4";
+      return state.landscape ? state.paperSize + "-landscape" : state.paperSize;
+    }
 
     // ================================================================
     // UTILITIES
@@ -1004,68 +888,47 @@
         : Date.now().toString(36) + Math.random().toString(36).slice(2);
     }
 
-    /**
-     * Parse a user-entered amount string to integer paise.
-     * Returns integer >= 0 on success, null if invalid or negative.
-     */
+    // Parse user string to integer paise; null if invalid/negative.
     function parsePaise(str) {
       if (str === null || str === undefined) return null;
       var s = String(str).trim().replace(/,/g, "");
       if (s === "") return null;
       var n = parseFloat(s);
-      if (!isFinite(n) || isNaN(n)) return null;
-      if (n < 0) return null;
-      return Math.round(n * 100); // integer paise — avoids float summation errors
+      if (!isFinite(n) || isNaN(n) || n < 0) return null;
+      return Math.round(n * 100);
     }
 
-    /**
-     * Format integer paise as Indian currency string.
-     * e.g. 10000000 → "₹1,00,000.00"
-     */
+    // Format integer paise as Indian currency string.
     function formatInr(paise) {
       if (!Number.isInteger(paise) || paise < 0) return "₹0.00";
       var rupees = Math.floor(paise / 100);
       var p = paise % 100;
-      var rupeeStr = rupees.toLocaleString("en-IN");
-      return "₹" + rupeeStr + "." + String(p).padStart(2, "0");
+      return "₹" + rupees.toLocaleString("en-IN") + "." + String(p).padStart(2, "0");
     }
 
-    /**
-     * Convert integer paise to Indian amount-in-words.
-     * Examples:
-     *   100    → "One Rupee Only"
-     *   1050   → "Ten Rupees and Fifty Paise Only"
-     *   100000 → "One Thousand Rupees Only"  (100000 paise = ₹1,000)
-     */
+    // Convert integer paise to Indian amount-in-words.
     function paiseToWords(totalPaise) {
       if (!Number.isInteger(totalPaise) || totalPaise < 0) return "Invalid amount";
       if (totalPaise === 0) return "Zero Rupees Only";
 
-      var ONES = [
-        "","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
-        "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen",
-        "Seventeen","Eighteen","Nineteen"
-      ];
+      var ONES = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
+                  "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen",
+                  "Seventeen","Eighteen","Nineteen"];
       var TENS = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
 
       function underHundred(n) {
-        if (n < 20) return ONES[n];
-        return TENS[Math.floor(n / 10)] + (n % 10 ? " " + ONES[n % 10] : "");
+        return n < 20 ? ONES[n] : TENS[Math.floor(n / 10)] + (n % 10 ? " " + ONES[n % 10] : "");
       }
-
       function underThousand(n) {
-        var h = Math.floor(n / 100);
-        var r = n % 100;
+        var h = Math.floor(n / 100), r = n % 100;
         return (h ? ONES[h] + " Hundred" + (r ? " " : "") : "") + (r ? underHundred(r) : "");
       }
-
       function rupeeWords(n) {
         if (n === 0) return "";
-        var rem = n;
+        var rem = n, parts = [];
         var crore = Math.floor(rem / 10000000); rem %= 10000000;
         var lakh  = Math.floor(rem / 100000);   rem %= 100000;
         var thou  = Math.floor(rem / 1000);      rem %= 1000;
-        var parts = [];
         if (crore) parts.push(underThousand(crore) + " Crore");
         if (lakh)  parts.push(underThousand(lakh)  + " Lakh");
         if (thou)  parts.push(underThousand(thou)  + " Thousand");
@@ -1075,85 +938,108 @@
 
       var rupees = Math.floor(totalPaise / 100);
       var paise  = totalPaise % 100;
+      var rPart  = rupees > 0 ? rupeeWords(rupees) + (rupees === 1 ? " Rupee" : " Rupees") : "";
+      var pPart  = paise  > 0 ? underHundred(paise) + " Paise" : "";
 
-      var rWords = rupeeWords(rupees);
-      var rupeePart = rupees > 0
-        ? rWords + (rupees === 1 ? " Rupee" : " Rupees")
-        : "";
-      var paisePart = paise > 0
-        ? underHundred(paise) + " Paise"
-        : "";
-
-      if (rupeePart && paisePart) return rupeePart + " and " + paisePart + " Only";
-      if (rupeePart) return rupeePart + " Only";
-      return paisePart + " Only";
+      if (rPart && pPart) return rPart + " and " + pPart + " Only";
+      if (rPart) return rPart + " Only";
+      return pPart + " Only";
     }
 
-    /**
-     * Convert date input value "YYYY-MM-DD" to "DD/MM/YYYY" without
-     * any timezone conversion — parses the string directly.
-     */
+    // Timezone-safe date formatter: "YYYY-MM-DD" → "DD/MM/YYYY"
     function formatDate(value) {
       if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return value || "—";
-      var parts = value.split("-");
-      return parts[2] + "/" + parts[1] + "/" + parts[0];
+      var p = value.split("-");
+      return p[2] + "/" + p[1] + "/" + p[0];
     }
 
     function val(id) {
       var el = document.getElementById(id);
       return el ? el.value.trim() : "";
     }
-
     function setText(id, text) {
       var el = document.getElementById(id);
       if (el) el.textContent = text;
     }
-
     function setError(fieldId, message) {
       var errEl   = document.getElementById("err-" + fieldId);
       var inputEl = document.getElementById(fieldId);
-      if (errEl) errEl.textContent = message || "";
+      if (errEl)   errEl.textContent = message || "";
       if (inputEl) {
         if (message) inputEl.classList.add("invalid");
-        else inputEl.classList.remove("invalid");
+        else         inputEl.classList.remove("invalid");
       }
     }
-
-    function clearError(fieldId) {
-      setError(fieldId, "");
-    }
+    function clearError(fieldId) { setError(fieldId, ""); }
 
     // ================================================================
-    // PAGE SIZE
+    // PAGE SIZE + ORIENTATION
     // ================================================================
     var PAGE_CSS = {
-      a4: "@page { size: A4 portrait; margin: 12mm; }",
-      a5: "@page { size: A5 portrait; margin: 9mm; }",
-      a6: "@page { size: A6 portrait; margin: 6mm; }",
+      "a4":             "@page { size: A4 portrait;   margin: 12mm; }",
+      "a5":             "@page { size: A5 portrait;   margin: 9mm;  }",
+      "a6":             "@page { size: A6 portrait;   margin: 6mm;  }",
+      "a5-landscape":   "@page { size: A5 landscape;  margin: 9mm;  }",
+      "a6-landscape":   "@page { size: A6 landscape;  margin: 6mm;  }",
     };
 
-    function applyPageSize(size) {
-      state.pageSize = size;
-      var receipt = document.getElementById("receipt");
-      receipt.className = "receipt size-" + size;
-      document.getElementById("page-size-css").textContent = PAGE_CSS[size] || PAGE_CSS.a4;
-      try { sessionStorage.setItem("kidora-receipt-size", size); } catch (e) {}
-      checkA6Overflow();
+    function applyPageSize() {
+      var key = sizeKey();
+      document.getElementById("receipt").className = "receipt size-" + key;
+      document.getElementById("page-size-css").textContent = PAGE_CSS[key] || PAGE_CSS["a4"];
+
+      // Landscape toggle: enabled only for A5 / A6
+      var lt = document.getElementById("landscapeToggle");
+      var lc = document.getElementById("landscapeCheck");
+      if (state.paperSize === "a4") {
+        lt.classList.add("disabled");
+        lt.classList.remove("active");
+        lc.disabled = true;
+        lc.checked  = false;
+        state.landscape = false;
+      } else {
+        lt.classList.remove("disabled");
+        lt.classList.toggle("active", state.landscape);
+        lc.disabled = false;
+        lc.checked  = state.landscape;
+      }
+
+      try { sessionStorage.setItem("kidora-paper", state.paperSize); } catch (e) {}
+      try { sessionStorage.setItem("kidora-landscape", state.landscape ? "1" : "0"); } catch (e) {}
+
+      checkOverflow();
     }
 
-    function checkA6Overflow() {
-      var warn = document.getElementById("a6Warning");
+    // Overflow warning heuristics per size
+    function checkOverflow() {
+      var warn = document.getElementById("overflowWarning");
       if (!warn) return;
-      if (state.pageSize !== "a6") { warn.classList.remove("visible"); return; }
+      var key = sizeKey();
       var feeCount = state.fees.length;
       var notesLen = val("notes").length;
       var addrLen  = val("schoolAddress").length;
-      var overflow = feeCount > 5 || notesLen > 80 || addrLen > 60;
-      warn.classList.toggle("visible", overflow);
+
+      var msg = "";
+      if (key === "a6") {
+        if (feeCount > 5 || notesLen > 80 || addrLen > 60) {
+          msg = "A6 portrait is very small. Consider A5 or A4, or shorten your content.";
+        }
+      } else if (key === "a5-landscape") {
+        if (feeCount > 8 || notesLen > 120) {
+          msg = "A5 landscape has a shorter page height. Reduce fee rows or notes if content is cut off.";
+        }
+      } else if (key === "a6-landscape") {
+        if (feeCount > 3 || notesLen > 40 || addrLen > 40) {
+          msg = "A6 landscape is very compact (148×105 mm). Suitable only for minimal receipts.";
+        }
+      }
+
+      warn.textContent = msg ? ("⚠ " + msg) : "";
+      warn.classList.toggle("visible", !!msg);
     }
 
     // ================================================================
-    // RENDER FEE EDITOR ROWS — safe DOM, no innerHTML for user values
+    // RENDER FEE EDITOR ROWS — safe DOM only
     // ================================================================
     function renderFees() {
       var container = document.getElementById("feeItems");
@@ -1164,18 +1050,14 @@
         row.className = "fee-item";
         row.dataset.feeId = fee.id;
 
-        // Header row
         var head = document.createElement("div");
         head.className = "fee-head";
-
         var h3 = document.createElement("h3");
         h3.textContent = "Fee Item " + (index + 1);
         head.appendChild(h3);
-
         if (state.fees.length > 1) {
           var btn = document.createElement("button");
-          btn.className = "remove-btn";
-          btn.type = "button";
+          btn.className = "remove-btn"; btn.type = "button";
           btn.textContent = "Remove";
           btn.dataset.remove = fee.id;
           btn.setAttribute("aria-label", "Remove fee item " + (index + 1));
@@ -1183,85 +1065,80 @@
         }
         row.appendChild(head);
 
-        // Grid: description + amount
         var grid = document.createElement("div");
         grid.className = "fee-grid";
 
-        // Description label + input + error
-        var descLabel = document.createElement("label");
-        var descSpan  = document.createElement("span");
-        descSpan.className = "label-text";
-        descSpan.textContent = "Fee Description *";
-        var descInput = document.createElement("input");
-        descInput.type = "text";
-        descInput.value = fee.description;
-        descInput.dataset.feeDesc = fee.id;
-        descInput.placeholder = "e.g. Tuition Fee";
-        descInput.setAttribute("aria-label", "Fee item " + (index + 1) + " description");
-        var descErr = document.createElement("span");
-        descErr.className = "field-error";
-        descErr.id = "err-desc-" + fee.id;
-        descErr.setAttribute("role", "alert");
-        descLabel.appendChild(descSpan);
-        descLabel.appendChild(descInput);
-        descLabel.appendChild(descErr);
+        // Description
+        var dLabel = document.createElement("label");
+        var dSpan  = document.createElement("span"); dSpan.className = "label-text"; dSpan.textContent = "Fee Description *";
+        var dInput = document.createElement("input"); dInput.type = "text"; dInput.value = fee.description;
+        dInput.dataset.feeDesc = fee.id; dInput.placeholder = "e.g. Tuition Fee";
+        dInput.setAttribute("aria-label", "Fee item " + (index + 1) + " description");
+        var dErr = document.createElement("span"); dErr.className = "field-error";
+        dErr.id = "err-desc-" + fee.id; dErr.setAttribute("role", "alert");
+        dLabel.appendChild(dSpan); dLabel.appendChild(dInput); dLabel.appendChild(dErr);
 
-        // Amount label + input + error
-        var amtLabel = document.createElement("label");
-        var amtSpan  = document.createElement("span");
-        amtSpan.className = "label-text";
-        amtSpan.textContent = "Amount (₹) *";
-        var amtInput = document.createElement("input");
-        amtInput.type = "number";
-        amtInput.min  = "0";
-        amtInput.step = "0.01";
-        amtInput.value = fee.paise > 0 ? (fee.paise / 100).toFixed(2) : "";
-        amtInput.dataset.feeAmount = fee.id;
-        amtInput.placeholder = "0.00";
-        amtInput.setAttribute("aria-label", "Fee item " + (index + 1) + " amount in rupees");
-        var amtErr = document.createElement("span");
-        amtErr.className = "field-error";
-        amtErr.id = "err-amt-" + fee.id;
-        amtErr.setAttribute("role", "alert");
-        amtLabel.appendChild(amtSpan);
-        amtLabel.appendChild(amtInput);
-        amtLabel.appendChild(amtErr);
+        // Amount
+        var aLabel = document.createElement("label");
+        var aSpan  = document.createElement("span"); aSpan.className = "label-text"; aSpan.textContent = "Amount (₹) *";
+        var aInput = document.createElement("input"); aInput.type = "number"; aInput.min = "0"; aInput.step = "0.01";
+        aInput.value = fee.paise > 0 ? (fee.paise / 100).toFixed(2) : "";
+        aInput.dataset.feeAmount = fee.id; aInput.placeholder = "0.00";
+        aInput.setAttribute("aria-label", "Fee item " + (index + 1) + " amount in rupees");
+        var aErr = document.createElement("span"); aErr.className = "field-error";
+        aErr.id = "err-amt-" + fee.id; aErr.setAttribute("role", "alert");
+        aLabel.appendChild(aSpan); aLabel.appendChild(aInput); aLabel.appendChild(aErr);
 
-        grid.appendChild(descLabel);
-        grid.appendChild(amtLabel);
+        grid.appendChild(dLabel); grid.appendChild(aLabel);
         row.appendChild(grid);
         container.appendChild(row);
       });
     }
 
     // ================================================================
-    // SYNC RECEIPT PREVIEW — textContent only for user-supplied values
+    // SIGNATURE PREVIEW — text or image
+    // ================================================================
+    function syncSignaturePreview() {
+      var container = document.getElementById("pSignatureContent");
+      while (container.firstChild) container.removeChild(container.firstChild);
+
+      var useImage = (state.signatureMode !== "type") && state.signatureImageUrl;
+
+      if (useImage) {
+        container.classList.add("sig-image-mode");
+        var img = document.createElement("img");
+        img.src = state.signatureImageUrl;
+        img.alt = "Authorized signature";
+        container.appendChild(img);
+      } else {
+        container.classList.remove("sig-image-mode");
+        container.textContent = val("signatureName") || "Authorized";
+      }
+    }
+
+    // ================================================================
+    // SYNC RECEIPT PREVIEW
     // ================================================================
     function syncPreview() {
-      var totalPaise = state.fees.reduce(function (sum, f) {
-        return sum + (f.paise || 0);
-      }, 0);
+      var totalPaise = state.fees.reduce(function (s, f) { return s + (f.paise || 0); }, 0);
+      var dateStr    = formatDate(val("receiptDate"));
 
-      var dateStr = formatDate(val("receiptDate"));
-
-      setText("pSchoolName",    (val("schoolName").toUpperCase()) || "SCHOOL NAME");
-      setText("pSchoolAddress", val("schoolAddress").toUpperCase());
-      setText("pReceiptNumber", val("receiptNumber") || "—");
-      setText("pReceiptDate",   dateStr);
-      setText("pReceiptDateBox",dateStr);
-      setText("pParentName",    val("parentName")    || "—");
-      setText("pStudentName",   val("studentName")   || "—");
-      setText("pClassName",     val("className")     || "—");
-      setText("pRollNumber",    val("rollNumber")    || "—");
-      setText("pPaymentMethod", val("paymentMethod") || "—");
-      setText("pSignature",     val("signatureName") || "Authorized");
+      setText("pSchoolName",     (val("schoolName").toUpperCase()) || "SCHOOL NAME");
+      setText("pSchoolAddress",  val("schoolAddress").toUpperCase());
+      setText("pReceiptNumber",  val("receiptNumber") || "—");
+      setText("pReceiptDate",    dateStr);
+      setText("pReceiptDateBox", dateStr);
+      setText("pParentName",     val("parentName")    || "—");
+      setText("pStudentName",    val("studentName")   || "—");
+      setText("pClassName",      val("className")     || "—");
+      setText("pRollNumber",     val("rollNumber")    || "—");
+      setText("pPaymentMethod",  val("paymentMethod") || "—");
 
       document.getElementById("formTotal").textContent = formatInr(totalPaise);
-      var wordsStr = totalPaise > 0 ? paiseToWords(totalPaise) : "—";
-      document.getElementById("formWords").textContent = wordsStr;
-      setText("pWords", wordsStr);
+      var wStr = totalPaise > 0 ? paiseToWords(totalPaise) : "—";
+      document.getElementById("formWords").textContent = wStr;
+      setText("pWords", wStr);
 
-      // Notes
       var notes = val("notes");
       document.getElementById("pNotesBox").style.display = notes ? "block" : "none";
       setText("pNotes", notes);
@@ -1269,124 +1146,78 @@
       // Fee table
       var tbody = document.getElementById("pFeeRows");
       while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
-
       state.fees.forEach(function (fee) {
-        var tr  = document.createElement("tr");
-        var td1 = document.createElement("td");
-        td1.textContent = fee.description || "—";
-        var td2 = document.createElement("td");
-        td2.textContent = formatInr(fee.paise || 0);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tbody.appendChild(tr);
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td"); td1.textContent = fee.description || "—";
+        var td2 = document.createElement("td"); td2.textContent = formatInr(fee.paise || 0);
+        tr.appendChild(td1); tr.appendChild(td2); tbody.appendChild(tr);
       });
+      var ttr  = document.createElement("tr"); ttr.className = "total-tr";
+      var ttd1 = document.createElement("td"); ttd1.textContent = "Total Amount";
+      var ttd2 = document.createElement("td"); ttd2.textContent = formatInr(totalPaise);
+      ttr.appendChild(ttd1); ttr.appendChild(ttd2); tbody.appendChild(ttr);
 
-      // Total row
-      var totalTr  = document.createElement("tr");
-      totalTr.className = "total-tr";
-      var ttd1 = document.createElement("td");
-      ttd1.textContent = "Total Amount";
-      var ttd2 = document.createElement("td");
-      ttd2.textContent = formatInr(totalPaise);
-      totalTr.appendChild(ttd1);
-      totalTr.appendChild(ttd2);
-      tbody.appendChild(totalTr);
-
-      checkA6Overflow();
+      syncSignaturePreview();
+      checkOverflow();
     }
 
     // ================================================================
-    // VALIDATION — runs before every print attempt
+    // VALIDATION
     // ================================================================
     function validate() {
-      var errors = [];
-      var firstInvalidEl = null;
+      var errors = [], firstInvalid = null;
 
-      function markInvalid(fieldId, msg) {
-        setError(fieldId, msg);
-        errors.push(msg);
-        if (!firstInvalidEl) firstInvalidEl = document.getElementById(fieldId);
+      function markInvalid(fid, msg) {
+        setError(fid, msg); errors.push(msg);
+        if (!firstInvalid) firstInvalid = document.getElementById(fid);
       }
 
-      // Clear all field errors
       ["schoolName","receiptNumber","receiptDate","parentName","studentName","className"]
         .forEach(clearError);
       var feesErrEl = document.getElementById("err-fees");
       if (feesErrEl) feesErrEl.textContent = "";
 
-      // School name
-      if (!val("schoolName")) {
-        markInvalid("schoolName", "School name is required.");
-      }
-
-      // Receipt number
+      if (!val("schoolName"))   markInvalid("schoolName",   "School name is required.");
       var rNum = val("receiptNumber");
-      if (!rNum) {
-        markInvalid("receiptNumber", "Receipt number is required.");
-      } else if (!/^[\x20-\x7E]+$/.test(rNum)) {
-        markInvalid("receiptNumber", "Receipt number must contain only printable characters.");
-      }
+      if (!rNum)                markInvalid("receiptNumber", "Receipt number is required.");
+      else if (!/^[\x20-\x7E]+$/.test(rNum))
+                                markInvalid("receiptNumber", "Receipt number must contain only printable characters.");
+      if (!val("receiptDate"))  markInvalid("receiptDate",  "Receipt date is required.");
+      if (!val("parentName"))   markInvalid("parentName",   "Parent / payer name is required.");
+      if (!val("studentName"))  markInvalid("studentName",  "Student name is required.");
+      if (!val("className"))    markInvalid("className",    "Class is required.");
 
-      // Receipt date
-      if (!val("receiptDate")) {
-        markInvalid("receiptDate", "Receipt date is required.");
-      }
-
-      // Parent name
-      if (!val("parentName")) {
-        markInvalid("parentName", "Parent / payer name is required.");
-      }
-
-      // Student name
-      if (!val("studentName")) {
-        markInvalid("studentName", "Student name is required.");
-      }
-
-      // Class
-      if (!val("className")) {
-        markInvalid("className", "Class is required.");
-      }
-
-      // Fee rows
+      var feeRowError = false;
       if (state.fees.length === 0) {
         if (feesErrEl) feesErrEl.textContent = "At least one fee item is required.";
         errors.push("At least one fee item is required.");
       } else {
-        var feeRowHasError = false;
-        state.fees.forEach(function (fee, i) {
-          var descErrEl = document.getElementById("err-desc-" + fee.id);
-          var amtErrEl  = document.getElementById("err-amt-"  + fee.id);
-          var descInput = document.querySelector("[data-fee-desc=\"" + fee.id + "\"]");
-          var amtInput  = document.querySelector("[data-fee-amount=\"" + fee.id + "\"]");
-
-          if (descErrEl) descErrEl.textContent = "";
-          if (amtErrEl)  amtErrEl.textContent  = "";
-          if (descInput) descInput.classList.remove("invalid");
-          if (amtInput)  amtInput.classList.remove("invalid");
+        state.fees.forEach(function (fee) {
+          var dErr = document.getElementById("err-desc-"   + fee.id);
+          var aErr = document.getElementById("err-amt-"    + fee.id);
+          var dIn  = document.querySelector("[data-fee-desc=\""   + fee.id + "\"]");
+          var aIn  = document.querySelector("[data-fee-amount=\"" + fee.id + "\"]");
+          if (dErr) dErr.textContent = ""; if (aErr) aErr.textContent = "";
+          if (dIn)  dIn.classList.remove("invalid");
+          if (aIn)  aIn.classList.remove("invalid");
 
           if (!fee.description.trim()) {
-            if (descErrEl) descErrEl.textContent = "Description is required.";
-            if (descInput) { descInput.classList.add("invalid"); if (!firstInvalidEl) firstInvalidEl = descInput; }
-            feeRowHasError = true;
+            if (dErr) dErr.textContent = "Description is required.";
+            if (dIn)  { dIn.classList.add("invalid"); if (!firstInvalid) firstInvalid = dIn; }
+            feeRowError = true;
           }
           if (!fee.paise || fee.paise <= 0) {
-            if (amtErrEl) amtErrEl.textContent = "Amount must be greater than zero.";
-            if (amtInput) { amtInput.classList.add("invalid"); if (!firstInvalidEl) firstInvalidEl = amtInput; }
-            feeRowHasError = true;
+            if (aErr) aErr.textContent = "Amount must be greater than zero.";
+            if (aIn)  { aIn.classList.add("invalid"); if (!firstInvalid) firstInvalid = aIn; }
+            feeRowError = true;
           }
         });
-        if (feeRowHasError) {
-          errors.push("Each fee item must have a description and a positive amount.");
-        }
+        if (feeRowError) errors.push("Each fee item must have a description and a positive amount.");
       }
 
-      // Total > 0
       var totalPaise = state.fees.reduce(function (s, f) { return s + (f.paise || 0); }, 0);
-      if (!feeRowHasError && totalPaise <= 0) {
-        errors.push("Total amount must be greater than zero.");
-      }
+      if (!feeRowError && totalPaise <= 0) errors.push("Total amount must be greater than zero.");
 
-      // Render summary
       var summary = document.getElementById("validationSummary");
       if (errors.length > 0) {
         summary.classList.add("visible");
@@ -1396,20 +1227,13 @@
         summary.appendChild(strong);
         var ul = document.createElement("ul");
         errors.forEach(function (msg) {
-          var li = document.createElement("li");
-          li.textContent = msg;
-          ul.appendChild(li);
+          var li = document.createElement("li"); li.textContent = msg; ul.appendChild(li);
         });
         summary.appendChild(ul);
-        if (firstInvalidEl) {
-          firstInvalidEl.focus();
-          firstInvalidEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        } else {
-          summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
+        if (firstInvalid) { firstInvalid.focus(); firstInvalid.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+        else summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
         return false;
       }
-
       summary.classList.remove("visible");
       while (summary.firstChild) summary.removeChild(summary.firstChild);
       return true;
@@ -1423,39 +1247,133 @@
       var errEl = document.getElementById("err-logo");
       if (errEl) errEl.textContent = "";
       if (!file) return;
-
-      var allowed = ["image/png","image/jpeg","image/gif","image/webp"];
-      if (!allowed.includes(file.type)) {
+      if (!["image/png","image/jpeg","image/gif","image/webp"].includes(file.type)) {
         if (errEl) errEl.textContent = "Please upload a PNG, JPG, GIF, or WebP image.";
-        event.target.value = "";
-        return;
+        event.target.value = ""; return;
       }
       if (file.size > 5 * 1024 * 1024) {
         if (errEl) errEl.textContent = "Logo file must be 5 MB or less.";
-        event.target.value = "";
-        return;
+        event.target.value = ""; return;
       }
-
       var reader = new FileReader();
       reader.onload = function () {
         var src = reader.result;
-
         var thumb = document.getElementById("logoThumb");
         while (thumb.firstChild) thumb.removeChild(thumb.firstChild);
-        var thumbImg = document.createElement("img");
-        thumbImg.src = src;
-        thumbImg.alt = "Uploaded school logo";
-        thumb.appendChild(thumbImg);
-
+        var ti = document.createElement("img"); ti.src = src; ti.alt = "Uploaded school logo";
+        thumb.appendChild(ti);
         var rLogo = document.getElementById("receiptLogo");
         rLogo.setAttribute("aria-label", "School logo");
         while (rLogo.firstChild) rLogo.removeChild(rLogo.firstChild);
-        var rImg = document.createElement("img");
-        rImg.src = src;
-        rImg.alt = "School logo";
-        rLogo.appendChild(rImg);
+        var ri = document.createElement("img"); ri.src = src; ri.alt = "School logo";
+        rLogo.appendChild(ri);
       };
       reader.readAsDataURL(file);
+    }
+
+    // ================================================================
+    // SIGNATURE — mode switching
+    // ================================================================
+    function switchSignatureMode(mode) {
+      state.signatureMode = mode;
+      document.querySelectorAll(".sig-tab").forEach(function (btn) {
+        var active = btn.dataset.sigMode === mode;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      document.getElementById("sigTypePanel").style.display   = mode === "type"   ? "" : "none";
+      document.getElementById("sigUploadPanel").style.display = mode === "upload" ? "" : "none";
+      document.getElementById("sigDrawPanel").style.display   = mode === "draw"   ? "" : "none";
+      syncPreview();
+    }
+
+    // ================================================================
+    // SIGNATURE — upload image
+    // ================================================================
+    function handleSignatureUpload(event) {
+      var file = event.target.files && event.target.files[0];
+      var errEl = document.getElementById("err-sigUpload");
+      if (errEl) errEl.textContent = "";
+      if (!file) return;
+      if (!["image/png","image/jpeg","image/gif","image/webp"].includes(file.type)) {
+        if (errEl) errEl.textContent = "Please upload a PNG, JPG, GIF, or WebP image.";
+        event.target.value = ""; return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        if (errEl) errEl.textContent = "Signature image must be 2 MB or less.";
+        event.target.value = ""; return;
+      }
+      var reader = new FileReader();
+      reader.onload = function () {
+        state.signatureImageUrl = reader.result;
+        var preview = document.getElementById("sigUploadPreview");
+        preview.src = reader.result;
+        preview.classList.add("visible");
+        syncPreview();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ================================================================
+    // SIGNATURE — canvas draw
+    // ================================================================
+    function initCanvas() {
+      var canvas = document.getElementById("sigCanvas");
+      var ctx    = canvas.getContext("2d");
+      var drawing = false;
+
+      ctx.strokeStyle = "#1e293b";
+      ctx.lineWidth   = 2.5;
+      ctx.lineCap     = "round";
+      ctx.lineJoin    = "round";
+
+      function coords(e) {
+        var rect = canvas.getBoundingClientRect();
+        var scaleX = canvas.width  / rect.width;
+        var scaleY = canvas.height / rect.height;
+        var src = e.touches ? e.touches[0] : e;
+        return {
+          x: (src.clientX - rect.left) * scaleX,
+          y: (src.clientY - rect.top)  * scaleY,
+        };
+      }
+
+      function startDraw(e) {
+        e.preventDefault();
+        drawing = true;
+        var c = coords(e);
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.y);
+      }
+      function draw(e) {
+        if (!drawing) return;
+        e.preventDefault();
+        var c = coords(e);
+        ctx.lineTo(c.x, c.y);
+        ctx.stroke();
+      }
+      function endDraw() {
+        if (drawing) { drawing = false; ctx.beginPath(); }
+      }
+
+      canvas.addEventListener("mousedown",  startDraw);
+      canvas.addEventListener("mousemove",  draw);
+      canvas.addEventListener("mouseup",    endDraw);
+      canvas.addEventListener("mouseleave", endDraw);
+      canvas.addEventListener("touchstart", startDraw, { passive: false });
+      canvas.addEventListener("touchmove",  draw,      { passive: false });
+      canvas.addEventListener("touchend",   endDraw);
+
+      document.getElementById("sigClearBtn").addEventListener("click", function () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        state.signatureImageUrl = null;
+        syncPreview();
+      });
+
+      document.getElementById("sigApplyBtn").addEventListener("click", function () {
+        state.signatureImageUrl = canvas.toDataURL("image/png");
+        syncPreview();
+      });
     }
 
     // ================================================================
@@ -1470,96 +1388,109 @@
     // INIT
     // ================================================================
     function init() {
-      // Restore saved page size from session
+      // Restore saved preferences
       try {
-        var saved = sessionStorage.getItem("kidora-receipt-size");
-        if (saved && ["a4","a5","a6"].includes(saved)) {
-          var radio = document.querySelector("input[name=\"pageSize\"][value=\"" + saved + "\"]");
+        var sp = sessionStorage.getItem("kidora-paper");
+        var sl = sessionStorage.getItem("kidora-landscape");
+        if (sp && ["a4","a5","a6"].includes(sp)) {
+          state.paperSize = sp;
+          var radio = document.querySelector("input[name=\"pageSize\"][value=\"" + sp + "\"]");
           if (radio) radio.checked = true;
-          state.pageSize = saved;
         }
+        if (sl === "1" && state.paperSize !== "a4") state.landscape = true;
       } catch (e) {}
 
-      applyPageSize(state.pageSize);
+      applyPageSize();
       renderFees();
       syncPreview();
+      initCanvas();
 
-      // Live preview for all text fields
-      var textFields = [
-        "schoolName","schoolAddress","receiptNumber","receiptDate",
-        "parentName","studentName","className","rollNumber",
-        "paymentMethod","notes","signatureName"
-      ];
+      // Text field live sync
+      var textFields = ["schoolName","schoolAddress","receiptNumber","receiptDate",
+                        "parentName","studentName","className","rollNumber",
+                        "paymentMethod","notes","signatureName"];
       textFields.forEach(function (id) {
         var el = document.getElementById(id);
         if (!el) return;
         el.addEventListener("input",  syncPreview);
         el.addEventListener("change", syncPreview);
-        // Clear field error on correction
-        el.addEventListener("input", function () { clearError(id); });
+        el.addEventListener("input",  function () { clearError(id); });
       });
 
       // Add fee
       document.getElementById("addFee").addEventListener("click", function () {
         state.fees.push({ id: uid(), description: "", paise: 0 });
-        renderFees();
-        syncPreview();
+        renderFees(); syncPreview();
         var inputs = document.querySelectorAll("[data-fee-desc]");
         if (inputs.length) inputs[inputs.length - 1].focus();
-        var feesErrEl = document.getElementById("err-fees");
-        if (feesErrEl) feesErrEl.textContent = "";
+        var fe = document.getElementById("err-fees");
+        if (fe) fe.textContent = "";
       });
 
-      // Fee field input (description + amount)
+      // Fee field changes
       document.getElementById("feeItems").addEventListener("input", function (event) {
         var descId   = event.target.dataset.feeDesc;
         var amountId = event.target.dataset.feeAmount;
         var feeId    = descId || amountId;
         var fee      = state.fees.find(function (f) { return f.id === feeId; });
         if (!fee) return;
-
         if (descId) {
-          // Store raw string; rendered via textContent — never innerHTML
           fee.description = event.target.value;
-          var descErr = document.getElementById("err-desc-" + feeId);
-          if (descErr && fee.description.trim()) {
-            descErr.textContent = "";
-            event.target.classList.remove("invalid");
-          }
+          var de = document.getElementById("err-desc-" + feeId);
+          if (de && fee.description.trim()) { de.textContent = ""; event.target.classList.remove("invalid"); }
         }
         if (amountId) {
           var p = parsePaise(event.target.value);
-          fee.paise = (p !== null) ? p : 0;
-          var amtErr = document.getElementById("err-amt-" + feeId);
-          if (amtErr && fee.paise > 0) {
-            amtErr.textContent = "";
-            event.target.classList.remove("invalid");
-          }
+          fee.paise = p !== null ? p : 0;
+          var ae = document.getElementById("err-amt-" + feeId);
+          if (ae && fee.paise > 0) { ae.textContent = ""; event.target.classList.remove("invalid"); }
         }
         syncPreview();
       });
 
       // Fee remove
       document.getElementById("feeItems").addEventListener("click", function (event) {
-        var removeBtn = event.target.closest("[data-remove]");
-        if (!removeBtn) return;
-        var removeId = removeBtn.dataset.remove;
-        if (state.fees.length <= 1) return;
-        state.fees = state.fees.filter(function (f) { return f.id !== removeId; });
-        renderFees();
-        syncPreview();
+        var btn = event.target.closest("[data-remove]");
+        if (!btn || state.fees.length <= 1) return;
+        state.fees = state.fees.filter(function (f) { return f.id !== btn.dataset.remove; });
+        renderFees(); syncPreview();
         document.getElementById("addFee").focus();
       });
 
-      // Logo upload
+      // Logo
       document.getElementById("logoInput").addEventListener("change", handleLogoUpload);
 
-      // Page size selector
+      // Page size radio buttons
       document.querySelectorAll("input[name=\"pageSize\"]").forEach(function (radio) {
         radio.addEventListener("change", function () {
-          if (radio.checked) applyPageSize(radio.value);
+          if (!radio.checked) return;
+          state.paperSize = radio.value;
+          if (radio.value === "a4") state.landscape = false;
+          applyPageSize();
         });
       });
+
+      // Landscape toggle
+      document.getElementById("landscapeCheck").addEventListener("change", function () {
+        state.landscape = this.checked;
+        applyPageSize();
+      });
+
+      // Notes / address also trigger overflow check
+      ["notes", "schoolAddress"].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener("input", checkOverflow);
+      });
+
+      // Signature tabs
+      document.querySelectorAll(".sig-tab").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          switchSignatureMode(btn.dataset.sigMode);
+        });
+      });
+
+      // Signature upload
+      document.getElementById("sigImageInput").addEventListener("change", handleSignatureUpload);
 
       // Print buttons
       document.getElementById("printBtn").addEventListener("click",    doPrint);
