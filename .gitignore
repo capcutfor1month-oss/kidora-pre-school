@@ -9,3 +9,16 @@ coverage/
 playwright-report/
 test-results/
 *.log
+
+# additional local/generated files
+.next/
+out/
+*.pdf
+Thumbs.db
+tmp/
+temp/
+.cache/
+*.pem
+*secret*
+*credential*
+*service-account*
