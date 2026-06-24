@@ -1,0 +1,28 @@
+# dependencies
+node_modules/
+
+# env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*secret*
+*credential*
+*service-account*
+
+# build output
+.next/
+dist/
+build/
+out/
+
+# generated exports and local files
+*.pdf
+*.log
+.DS_Store
+Thumbs.db
+
+# temporary folders
+tmp/
+temp/
+.cache/
