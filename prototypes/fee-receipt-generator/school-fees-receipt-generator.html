@@ -656,12 +656,15 @@
 
             <!-- Mode tabs -->
             <div class="sig-tabs" role="tablist" aria-label="Signature mode">
-              <button class="sig-tab active" type="button" role="tab"
-                      aria-selected="true" data-sig-mode="type">Type</button>
-              <button class="sig-tab" type="button" role="tab"
-                      aria-selected="false" data-sig-mode="upload">Upload</button>
-              <button class="sig-tab" type="button" role="tab"
-                      aria-selected="false" data-sig-mode="draw">Draw</button>
+              <button class="sig-tab active" type="button" role="tab" id="sig-tab-type"
+                      aria-selected="true" aria-controls="sigTypePanel"
+                      data-sig-mode="type">Type</button>
+              <button class="sig-tab" type="button" role="tab" id="sig-tab-upload"
+                      aria-selected="false" aria-controls="sigUploadPanel"
+                      data-sig-mode="upload">Upload</button>
+              <button class="sig-tab" type="button" role="tab" id="sig-tab-draw"
+                      aria-selected="false" aria-controls="sigDrawPanel"
+                      data-sig-mode="draw">Draw</button>
             </div>
 
             <!-- Type panel -->
@@ -862,6 +865,28 @@
 
   <script>
     // ================================================================
+    // CONSTANTS
+    // ================================================================
+
+    // Maximum receipt total: ₹99,99,999.99 (under 1 crore).
+    var MAX_RECEIPT_PAISE = 999999999;
+
+    // Printable height thresholds in on-screen pixels.
+    // Derived from paper dimensions minus margins at each size's CSS px/mm scale.
+    // A4: 595px/210mm = 2.833px/mm → (297-24)mm * 2.833 ≈ 773px
+    // A5: 420px/148mm = 2.838px/mm → (210-18)mm * 2.838 ≈ 545px
+    // A6: 298px/105mm = 2.838px/mm → (148-12)mm * 2.838 ≈ 386px
+    // A5-land: 595px/210mm = 2.833px/mm → (148-18)mm * 2.833 ≈ 368px
+    // A6-land: 420px/148mm = 2.838px/mm → (105-12)mm * 2.838 ≈ 264px
+    var PRINTABLE_H_PX = {
+      "a4":           773,
+      "a5":           545,
+      "a6":           386,
+      "a5-landscape": 368,
+      "a6-landscape": 264,
+    };
+
+    // ================================================================
     // STATE
     // ================================================================
     var state = {
@@ -888,14 +913,21 @@
         : Date.now().toString(36) + Math.random().toString(36).slice(2);
     }
 
-    // Parse user string to integer paise; null if invalid/negative.
+    // Parse user string to integer paise; null if invalid.
+    // Accepts only plain decimal notation: digits with at most 2 decimal places.
+    // Rejects commas, exponent/scientific notation, leading signs, and values
+    // above MAX_RECEIPT_PAISE. Returns 0 for "0" (caught by validation as zero).
     function parsePaise(str) {
       if (str === null || str === undefined) return null;
-      var s = String(str).trim().replace(/,/g, "");
+      var s = String(str).trim();
       if (s === "") return null;
-      var n = parseFloat(s);
-      if (!isFinite(n) || isNaN(n) || n < 0) return null;
-      return Math.round(n * 100);
+      // Strict: only digits, optional dot, at most 2 decimal places.
+      if (!/^\d+(\.\d{1,2})?$/.test(s)) return null;
+      var n = Number(s);
+      if (!isFinite(n) || n < 0) return null;
+      var p = Math.round(n * 100);
+      if (p > MAX_RECEIPT_PAISE) return null;
+      return p;
     }
 
     // Format integer paise as Indian currency string.
@@ -909,6 +941,7 @@
     // Convert integer paise to Indian amount-in-words.
     function paiseToWords(totalPaise) {
       if (!Number.isInteger(totalPaise) || totalPaise < 0) return "Invalid amount";
+      if (totalPaise > MAX_RECEIPT_PAISE) return "Amount exceeds maximum";
       if (totalPaise === 0) return "Zero Rupees Only";
 
       var ONES = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
@@ -939,7 +972,7 @@
       var rupees = Math.floor(totalPaise / 100);
       var paise  = totalPaise % 100;
       var rPart  = rupees > 0 ? rupeeWords(rupees) + (rupees === 1 ? " Rupee" : " Rupees") : "";
-      var pPart  = paise  > 0 ? underHundred(paise) + " Paise" : "";
+      var pPart  = paise === 1 ? "One Paisa" : (paise > 1 ? underHundred(paise) + " Paise" : "");
 
       if (rPart && pPart) return rPart + " and " + pPart + " Only";
       if (rPart) return rPart + " Only";
@@ -951,6 +984,20 @@
       if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return value || "—";
       var p = value.split("-");
       return p[2] + "/" + p[1] + "/" + p[0];
+    }
+
+    // Verify that a "YYYY-MM-DD" string is a real calendar date (no Feb 29 on non-leap years, etc.)
+    function isValidCalendarDate(value) {
+      if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+      var p  = value.split("-");
+      var yr = parseInt(p[0], 10);
+      var mo = parseInt(p[1], 10);
+      var dy = parseInt(p[2], 10);
+      if (mo < 1 || mo > 12) return false;
+      var days = [0,31,28,31,30,31,30,31,31,30,31,30,31];
+      var isLeap = (yr % 4 === 0 && yr % 100 !== 0) || yr % 400 === 0;
+      if (isLeap) days[2] = 29;
+      return dy >= 1 && dy <= days[mo];
     }
 
     function val(id) {
@@ -1010,28 +1057,29 @@
       checkOverflow();
     }
 
-    // Overflow warning heuristics per size
+    // Overflow check: measure actual rendered receipt height against the
+    // printable area for the selected page size (PRINTABLE_H_PX).
+    // This replaces heuristic row/character counts with real layout data.
     function checkOverflow() {
       var warn = document.getElementById("overflowWarning");
       if (!warn) return;
-      var key = sizeKey();
-      var feeCount = state.fees.length;
-      var notesLen = val("notes").length;
-      var addrLen  = val("schoolAddress").length;
+      var key     = sizeKey();
+      var receipt = document.getElementById("receipt");
+      var maxH    = PRINTABLE_H_PX[key];
+      var actualH = receipt ? receipt.scrollHeight : 0;
 
       var msg = "";
-      if (key === "a6") {
-        if (feeCount > 5 || notesLen > 80 || addrLen > 60) {
-          msg = "A6 portrait is very small. Consider A5 or A4, or shorten your content.";
-        }
-      } else if (key === "a5-landscape") {
-        if (feeCount > 8 || notesLen > 120) {
-          msg = "A5 landscape has a shorter page height. Reduce fee rows or notes if content is cut off.";
-        }
-      } else if (key === "a6-landscape") {
-        if (feeCount > 3 || notesLen > 40 || addrLen > 40) {
-          msg = "A6 landscape is very compact (148×105 mm). Suitable only for minimal receipts.";
-        }
+      if (maxH && actualH > maxH) {
+        var sizeNames = {
+          "a4":           "A4 portrait",
+          "a5":           "A5 portrait",
+          "a6":           "A6 portrait",
+          "a5-landscape": "A5 landscape",
+          "a6-landscape": "A6 landscape",
+        };
+        msg = "Receipt content is taller than the " + (sizeNames[key] || key) +
+              " printable area — content may be cut off or spill onto a second page. " +
+              "Reduce fee rows, shorten notes, or choose a larger paper size.";
       }
 
       warn.textContent = msg ? ("⚠ " + msg) : "";
@@ -1081,7 +1129,7 @@
         // Amount
         var aLabel = document.createElement("label");
         var aSpan  = document.createElement("span"); aSpan.className = "label-text"; aSpan.textContent = "Amount (₹) *";
-        var aInput = document.createElement("input"); aInput.type = "number"; aInput.min = "0"; aInput.step = "0.01";
+        var aInput = document.createElement("input"); aInput.type = "text"; aInput.inputMode = "decimal";
         aInput.value = fee.paise > 0 ? (fee.paise / 100).toFixed(2) : "";
         aInput.dataset.feeAmount = fee.id; aInput.placeholder = "0.00";
         aInput.setAttribute("aria-label", "Fee item " + (index + 1) + " amount in rupees");
@@ -1182,7 +1230,10 @@
       if (!rNum)                markInvalid("receiptNumber", "Receipt number is required.");
       else if (!/^[\x20-\x7E]+$/.test(rNum))
                                 markInvalid("receiptNumber", "Receipt number must contain only printable characters.");
-      if (!val("receiptDate"))  markInvalid("receiptDate",  "Receipt date is required.");
+      var dv = val("receiptDate");
+      if (!dv)                  markInvalid("receiptDate",  "Receipt date is required.");
+      else if (!isValidCalendarDate(dv))
+                                markInvalid("receiptDate",  "Please enter a valid calendar date.");
       if (!val("parentName"))   markInvalid("parentName",   "Parent / payer name is required.");
       if (!val("studentName"))  markInvalid("studentName",  "Student name is required.");
       if (!val("className"))    markInvalid("className",    "Class is required.");
@@ -1251,22 +1302,39 @@
         if (errEl) errEl.textContent = "Please upload a PNG, JPG, GIF, or WebP image.";
         event.target.value = ""; return;
       }
+      if (file.size === 0) {
+        if (errEl) errEl.textContent = "The selected file is empty.";
+        event.target.value = ""; return;
+      }
       if (file.size > 5 * 1024 * 1024) {
         if (errEl) errEl.textContent = "Logo file must be 5 MB or less.";
         event.target.value = ""; return;
       }
       var reader = new FileReader();
+      reader.onerror = function () {
+        if (errEl) errEl.textContent = "Failed to read the file. Please try again.";
+        event.target.value = "";
+      };
       reader.onload = function () {
         var src = reader.result;
-        var thumb = document.getElementById("logoThumb");
-        while (thumb.firstChild) thumb.removeChild(thumb.firstChild);
-        var ti = document.createElement("img"); ti.src = src; ti.alt = "Uploaded school logo";
-        thumb.appendChild(ti);
-        var rLogo = document.getElementById("receiptLogo");
-        rLogo.setAttribute("aria-label", "School logo");
-        while (rLogo.firstChild) rLogo.removeChild(rLogo.firstChild);
-        var ri = document.createElement("img"); ri.src = src; ri.alt = "School logo";
-        rLogo.appendChild(ri);
+        // Verify the bytes actually decode as an image before applying to UI.
+        var testImg = new Image();
+        testImg.onerror = function () {
+          if (errEl) errEl.textContent = "The file could not be loaded as an image. Please try a different file.";
+          event.target.value = "";
+        };
+        testImg.onload = function () {
+          var thumb = document.getElementById("logoThumb");
+          while (thumb.firstChild) thumb.removeChild(thumb.firstChild);
+          var ti = document.createElement("img"); ti.src = src; ti.alt = "Uploaded school logo";
+          thumb.appendChild(ti);
+          var rLogo = document.getElementById("receiptLogo");
+          rLogo.setAttribute("aria-label", "School logo");
+          while (rLogo.firstChild) rLogo.removeChild(rLogo.firstChild);
+          var ri = document.createElement("img"); ri.src = src; ri.alt = "School logo";
+          rLogo.appendChild(ri);
+        };
+        testImg.src = src;
       };
       reader.readAsDataURL(file);
     }
@@ -1299,17 +1367,35 @@
         if (errEl) errEl.textContent = "Please upload a PNG, JPG, GIF, or WebP image.";
         event.target.value = ""; return;
       }
+      if (file.size === 0) {
+        if (errEl) errEl.textContent = "The selected file is empty.";
+        event.target.value = ""; return;
+      }
       if (file.size > 2 * 1024 * 1024) {
         if (errEl) errEl.textContent = "Signature image must be 2 MB or less.";
         event.target.value = ""; return;
       }
       var reader = new FileReader();
+      reader.onerror = function () {
+        if (errEl) errEl.textContent = "Failed to read the file. Please try again.";
+        event.target.value = "";
+      };
       reader.onload = function () {
-        state.signatureImageUrl = reader.result;
-        var preview = document.getElementById("sigUploadPreview");
-        preview.src = reader.result;
-        preview.classList.add("visible");
-        syncPreview();
+        var src = reader.result;
+        // Verify the bytes actually decode as an image before applying to UI.
+        var testImg = new Image();
+        testImg.onerror = function () {
+          if (errEl) errEl.textContent = "The file could not be loaded as an image. Please try a different file.";
+          event.target.value = "";
+        };
+        testImg.onload = function () {
+          state.signatureImageUrl = src;
+          var preview = document.getElementById("sigUploadPreview");
+          preview.src = src;
+          preview.classList.add("visible");
+          syncPreview();
+        };
+        testImg.src = src;
       };
       reader.readAsDataURL(file);
     }
@@ -1440,10 +1526,22 @@
           if (de && fee.description.trim()) { de.textContent = ""; event.target.classList.remove("invalid"); }
         }
         if (amountId) {
-          var p = parsePaise(event.target.value);
-          fee.paise = p !== null ? p : 0;
+          var rawVal = event.target.value.trim();
+          var p = parsePaise(rawVal);
+          fee.paise = (p !== null) ? p : 0;
           var ae = document.getElementById("err-amt-" + feeId);
-          if (ae && fee.paise > 0) { ae.textContent = ""; event.target.classList.remove("invalid"); }
+          if (ae) {
+            if (rawVal && p === null) {
+              ae.textContent = "Enter a valid amount (digits only, max 2 decimals, max ₹99,99,999.99).";
+              event.target.classList.add("invalid");
+            } else if (fee.paise > 0) {
+              ae.textContent = "";
+              event.target.classList.remove("invalid");
+            } else {
+              ae.textContent = "";
+              event.target.classList.remove("invalid");
+            }
+          }
         }
         syncPreview();
       });

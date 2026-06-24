@@ -34,14 +34,36 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 - Enter school name, address, and logo
 - Enter receipt number and date
 - Enter parent name, student name, class, roll number
-- Add or remove fee rows with description and amount
+- Add or remove fee rows with description and amount (max ₹99,99,999.99 per receipt)
 - Select payment method
 - Add optional notes
-- Select A4, A5, or A6 paper size — affects preview and print layout
-- See total in INR and amount in words (Indian numbering: lakh, crore, paise)
+- Select A4, A5, or A6 paper size with optional landscape orientation for A5/A6
+- See total in INR and amount in words (Indian numbering: lakh, crore, paise; "One Paisa" singular)
+- Live overflow warning when receipt content exceeds the measured printable area
 - Preview updates live as you type
-- Validate all required fields before printing
+- Validate all required fields (including impossible calendar dates) before printing
 - Print or save as PDF using the browser's Print dialog
+
+## What was fixed (Codex audit — commit: fix: address Codex audit findings)
+
+1. **Strict money parsing** — `parsePaise` uses a regex that accepts only plain decimal notation
+   (`^\d+(\.\d{1,2})?$`). Rejects commas in input, exponent notation (`1e3`), partial strings
+   (`1abc`), more than 2 decimal places (`10.999`), and any value above ₹99,99,999.99.
+   Amount input changed from `type="number"` to `type="text"` + `inputmode="decimal"` so the
+   browser does not silently normalise scientific notation before our validator sees it.
+2. **Amount-in-words** — Fixed singular "One Paisa" (was "One Paise"). Added guard that returns
+   "Amount exceeds maximum" for values above ₹99,99,999.99.
+3. **Date validation** — `isValidCalendarDate()` rejects impossible dates such as 2023-02-29 and
+   2023-04-31. Validation shows "Please enter a valid calendar date." for these inputs.
+4. **Upload image decode** — Logo and signature uploads now verify the file bytes actually decode
+   as an image (`Image.onload / onerror`) after the MIME-type and size checks pass.
+   Rejects zero-byte files and corrupt or spoofed images.
+5. **Overflow warning** — Replaced heuristic row/character counts with a real measurement:
+   `receipt.scrollHeight` is compared to a `PRINTABLE_H_PX` map of calculated printable heights
+   for each size/orientation. Warning fires only when actual content height exceeds the page.
+6. **ARIA tab references** — Added `id="sig-tab-type"`, `id="sig-tab-upload"`, `id="sig-tab-draw"`
+   to the three signature-mode tab buttons. Added `aria-controls` linking each button to its panel.
+   The `aria-labelledby` references on the tab panels now resolve correctly.
 
 ## What was fixed (commit: fix: stabilize Kidora internal fee receipt tool)
 
@@ -79,12 +101,21 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 - `@page { size: A5; }` tells the browser to format content for A5, but the user must still
   manually select A5 in the Print dialog's paper-size dropdown for the correct printed size.
   This works reliably in Chrome and Edge. Safari does not honour `@page { size }`.
+- The overflow warning compares `receipt.scrollHeight` to a calculated screen-pixel threshold
+  for each paper size. It is an estimate: screen DPI and print DPI differ, so a receipt that
+  barely fits on screen may still require a second page in print. Always check the Print dialog
+  preview before saving, especially for A6 and landscape orientations.
+- A6 portrait (105×148 mm) and A6 landscape (148×105 mm) are very compact. They are suitable
+  only for minimal receipts with few fee rows and short addresses. The overflow warning fires
+  early for these sizes. If the Print preview shows clipping, switch to A5 or A4.
+- A5 landscape prints a shorter page (148 mm tall after margins). Long receipts will overflow.
+  The measured overflow warning will indicate this before you print.
 
 ## Known limitations
 
 - No persistent storage — data is lost on page reload.
 - No multi-receipt history.
-- A6 is practical for short receipts (up to ~5 fee rows); a warning appears for longer content.
+- Maximum receipt total is ₹99,99,999.99. Amounts above this are rejected at input.
 - Page-size selection is kept only for the current browser session (sessionStorage).
 
 ## Testing

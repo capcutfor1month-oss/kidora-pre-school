@@ -27,18 +27,83 @@ Fill in a single fee row with the given value, then confirm the total and amount
 | # | Input | Expected total | Expected words |
 |---|-------|----------------|----------------|
 | M-1 | 0.50 | ₹0.50 | Fifty Paise Only |
-| M-2 | 1 | ₹1.00 | One Rupee Only |
-| M-3 | 10.50 | ₹10.50 | Ten Rupees and Fifty Paise Only |
-| M-4 | 1000 | ₹1,000.00 | One Thousand Rupees Only |
-| M-5 | 100000 | ₹1,00,000.00 | One Lakh Rupees Only |
-| M-6 | 10000000 | ₹1,00,00,000.00 | One Crore Rupees Only |
-| M-7 | -100 | Total stays at ₹0.00 | — (negative rejected) |
-| M-8 | abc | Total stays at ₹0.00 | — (non-numeric rejected) |
-| M-9 | (empty) | Total stays at ₹0.00 | — |
-| M-10 | 0 | Total stays at ₹0.00 | — |
+| M-2 | 0.01 | ₹0.01 | One Paisa Only |
+| M-3 | 1 | ₹1.00 | One Rupee Only |
+| M-4 | 10.50 | ₹10.50 | Ten Rupees and Fifty Paise Only |
+| M-5 | 1000 | ₹1,000.00 | One Thousand Rupees Only |
+| M-6 | 100000 | ₹1,00,000.00 | One Lakh Rupees Only |
+| M-7 | 10000000 | ₹1,00,00,000.00 | One Crore Rupees Only |
+| M-8 | -100 | Total stays at ₹0.00 | — (negative rejected) |
+| M-9 | abc | Total stays at ₹0.00 | — (non-numeric rejected) |
+| M-10 | (empty) | Total stays at ₹0.00 | — |
+| M-11 | 0 | Total stays at ₹0.00 | — |
 
-**Decimal summation test (M-11):**
+**Decimal summation test (M-12):**
 Add two fee rows: 0.10 and 0.20. Expected total: ₹0.30 (not ₹0.2999…).
+
+---
+
+## 11. Strict money-parsing regression
+
+For each input, type the value into the Amount field. Verify the inline error message and that the total does NOT update with the invalid value.
+
+| # | Input | Expected field error shown | Total changes? |
+|---|-------|---------------------------|----------------|
+| SM-1 | `1abc` | "Enter a valid amount…" | No |
+| SM-2 | `1.2.3` | "Enter a valid amount…" | No |
+| SM-3 | `1e3` | "Enter a valid amount…" | No |
+| SM-4 | `10.999` | "Enter a valid amount…" | No |
+| SM-5 | `1,000` | "Enter a valid amount…" | No |
+| SM-6 | `100000000` (₹10 crore, over max) | "Enter a valid amount…" | No |
+| SM-7 | `0.01` | No error | Yes — total shows ₹0.01 |
+| SM-8 | `99999999.99` (below max ₹99,99,999.99 after rounding) | No error | Yes |
+| SM-9 | `99999999.999` (3 decimal places) | "Enter a valid amount…" | No |
+| SM-10 | ` 500 ` (leading/trailing spaces) | No error (trimmed) | Yes — ₹500.00 |
+
+---
+
+## 12. Calendar date validation
+
+| # | Date entered | Expected result |
+|---|--------------|-----------------|
+| CD-1 | 2023-02-29 | "Please enter a valid calendar date." (2023 is not a leap year) |
+| CD-2 | 2024-02-29 | Accepted — 2024 is a leap year |
+| CD-3 | 2023-04-31 | "Please enter a valid calendar date." (April has 30 days) |
+| CD-4 | 2023-01-32 | "Please enter a valid calendar date." |
+| CD-5 | 2023-13-01 | "Please enter a valid calendar date." (month 13 invalid) |
+| CD-6 | 2026-06-25 | Accepted, preview shows 25/06/2026 |
+
+---
+
+## 13. Upload decode verification
+
+| # | File | Expected result |
+|---|------|-----------------|
+| UV-1 | Rename a `.txt` file to `.png`; upload as logo | Error: "The file could not be loaded as an image." |
+| UV-2 | Create a zero-byte file; upload as logo | Error: "The selected file is empty." |
+| UV-3 | Valid PNG logo (any size ≤ 5 MB) | Logo appears in thumb and receipt |
+| UV-4 | Rename a `.txt` file to `.png`; upload as signature | Error: "The file could not be loaded as an image." |
+| UV-5 | Zero-byte file as signature | Error: "The selected file is empty." |
+| UV-6 | Valid PNG signature with transparent background | Signature appears in receipt preview |
+
+---
+
+## 14. Print layout verification (PDF evidence required)
+
+For each layout: fill all required fields with at least 3 fee rows, click Print / Save as PDF, save the file, then open it.
+
+| # | Layout | PDF page size | PDF orientation | Pages | Receipt visible | Content clipped? |
+|---|--------|--------------|-----------------|-------|-----------------|-----------------|
+| PL-1 | A4 portrait | A4 | Portrait | 1 | Yes | No |
+| PL-2 | A5 portrait | A5 | Portrait | 1 (short receipt) | Yes | No |
+| PL-3 | A5 landscape | A5 | Landscape | 1 (short receipt) | Yes | Verify in preview |
+| PL-4 | A6 portrait | A6 | Portrait | 1 (≤3 fee rows) | Yes | Verify in preview |
+| PL-5 | A6 landscape | A6 | Landscape | 1 (≤2 fee rows) | Yes | Verify in preview |
+
+Additional checks for each PDF:
+- No form, header, nav, or UI chrome is visible
+- Receipt border, table, and signature row all appear
+- Overflow warning fired when content was too tall (before saving)
 
 ---
 
