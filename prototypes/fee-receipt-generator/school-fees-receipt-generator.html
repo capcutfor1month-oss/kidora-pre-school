@@ -241,12 +241,10 @@
     .receipt { margin: 0 auto; background: #ffffff; color: #020817; }
 
     /* Portrait sizes */
-    .receipt.size-a4            { width: 595px; font-size: 14px; }
-    .receipt.size-a5            { width: 420px; font-size: 12px; }
-    .receipt.size-a6            { width: 298px; font-size: 10px; }
-    /* Landscape sizes (width = landscape paper width in mm * px/mm) */
-    .receipt.size-a5-landscape  { width: 595px; font-size: 13px; }  /* 210mm wide, like A4 portrait */
-    .receipt.size-a6-landscape  { width: 420px; font-size: 11px; }  /* 148mm wide, like A5 portrait */
+    .receipt.size-a4           { width: 595px; font-size: 14px; }
+    .receipt.size-a5           { width: 420px; font-size: 12px; }
+    /* A5 landscape — tight density; suitable for short receipts (≤ ~8 rows) */
+    .receipt.size-a5-landscape { width: 595px; font-size: 11px; }
 
     .receipt-border { border: 1px solid #cbd5e1; }
 
@@ -255,15 +253,12 @@
       display: flex; justify-content: space-between; gap: 14px;
       border-bottom: 1px solid #cbd5e1; flex-wrap: nowrap;
     }
-    .size-a4           .receipt-top { padding: 20px 22px; }
+    .size-a4           .receipt-top { padding: 14px 22px; }
     .size-a5           .receipt-top { padding: 14px 16px; }
-    .size-a6           .receipt-top { padding: 8px 10px; gap: 8px; }
-    .size-a5-landscape .receipt-top { padding: 16px 20px; }
-    .size-a6-landscape .receipt-top { padding: 10px 12px; gap: 10px; }
+    .size-a5-landscape .receipt-top { padding: 7px 12px; gap: 10px; }
 
     .school-block { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
-    .size-a6           .school-block { gap: 7px; }
-    .size-a6-landscape .school-block { gap: 8px; }
+    .size-a5-landscape .school-block { gap: 8px; }
 
     /* Logo */
     .receipt-logo {
@@ -273,9 +268,7 @@
     }
     .size-a4           .receipt-logo { width: 76px; height: 76px; font-size: 9px; }
     .size-a5           .receipt-logo { width: 58px; height: 58px; font-size: 8px; }
-    .size-a6           .receipt-logo { width: 40px; height: 40px; font-size: 7px; }
-    .size-a5-landscape .receipt-logo { width: 70px; height: 70px; font-size: 9px; }
-    .size-a6-landscape .receipt-logo { width: 50px; height: 50px; font-size: 8px; }
+    .size-a5-landscape .receipt-logo { width: 46px; height: 46px; font-size: 7px; }
     .receipt-logo img { width: 100%; height: 100%; object-fit: contain; }
 
     .school-info { min-width: 0; }
@@ -285,53 +278,40 @@
     }
     .size-a4           .school-name { font-size: 18px; }
     .size-a5           .school-name { font-size: 14px; }
-    .size-a6           .school-name { font-size: 10px; }
-    .size-a5-landscape .school-name { font-size: 16px; }
-    .size-a6-landscape .school-name { font-size: 12px; }
+    .size-a5-landscape .school-name { font-size: 13px; }
 
     .school-address { margin: 5px 0 0; color: #64748b; line-height: 1.4; text-transform: uppercase; word-break: break-word; }
     .size-a4           .school-address { font-size: 11px; }
     .size-a5           .school-address { font-size: 10px; }
-    .size-a6           .school-address { font-size: 8px; margin-top: 2px; }
-    .size-a5-landscape .school-address { font-size: 11px; }
-    .size-a6-landscape .school-address { font-size: 9px; margin-top: 3px; }
+    .size-a5-landscape .school-address { font-size: 9px; margin-top: 2px; }
 
     .receipt-meta { text-align: right; flex-shrink: 0; }
     .meta-group + .meta-group { margin-top: 10px; }
-    .size-a6           .meta-group + .meta-group { margin-top: 6px; }
-    .size-a6-landscape .meta-group + .meta-group { margin-top: 7px; }
+    .size-a5-landscape .meta-group + .meta-group { margin-top: 4px; }
     .meta-label { color: #64748b; font-weight: 700; }
     .meta-value { font-weight: 800; margin-top: 3px; }
     .size-a4           .meta-label { font-size: 11px; }
     .size-a4           .meta-value { font-size: 13px; }
     .size-a5           .meta-label { font-size: 10px; }
     .size-a5           .meta-value { font-size: 12px; }
-    .size-a6           .meta-label { font-size: 8px; }
-    .size-a6           .meta-value { font-size: 10px; margin-top: 2px; }
-    .size-a5-landscape .meta-label { font-size: 11px; }
-    .size-a5-landscape .meta-value { font-size: 13px; }
-    .size-a6-landscape .meta-label { font-size: 9px; }
-    .size-a6-landscape .meta-value { font-size: 11px; margin-top: 2px; }
+    .size-a5-landscape .meta-label { font-size: 9px; }
+    .size-a5-landscape .meta-value { font-size: 10px; margin-top: 2px; }
 
     .receipt-title {
       background: #f1f5f9; border-bottom: 1px solid #cbd5e1;
       text-align: center; font-weight: 900; letter-spacing: 0.15em;
     }
-    .size-a4           .receipt-title { padding: 12px; font-size: 16px; }
-    .size-a5           .receipt-title { padding: 9px;  font-size: 13px; }
-    .size-a6           .receipt-title { padding: 5px;  font-size: 9px; letter-spacing: 0.1em; }
-    .size-a5-landscape .receipt-title { padding: 10px; font-size: 14px; }
-    .size-a6-landscape .receipt-title { padding: 7px;  font-size: 11px; letter-spacing: 0.12em; }
+    .size-a4           .receipt-title { padding: 10px;    font-size: 16px; }
+    .size-a5           .receipt-title { padding: 9px;     font-size: 13px; }
+    .size-a5-landscape .receipt-title { padding: 4px 8px; font-size: 12px; letter-spacing: 0.12em; }
 
     .details-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid #cbd5e1; }
     .detail-cell { border-bottom: 1px solid #cbd5e1; }
     .detail-cell:nth-child(odd) { border-right: 1px solid #cbd5e1; }
     .detail-cell:nth-last-child(-n+2) { border-bottom: 0; }
-    .size-a4           .detail-cell { padding: 12px 16px; }
+    .size-a4           .detail-cell { padding: 10px 16px; }
     .size-a5           .detail-cell { padding: 9px 12px; }
-    .size-a6           .detail-cell { padding: 5px 7px; }
-    .size-a5-landscape .detail-cell { padding: 10px 14px; }
-    .size-a6-landscape .detail-cell { padding: 6px 9px; }
+    .size-a5-landscape .detail-cell { padding: 4px 8px; }
 
     .detail-label { color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
     .detail-value { font-weight: 800; margin-top: 5px; word-break: break-word; }
@@ -339,38 +319,26 @@
     .size-a4           .detail-value { font-size: 13px; }
     .size-a5           .detail-label { font-size: 9px; }
     .size-a5           .detail-value { font-size: 11px; }
-    .size-a6           .detail-label { font-size: 7px; }
-    .size-a6           .detail-value { font-size: 9px; margin-top: 2px; }
-    .size-a5-landscape .detail-label { font-size: 10px; }
-    .size-a5-landscape .detail-value { font-size: 12px; }
-    .size-a6-landscape .detail-label { font-size: 8px; }
-    .size-a6-landscape .detail-value { font-size: 10px; margin-top: 3px; }
+    .size-a5-landscape .detail-label { font-size: 8px; }
+    .size-a5-landscape .detail-value { font-size: 10px; margin-top: 2px; }
 
     .receipt-body { }
-    .size-a4           .receipt-body { padding: 18px 20px; }
+    .size-a4           .receipt-body { padding: 12px 20px; }
     .size-a5           .receipt-body { padding: 12px 14px; }
-    .size-a6           .receipt-body { padding: 7px 8px; }
-    .size-a5-landscape .receipt-body { padding: 14px 18px; }
-    .size-a6-landscape .receipt-body { padding: 9px 10px; }
+    .size-a5-landscape .receipt-body { padding: 7px 10px; }
 
     .fee-table { width: 100%; border-collapse: collapse; }
     .size-a4           .fee-table { font-size: 13px; }
     .size-a5           .fee-table { font-size: 11px; }
-    .size-a6           .fee-table { font-size: 9px; }
-    .size-a5-landscape .fee-table { font-size: 12px; }
-    .size-a6-landscape .fee-table { font-size: 10px; }
+    .size-a5-landscape .fee-table { font-size: 10px; }
 
     .fee-table th, .fee-table td { border: 1px solid #cbd5e1; }
     .size-a4           .fee-table th,
-    .size-a4           .fee-table td { padding: 9px 11px; }
+    .size-a4           .fee-table td { padding: 7px 10px; }
     .size-a5           .fee-table th,
     .size-a5           .fee-table td { padding: 7px 8px; }
-    .size-a6           .fee-table th,
-    .size-a6           .fee-table td { padding: 4px 5px; }
     .size-a5-landscape .fee-table th,
-    .size-a5-landscape .fee-table td { padding: 8px 10px; }
-    .size-a6-landscape .fee-table th,
-    .size-a6-landscape .fee-table td { padding: 5px 7px; }
+    .size-a5-landscape .fee-table td { padding: 4px 7px; }
 
     .fee-table th { background: #f1f5f9; text-align: left; font-weight: 700; }
     .fee-table th:last-child, .fee-table td:last-child { text-align: right; white-space: nowrap; }
@@ -378,40 +346,30 @@
     .fee-table .total-tr td:first-child { text-align: right; }
 
     .receipt-boxes { display: grid; }
-    .size-a4           .receipt-boxes { margin-top: 14px; gap: 10px; }
+    .size-a4           .receipt-boxes { margin-top: 10px; gap: 8px; }
     .size-a5           .receipt-boxes { margin-top: 10px; gap: 8px; }
-    .size-a6           .receipt-boxes { margin-top: 7px;  gap: 5px; }
-    .size-a5-landscape .receipt-boxes { margin-top: 12px; gap: 8px; }
-    .size-a6-landscape .receipt-boxes { margin-top: 9px;  gap: 6px; }
+    .size-a5-landscape .receipt-boxes { margin-top: 5px;  gap: 4px; }
 
     .receipt-box { border: 1px solid #cbd5e1; border-radius: 3px; line-height: 1.5; word-break: break-word; }
-    .size-a4           .receipt-box { padding: 9px 11px;  font-size: 12px; }
-    .size-a5           .receipt-box { padding: 7px 8px;   font-size: 10px; }
-    .size-a6           .receipt-box { padding: 4px 5px;   font-size: 8px; }
-    .size-a5-landscape .receipt-box { padding: 7px 9px;   font-size: 11px; }
-    .size-a6-landscape .receipt-box { padding: 5px 7px;   font-size: 10px; }
+    .size-a4           .receipt-box { padding: 9px 11px; font-size: 12px; }
+    .size-a5           .receipt-box { padding: 7px 8px;  font-size: 10px; }
+    .size-a5-landscape .receipt-box { padding: 3px 6px;  font-size: 10px; }
 
     .box-row { display: grid; grid-template-columns: 1fr 1fr; }
     .size-a4           .box-row { gap: 10px; }
     .size-a5           .box-row { gap: 8px; }
-    .size-a6           .box-row { gap: 5px; }
-    .size-a5-landscape .box-row { gap: 8px; }
-    .size-a6-landscape .box-row { gap: 6px; }
+    .size-a5-landscape .box-row { gap: 4px; }
 
     .sign-row { display: flex; justify-content: space-between; align-items: flex-end; }
-    .size-a4           .sign-row { margin-top: 44px; }
+    .size-a4           .sign-row { margin-top: 24px; }
     .size-a5           .sign-row { margin-top: 28px; }
-    .size-a6           .sign-row { margin-top: 16px; }
-    /* Landscape: reduced top margin — page is shorter */
-    .size-a5-landscape .sign-row { margin-top: 20px; }
-    .size-a6-landscape .sign-row { margin-top: 12px; }
+    /* A5 landscape: minimal top margin — printable height is only 130 mm */
+    .size-a5-landscape .sign-row { margin-top: 8px; }
 
     .receipt-footer-note { color: #94a3b8; }
     .size-a4           .receipt-footer-note { font-size: 10px; }
     .size-a5           .receipt-footer-note { font-size: 9px; }
-    .size-a6           .receipt-footer-note { font-size: 7px; }
-    .size-a5-landscape .receipt-footer-note { font-size: 10px; }
-    .size-a6-landscape .receipt-footer-note { font-size: 8px; }
+    .size-a5-landscape .receipt-footer-note { font-size: 8px; }
 
     .sign-block { text-align: center; }
 
@@ -431,19 +389,13 @@
     .size-a4           .sign-content img { max-height: 52px; }
     .size-a5           .sign-content { font-size: 15px; min-width: 100px; }
     .size-a5           .sign-content img { max-height: 40px; }
-    .size-a6           .sign-content { font-size: 10px; min-width: 65px; padding-bottom: 2px; }
-    .size-a6           .sign-content img { max-height: 28px; }
-    .size-a5-landscape .sign-content { font-size: 16px; min-width: 110px; }
-    .size-a5-landscape .sign-content img { max-height: 44px; }
-    .size-a6-landscape .sign-content { font-size: 11px; min-width: 75px; padding-bottom: 3px; }
-    .size-a6-landscape .sign-content img { max-height: 32px; }
+    .size-a5-landscape .sign-content { font-size: 12px; min-width: 80px; padding-bottom: 3px; }
+    .size-a5-landscape .sign-content img { max-height: 28px; }
 
     .sign-label { font-weight: 700; margin-top: 5px; }
     .size-a4           .sign-label { font-size: 11px; }
     .size-a5           .sign-label { font-size: 9px; }
-    .size-a6           .sign-label { font-size: 7px; margin-top: 2px; }
-    .size-a5-landscape .sign-label { font-size: 10px; }
-    .size-a6-landscape .sign-label { font-size: 8px; margin-top: 2px; }
+    .size-a5-landscape .sign-label { font-size: 8px; margin-top: 2px; }
 
     /* MOBILE */
     @media (max-width: 960px) {
@@ -484,9 +436,7 @@
       .receipt,
       .receipt.size-a4,
       .receipt.size-a5,
-      .receipt.size-a6,
-      .receipt.size-a5-landscape,
-      .receipt.size-a6-landscape { width: 100% !important; margin: 0 !important; }
+      .receipt.size-a5-landscape { width: 100% !important; margin: 0 !important; }
 
       .fee-table tr { page-break-inside: avoid; }
       .sign-row { page-break-inside: avoid; }
@@ -735,29 +685,27 @@
           <div class="size-row" aria-label="Paper size and orientation">
             <span class="size-selector-label size-row-label" id="size-grp-label">Paper:</span>
             <div class="size-options" role="radiogroup" aria-labelledby="size-grp-label">
-              <label title="A4 portrait — 210×297 mm">
+              <label title="A4 portrait — 210×297 mm. Best for long or itemized receipts.">
                 <input type="radio" name="pageSize" value="a4" checked />
                 <span class="size-btn">A4</span>
               </label>
-              <label title="A5 portrait — 148×210 mm">
+              <label title="A5 portrait — 148×210 mm. General compact receipts.">
                 <input type="radio" name="pageSize" value="a5" />
                 <span class="size-btn">A5</span>
               </label>
-              <label title="A6 portrait — 105×148 mm">
-                <input type="radio" name="pageSize" value="a6" />
-                <span class="size-btn">A6</span>
-              </label>
             </div>
-            <!-- Landscape toggle — only active for A5 / A6 -->
+            <!-- Landscape toggle — only active for A5 -->
             <label class="orient-toggle disabled" id="landscapeToggle"
-                   title="Rotate paper to horizontal (landscape). A4 landscape is not a standard receipt size.">
+                   title="Rotate A5 to horizontal landscape. Compact; suitable for short admission-style receipts.">
               <input type="checkbox" id="landscapeCheck" disabled />
               ↔ Landscape
             </label>
           </div>
           <p class="size-note">
-            A4 portrait (default) · A5 = 148×210 mm · A6 = 105×148 mm · Landscape rotates A5/A6 to horizontal.<br>
-            In the Print dialog, manually select the matching paper size and orientation.
+            A4 portrait — long/itemized receipts &nbsp;·&nbsp;
+            A5 portrait — compact receipts &nbsp;·&nbsp;
+            A5 landscape — short admission-style receipts<br>
+            A6 is not supported. In the Print dialog, select the matching paper size and orientation.
           </p>
 
           <div class="overflow-warning" id="overflowWarning" role="alert"></div>
@@ -871,19 +819,19 @@
     // Maximum receipt total: ₹99,99,999.99 (under 1 crore).
     var MAX_RECEIPT_PAISE = 999999999;
 
-    // Printable height thresholds in on-screen pixels.
-    // Derived from paper dimensions minus margins at each size's CSS px/mm scale.
-    // A4: 595px/210mm = 2.833px/mm → (297-24)mm * 2.833 ≈ 773px
-    // A5: 420px/148mm = 2.838px/mm → (210-18)mm * 2.838 ≈ 545px
-    // A6: 298px/105mm = 2.838px/mm → (148-12)mm * 2.838 ≈ 386px
-    // A5-land: 595px/210mm = 2.833px/mm → (148-18)mm * 2.833 ≈ 368px
-    // A6-land: 420px/148mm = 2.838px/mm → (105-12)mm * 2.838 ≈ 264px
+    // Printable height limits in CSS px (1 CSS px = 1/96 in).
+    // In print, width:100% makes the receipt fill the printable width, which is
+    // wider than the on-screen preview. Text therefore wraps less in print, so
+    // on-screen scrollHeight >= print height. These thresholds are the actual
+    // @page printable heights: if scrollHeight exceeds the threshold, the content
+    // will overflow onto a second page.
+    // A4  portrait:  (297-24)mm × 96/25.4 = 273 × 3.7795 ≈ 1032px
+    // A5  portrait:  (210-18)mm × 96/25.4 = 192 × 3.7795 ≈  726px
+    // A5 landscape:  (148-18)mm × 96/25.4 = 130 × 3.7795 ≈  491px
     var PRINTABLE_H_PX = {
-      "a4":           773,
-      "a5":           545,
-      "a6":           386,
-      "a5-landscape": 368,
-      "a6-landscape": 264,
+      "a4":           1032,
+      "a5":           726,
+      "a5-landscape": 491,
     };
 
     // ================================================================
@@ -891,8 +839,8 @@
     // ================================================================
     var state = {
       fees: [{ id: uid(), description: "", paise: 0 }],
-      paperSize: "a4",          // "a4" | "a5" | "a6"
-      landscape: false,          // only meaningful for a5 and a6
+      paperSize: "a4",          // "a4" | "a5"
+      landscape: false,          // only meaningful for a5
       signatureMode: "type",     // "type" | "upload" | "draw"
       signatureImageUrl: null,   // data URL used in upload or draw mode
     };
@@ -1023,11 +971,9 @@
     // PAGE SIZE + ORIENTATION
     // ================================================================
     var PAGE_CSS = {
-      "a4":             "@page { size: A4 portrait;   margin: 12mm; }",
-      "a5":             "@page { size: A5 portrait;   margin: 9mm;  }",
-      "a6":             "@page { size: A6 portrait;   margin: 6mm;  }",
-      "a5-landscape":   "@page { size: A5 landscape;  margin: 9mm;  }",
-      "a6-landscape":   "@page { size: A6 landscape;  margin: 6mm;  }",
+      "a4":           "@page { size: A4 portrait;  margin: 12mm; }",
+      "a5":           "@page { size: A5 portrait;  margin: 9mm;  }",
+      "a5-landscape": "@page { size: A5 landscape; margin: 9mm;  }",
     };
 
     function applyPageSize() {
@@ -1035,7 +981,7 @@
       document.getElementById("receipt").className = "receipt size-" + key;
       document.getElementById("page-size-css").textContent = PAGE_CSS[key] || PAGE_CSS["a4"];
 
-      // Landscape toggle: enabled only for A5 / A6
+      // Landscape toggle: enabled only for A5
       var lt = document.getElementById("landscapeToggle");
       var lc = document.getElementById("landscapeCheck");
       if (state.paperSize === "a4") {
@@ -1057,9 +1003,10 @@
       checkOverflow();
     }
 
-    // Overflow check: measure actual rendered receipt height against the
-    // printable area for the selected page size (PRINTABLE_H_PX).
-    // This replaces heuristic row/character counts with real layout data.
+    // Overflow check: compare actual rendered receipt height (scrollHeight) to
+    // the @page printable height in CSS px for the selected size (PRINTABLE_H_PX).
+    // Because print renders at the wider printable width, on-screen height ≥ print
+    // height, so this check is safe: if it fits on screen it fits in print.
     function checkOverflow() {
       var warn = document.getElementById("overflowWarning");
       if (!warn) return;
@@ -1070,16 +1017,16 @@
 
       var msg = "";
       if (maxH && actualH > maxH) {
-        var sizeNames = {
-          "a4":           "A4 portrait",
-          "a5":           "A5 portrait",
-          "a6":           "A6 portrait",
-          "a5-landscape": "A5 landscape",
-          "a6-landscape": "A6 landscape",
-        };
-        msg = "Receipt content is taller than the " + (sizeNames[key] || key) +
-              " printable area — content may be cut off or spill onto a second page. " +
-              "Reduce fee rows, shorten notes, or choose a larger paper size.";
+        if (key === "a5-landscape") {
+          msg = "Receipt content is too tall for A5 landscape (printable height 130 mm). " +
+                "Switch to A4 portrait for longer or itemized receipts. " +
+                "A5 landscape is suitable only for short admission-style receipts.";
+        } else {
+          var sizeNames = { "a4": "A4 portrait", "a5": "A5 portrait" };
+          msg = "Receipt content is taller than the " + (sizeNames[key] || key) +
+                " printable area — content may spill onto a second page. " +
+                "Reduce fee rows, shorten notes, or switch to A4 portrait.";
+        }
       }
 
       warn.textContent = msg ? ("⚠ " + msg) : "";
@@ -1478,7 +1425,7 @@
       try {
         var sp = sessionStorage.getItem("kidora-paper");
         var sl = sessionStorage.getItem("kidora-landscape");
-        if (sp && ["a4","a5","a6"].includes(sp)) {
+        if (sp && ["a4","a5"].includes(sp)) {
           state.paperSize = sp;
           var radio = document.querySelector("input[name=\"pageSize\"][value=\"" + sp + "\"]");
           if (radio) radio.checked = true;

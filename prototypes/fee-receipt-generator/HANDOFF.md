@@ -29,6 +29,16 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 | `HANDOFF.md` | This file |
 | `TESTS.md` | Manual verification checklist |
 
+## Supported layouts
+
+| Layout | Paper | Use case |
+|--------|-------|----------|
+| A4 portrait | 210 × 297 mm | Long or itemized receipts (books, uniforms, stationery, kits) |
+| A5 portrait | 148 × 210 mm | General compact receipts |
+| A5 landscape | 210 × 148 mm | Short admission-style receipts (≈ 4–8 fee rows) |
+
+A6 is **not supported**. Do not select A6 in the browser Print dialog.
+
 ## What the tool does
 
 - Enter school name, address, and logo
@@ -37,9 +47,9 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 - Add or remove fee rows with description and amount (max ₹99,99,999.99 per receipt)
 - Select payment method
 - Add optional notes
-- Select A4, A5, or A6 paper size with optional landscape orientation for A5/A6
+- Select A4 portrait, A5 portrait, or A5 landscape paper size
 - See total in INR and amount in words (Indian numbering: lakh, crore, paise; "One Paisa" singular)
-- Live overflow warning when receipt content exceeds the measured printable area
+- Live overflow warning (measured from `receipt.scrollHeight`) when content exceeds the printable area; A5 landscape warns and recommends A4 portrait
 - Preview updates live as you type
 - Validate all required fields (including impossible calendar dates) before printing
 - Print or save as PDF using the browser's Print dialog
@@ -105,18 +115,18 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
   for each paper size. It is an estimate: screen DPI and print DPI differ, so a receipt that
   barely fits on screen may still require a second page in print. Always check the Print dialog
   preview before saving, especially for A6 and landscape orientations.
-- A6 portrait (105×148 mm) and A6 landscape (148×105 mm) are very compact. They are suitable
-  only for minimal receipts with few fee rows and short addresses. The overflow warning fires
-  early for these sizes. If the Print preview shows clipping, switch to A5 or A4.
-- A5 landscape prints a shorter page (148 mm tall after margins). Long receipts will overflow.
-  The measured overflow warning will indicate this before you print.
+- A5 landscape prints a shorter page (130 mm tall after 9 mm margins on each side). It is
+  suitable only for short admission-style receipts (≈ 4–8 fee rows). The overflow warning fires
+  and recommends A4 portrait when content exceeds the printable area.
+- A6 is not supported and is not shown in the UI. Do not select A6 in the Print dialog.
 
 ## Known limitations
 
 - No persistent storage — data is lost on page reload.
 - No multi-receipt history.
 - Maximum receipt total is ₹99,99,999.99. Amounts above this are rejected at input.
-- Page-size selection is kept only for the current browser session (sessionStorage).
+- Page-size and orientation selection are kept only for the current browser session (sessionStorage).
+- A6 is not supported. Using it in the Print dialog will produce incorrect output.
 
 ## Testing
 

@@ -56,7 +56,7 @@ For each input, type the value into the Amount field. Verify the inline error me
 | SM-5 | `1,000` | "Enter a valid amount…" | No |
 | SM-6 | `100000000` (₹10 crore, over max) | "Enter a valid amount…" | No |
 | SM-7 | `0.01` | No error | Yes — total shows ₹0.01 |
-| SM-8 | `99999999.99` (below max ₹99,99,999.99 after rounding) | No error | Yes |
+| SM-8 | `9999999.99` (exactly ₹99,99,999.99 — at the limit) | No error | Yes |
 | SM-9 | `99999999.999` (3 decimal places) | "Enter a valid amount…" | No |
 | SM-10 | ` 500 ` (leading/trailing spaces) | No error (trimmed) | Yes — ₹500.00 |
 
@@ -90,20 +90,62 @@ For each input, type the value into the Amount field. Verify the inline error me
 
 ## 14. Print layout verification (PDF evidence required)
 
-For each layout: fill all required fields with at least 3 fee rows, click Print / Save as PDF, save the file, then open it.
+For each layout: fill all required fields, click Print / Save as PDF, save the file, open it and verify.
 
-| # | Layout | PDF page size | PDF orientation | Pages | Receipt visible | Content clipped? |
-|---|--------|--------------|-----------------|-------|-----------------|-----------------|
-| PL-1 | A4 portrait | A4 | Portrait | 1 | Yes | No |
-| PL-2 | A5 portrait | A5 | Portrait | 1 (short receipt) | Yes | No |
-| PL-3 | A5 landscape | A5 | Landscape | 1 (short receipt) | Yes | Verify in preview |
-| PL-4 | A6 portrait | A6 | Portrait | 1 (≤3 fee rows) | Yes | Verify in preview |
-| PL-5 | A6 landscape | A6 | Landscape | 1 (≤2 fee rows) | Yes | Verify in preview |
+**PL-1 — A4 portrait, 10–15 fee rows (itemized)**
 
-Additional checks for each PDF:
-- No form, header, nav, or UI chrome is visible
-- Receipt border, table, and signature row all appear
-- Overflow warning fired when content was too tall (before saving)
+Content: school name + address, 12 fee rows (various descriptions and amounts), payment method, notes.
+
+| Check | Expected |
+|-------|----------|
+| PDF page size | A4 (210 × 297 mm) |
+| Orientation | Portrait |
+| Page count | 1 |
+| Receipt visible | Yes |
+| Form / nav / UI chrome | Not visible |
+| All fee rows visible | Yes — no clipping or truncation |
+| Signature visible | Yes |
+| Overflow warning before print | No (A4 holds long receipts) |
+
+**PL-2 — A5 portrait, 3–5 fee rows**
+
+Content: school name, 4 fee rows, no notes.
+
+| Check | Expected |
+|-------|----------|
+| PDF page size | A5 (148 × 210 mm) |
+| Orientation | Portrait |
+| Page count | 1 |
+| Receipt visible | Yes — no clipping |
+| Signature visible | Yes |
+| Overflow warning before print | No |
+
+**PL-3 — A5 landscape, admission structure (4 rows)**
+
+Content: school name + address, 4 rows (Registration Fee, Amenity Charges, Activity Charges, Tuition Fee), no notes.
+
+| Check | Expected |
+|-------|----------|
+| PDF page size | A5 (148 × 210 mm reported; 210 mm wide in landscape) |
+| Orientation | Landscape |
+| Page count | 1 |
+| Receipt visible | Yes — no clipping |
+| Signature visible on page 1 | Yes |
+| Overflow warning before print | No |
+
+**PL-4 — A5 landscape overflow (long receipt)**
+
+Content: same as PL-3 but with 10+ fee rows.
+
+| Check | Expected |
+|-------|----------|
+| Overflow warning shown | Yes — recommends A4 portrait |
+| User can still print | Yes (warning does not block) |
+
+Additional checks for all PDFs:
+- No form, header, nav, or UI chrome visible
+- Receipt border, table, and total row visible
+- Overflow warning fires before printing when content is too tall
 
 ---
 
@@ -153,25 +195,27 @@ Fill all required fields. Click "Print Receipt / Save as PDF". In the Print prev
 
 ---
 
-## 6. Page size
+## 6. Page size and layout
 
 For each size, select it and verify:
 
-| # | Size | On-screen preview width | Print layout |
-|---|------|------------------------|--------------|
-| PS-1 | A4 | ~595 px wide | @page size: A4 portrait |
-| PS-2 | A5 | ~420 px wide | @page size: A5 portrait |
-| PS-3 | A6 | ~298 px wide | @page size: A6 portrait |
+| # | Size | On-screen preview width | Print layout | Use case |
+|---|------|------------------------|--------------|----------|
+| PS-1 | A4 portrait | ~595 px wide | @page size: A4 portrait | Long/itemized receipts |
+| PS-2 | A5 portrait | ~420 px wide | @page size: A5 portrait | Compact receipts |
+| PS-3 | A5 landscape | ~595 px wide | @page size: A5 landscape | Short admission-style receipts |
 
 Additional checks:
 
 | # | Check | Expected |
 |---|-------|----------|
-| PS-4 | Switch A4 → A5 → A6 while form is filled | All entered data is preserved |
-| PS-5 | 6+ fee rows with A6 selected | Yellow overflow warning appears above preview |
-| PS-6 | Reduce to 3 fee rows with A6 selected | Warning disappears |
-| PS-7 | A6: font size visibly smaller than A4 | Yes |
-| PS-8 | A4 print preview then A5 then A6 | Each shows correct aspect ratio in print preview |
+| PS-4 | Switch A4 → A5 → A5 landscape while form is filled | All entered data preserved |
+| PS-5 | A5 landscape, 4 fee rows (Registration, Amenity, Activity, Tuition) | No overflow warning |
+| PS-6 | A5 landscape, add rows until warning fires | Warning text recommends A4 portrait |
+| PS-7 | A5 landscape: font sizes visibly smaller than A4 | Yes — compact density |
+| PS-8 | A4 portrait with 10+ fee rows | No overflow warning (A4 holds long receipts) |
+| PS-9 | A5 portrait with 5 fee rows and short address | No overflow warning (false-positive fix) |
+| PS-10 | A6 radio button | Not present in UI — A6 is not supported |
 
 ---
 
