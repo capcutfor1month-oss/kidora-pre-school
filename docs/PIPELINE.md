@@ -178,6 +178,30 @@ GitHub Agentic Workflows may later automate only approved low-risk work such as:
 
 It must not make product decisions or change production autonomously.
 
+## ChatGPT prompt rule
+
+ChatGPT should send Claude, Codex, Gemini CLI, and OpenCode compact task prompts.
+
+- Do not repeat the Kidora repository, branch, agent role, pipeline, or standing safety rules when they are already established in the active session or canonical files.
+- Point agents to the exact document, commit range, issue, or audit finding instead of pasting existing context again.
+- Include only the current objective, requirements, verification, affected scope, and expected return.
+- Remove repetitive wording and duplicate commands.
+- Mention non-goals only when they prevent a likely mistake or scope expansion.
+- Use a full handoff when starting a fresh agent/session, changing branches or phases, or when the required context is not already available.
+- Token saving must never remove child-data safeguards, founder-approved decisions, acceptance criteria, security requirements, or proof obligations.
+
+Preferred prompt shape:
+
+```text
+Objective
+Requirements
+Verification
+Files or scope
+Return
+```
+
+Claude remains the engineer. Codex remains the independent auditor. ChatGPT does not ask either agent to repeat work already evidenced in the repository.
+
 ## Scale by risk
 
 ### Small documentation change
