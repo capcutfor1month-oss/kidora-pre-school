@@ -1,993 +1,1572 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>KIDORA Preschool Fee Receipt Generator</title>
-    <style>
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: Inter, Arial, sans-serif;
-        color: #020817;
-        background: #ffffff;
-      }
-      header {
-        border-bottom: 1px solid #e2e8f0;
-        background: #ffffff;
-      }
-      .nav, .hero, .workspace, .section-inner {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-      .nav {
-        min-height: 68px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-        color: inherit;
-      }
-      .brand-mark {
-        width: 38px;
-        height: 38px;
-        border-radius: 8px;
-        display: grid;
-        place-items: center;
-        background: #2563eb;
-        color: #ffffff;
-        font-weight: 800;
-      }
-      .brand-title { display: block; font-weight: 800; line-height: 1.1; }
-      .brand-subtitle { display: block; color: #64748b; font-size: 12px; line-height: 1.1; }
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .nav-actions a {
-        color: #334155;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 10px 12px;
-        border-radius: 6px;
-      }
-      .nav-actions .dark {
-        background: #020817;
-        color: #ffffff;
-      }
-      .hero {
-        padding-top: 44px;
-        padding-bottom: 28px;
-        text-align: center;
-      }
-      h1 {
-        margin: 0;
-        font-size: clamp(32px, 5vw, 44px);
-        letter-spacing: -0.03em;
-      }
-      .hero p {
-        max-width: 760px;
-        margin: 16px auto 0;
-        color: #475569;
-        line-height: 1.7;
-      }
-      .badges {
-        margin-top: 22px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .badge {
-        border: 1px solid #dbeafe;
-        background: #eff6ff;
-        color: #1d4ed8;
-        border-radius: 999px;
-        padding: 7px 13px;
-        font-size: 14px;
-        font-weight: 700;
-      }
-      .tabs {
-        max-width: 420px;
-        margin: 0 auto 24px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        border-radius: 10px;
-        background: #f1f5f9;
-        padding: 4px;
-      }
-      .tabs button {
-        border: 0;
-        border-radius: 8px;
-        padding: 11px 16px;
-        font-weight: 800;
-        background: transparent;
-        color: #64748b;
-        cursor: pointer;
-      }
-      .tabs button.active {
-        background: #ffffff;
-        color: #020817;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-      }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kidora – Fee Receipt</title>
+  <style>
+    /* BASE */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 15px;
+      color: #020817;
+      background: #f1f5f9;
+    }
+
+    /* HEADER */
+    header {
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+    }
+    .nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-mark {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 800;
+      font-size: 17px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .brand-title { font-weight: 800; font-size: 15px; line-height: 1.2; }
+    .brand-subtitle { font-size: 11px; color: #64748b; }
+    .tool-badge {
+      margin-left: auto;
+      font-size: 12px;
+      color: #475569;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-weight: 600;
+    }
+
+    /* WORKSPACE */
+    .workspace {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* CARDS */
+    .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+    }
+    .card-head {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .card-head h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    .card-head p {
+      margin: 4px 0 0;
+      color: #64748b;
+      font-size: 13px;
+    }
+    .form-body {
+      padding: 24px;
+      display: grid;
+      gap: 28px;
+    }
+
+    /* FORM ELEMENTS */
+    .form-section h2 {
+      margin: 0 0 14px;
+      font-size: 15px;
+      color: #1e293b;
+      font-weight: 700;
+    }
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .span-2 { grid-column: 1 / -1; }
+    .label-text {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      min-height: 40px;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 14px;
+      color: #020817;
+      background: #ffffff;
+      transition: border-color 0.15s;
+    }
+    textarea { min-height: 72px; resize: vertical; }
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid #bfdbfe;
+      outline-offset: 0;
+      border-color: #2563eb;
+    }
+    input.invalid, textarea.invalid, select.invalid {
+      border-color: #dc2626;
+    }
+    input.invalid:focus, textarea.invalid:focus, select.invalid:focus {
+      outline-color: #fecaca;
+    }
+    .field-error {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: #dc2626;
+      min-height: 16px;
+    }
+
+    /* LOGO UPLOAD */
+    .upload-box {
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .upload-thumb {
+      width: 96px; height: 68px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .upload-thumb img { width: 100%; height: 100%; object-fit: contain; }
+    .upload-actions { display: flex; flex-direction: column; gap: 6px; }
+    .upload-btn {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #ffffff;
+      padding: 0 16px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      color: #020817;
+    }
+    .upload-btn:hover { background: #f8fafc; }
+    .upload-btn:focus-within { outline: 2px solid #bfdbfe; border-color: #2563eb; }
+    .upload-btn input[type="file"] { display: none; }
+    .help { margin: 4px 0 0; color: #64748b; font-size: 12px; line-height: 1.5; }
+
+    /* FEE ITEMS */
+    .fee-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .fee-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .fee-head h3 { margin: 0; font-size: 13px; color: #475569; font-weight: 700; }
+    .remove-btn {
+      border: 0;
+      background: transparent;
+      color: #dc2626;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      min-height: 32px;
+    }
+    .remove-btn:hover { background: #fef2f2; }
+    .remove-btn:focus { outline: 2px solid #fecaca; outline-offset: 1px; }
+    .fee-grid {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 14px;
+    }
+
+    /* TOTAL */
+    .total-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .total-label { font-weight: 700; color: #1e293b; font-size: 14px; }
+    .total-amount { font-size: 20px; font-weight: 800; color: #2563eb; }
+    .words-row { margin: 8px 0 0; color: #475569; font-size: 13px; }
+
+    /* BUTTONS */
+    .secondary-btn, .primary-btn {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .secondary-btn {
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #020817;
+    }
+    .secondary-btn:hover { background: #f8fafc; }
+    .primary-btn {
+      border: 0;
+      background: #2563eb;
+      color: #ffffff;
+    }
+    .primary-btn:hover { background: #1d4ed8; }
+    .primary-btn:focus, .secondary-btn:focus {
+      outline: 2px solid #bfdbfe;
+      outline-offset: 2px;
+    }
+
+    /* PAGE SIZE SELECTOR */
+    .size-selector {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .size-selector-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+    }
+    .size-options {
+      display: flex;
+      gap: 4px;
+    }
+    .size-options label { display: flex; align-items: center; }
+    .size-options input[type="radio"] { display: none; }
+    .size-btn {
+      display: inline-block;
+      padding: 5px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      user-select: none;
+      background: #ffffff;
+    }
+    .size-btn:hover { background: #f8fafc; }
+    .size-options input[type="radio"]:checked + .size-btn {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+    .size-options input[type="radio"]:focus + .size-btn {
+      outline: 2px solid #bfdbfe;
+      outline-offset: 1px;
+    }
+    .size-note {
+      font-size: 11px;
+      color: #94a3b8;
+      margin: 0 0 10px;
+      line-height: 1.5;
+    }
+
+    /* PREVIEW */
+    .preview-shell {
+      position: sticky;
+      top: 24px;
+    }
+    .preview-card { padding: 16px; }
+    .preview-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .preview-head h2 { margin: 0; font-size: 17px; }
+    .preview-head p { margin: 3px 0 0; font-size: 12px; color: #64748b; }
+    .preview-frame {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f1f5f9;
+      padding: 12px;
+      overflow: auto;
+    }
+
+    /* A6 OVERFLOW WARNING */
+    .a6-warning {
+      display: none;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      background: #fef9c3;
+      border: 1px solid #fde047;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #713f12;
+      line-height: 1.5;
+    }
+    .a6-warning.visible { display: block; }
+
+    /* VALIDATION SUMMARY */
+    .validation-summary {
+      display: none;
+      padding: 12px 16px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #991b1b;
+    }
+    .validation-summary.visible { display: block; }
+    .validation-summary ul { margin: 8px 0 0; padding-left: 18px; }
+    .validation-summary li { margin-bottom: 3px; }
+
+    /* PRINT NOTE */
+    .print-note {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #0c4a6e;
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       RECEIPT — on-screen sizes
+       ============================================================ */
+    .receipt {
+      margin: 0 auto;
+      background: #ffffff;
+      color: #020817;
+    }
+    .receipt.size-a4 { width: 595px; font-size: 14px; }
+    .receipt.size-a5 { width: 420px; font-size: 12px; }
+    .receipt.size-a6 { width: 298px; font-size: 10px; }
+
+    .receipt-border { border: 1px solid #cbd5e1; }
+
+    .receipt-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid #cbd5e1;
+      flex-wrap: nowrap;
+    }
+    .size-a4 .receipt-top { padding: 20px 22px; }
+    .size-a5 .receipt-top { padding: 14px 16px; }
+    .size-a6 .receipt-top { padding: 8px 10px; gap: 8px; }
+
+    .school-block { display: flex; gap: 12px; align-items: flex-start; min-width: 0; }
+    .size-a6 .school-block { gap: 7px; }
+
+    .receipt-logo {
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      color: #94a3b8;
+      font-weight: 700;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .size-a4 .receipt-logo { width: 76px; height: 76px; font-size: 9px; }
+    .size-a5 .receipt-logo { width: 58px; height: 58px; font-size: 8px; }
+    .size-a6 .receipt-logo { width: 40px; height: 40px; font-size: 7px; }
+    .receipt-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+    .school-info { min-width: 0; }
+    .school-name {
+      margin: 0;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .size-a4 .school-name { font-size: 18px; }
+    .size-a5 .school-name { font-size: 14px; }
+    .size-a6 .school-name { font-size: 10px; }
+
+    .school-address {
+      margin: 5px 0 0;
+      color: #64748b;
+      line-height: 1.4;
+      text-transform: uppercase;
+      word-break: break-word;
+    }
+    .size-a4 .school-address { font-size: 11px; }
+    .size-a5 .school-address { font-size: 10px; }
+    .size-a6 .school-address { font-size: 8px; margin-top: 2px; }
+
+    .receipt-meta { text-align: right; flex-shrink: 0; }
+    .meta-group + .meta-group { margin-top: 10px; }
+    .size-a6 .meta-group + .meta-group { margin-top: 6px; }
+    .meta-label { color: #64748b; font-weight: 700; }
+    .meta-value { font-weight: 800; margin-top: 3px; }
+    .size-a4 .meta-label { font-size: 11px; }
+    .size-a4 .meta-value { font-size: 13px; }
+    .size-a5 .meta-label { font-size: 10px; }
+    .size-a5 .meta-value { font-size: 12px; }
+    .size-a6 .meta-label { font-size: 8px; }
+    .size-a6 .meta-value { font-size: 10px; margin-top: 2px; }
+
+    .receipt-title {
+      background: #f1f5f9;
+      border-bottom: 1px solid #cbd5e1;
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+    }
+    .size-a4 .receipt-title { padding: 12px; font-size: 16px; }
+    .size-a5 .receipt-title { padding: 9px; font-size: 13px; }
+    .size-a6 .receipt-title { padding: 5px; font-size: 9px; letter-spacing: 0.1em; }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .detail-cell { border-bottom: 1px solid #cbd5e1; }
+    .detail-cell:nth-child(odd) { border-right: 1px solid #cbd5e1; }
+    .detail-cell:nth-last-child(-n+2) { border-bottom: 0; }
+    .size-a4 .detail-cell { padding: 12px 16px; }
+    .size-a5 .detail-cell { padding: 9px 12px; }
+    .size-a6 .detail-cell { padding: 5px 7px; }
+
+    .detail-label {
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .detail-value { font-weight: 800; margin-top: 5px; word-break: break-word; }
+    .size-a4 .detail-label { font-size: 10px; }
+    .size-a4 .detail-value { font-size: 13px; }
+    .size-a5 .detail-label { font-size: 9px; }
+    .size-a5 .detail-value { font-size: 11px; }
+    .size-a6 .detail-label { font-size: 7px; }
+    .size-a6 .detail-value { font-size: 9px; margin-top: 2px; }
+
+    .receipt-body { }
+    .size-a4 .receipt-body { padding: 18px 20px; }
+    .size-a5 .receipt-body { padding: 12px 14px; }
+    .size-a6 .receipt-body { padding: 7px 8px; }
+
+    .fee-table { width: 100%; border-collapse: collapse; }
+    .size-a4 .fee-table { font-size: 13px; }
+    .size-a5 .fee-table { font-size: 11px; }
+    .size-a6 .fee-table { font-size: 9px; }
+
+    .fee-table th, .fee-table td { border: 1px solid #cbd5e1; }
+    .size-a4 .fee-table th, .size-a4 .fee-table td { padding: 9px 11px; }
+    .size-a5 .fee-table th, .size-a5 .fee-table td { padding: 7px 8px; }
+    .size-a6 .fee-table th, .size-a6 .fee-table td { padding: 4px 5px; }
+
+    .fee-table th { background: #f1f5f9; text-align: left; font-weight: 700; }
+    .fee-table th:last-child, .fee-table td:last-child { text-align: right; white-space: nowrap; }
+    .fee-table .total-tr td { font-weight: 900; }
+    .fee-table .total-tr td:first-child { text-align: right; }
+
+    .receipt-boxes { display: grid; }
+    .size-a4 .receipt-boxes { margin-top: 14px; gap: 10px; }
+    .size-a5 .receipt-boxes { margin-top: 10px; gap: 8px; }
+    .size-a6 .receipt-boxes { margin-top: 7px; gap: 5px; }
+
+    .receipt-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 3px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .size-a4 .receipt-box { padding: 9px 11px; font-size: 12px; }
+    .size-a5 .receipt-box { padding: 7px 8px; font-size: 10px; }
+    .size-a6 .receipt-box { padding: 4px 5px; font-size: 8px; }
+
+    .box-row { display: grid; grid-template-columns: 1fr 1fr; }
+    .size-a4 .box-row { gap: 10px; }
+    .size-a5 .box-row { gap: 8px; }
+    .size-a6 .box-row { gap: 5px; }
+
+    .sign-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .size-a4 .sign-row { margin-top: 44px; }
+    .size-a5 .sign-row { margin-top: 28px; }
+    .size-a6 .sign-row { margin-top: 16px; }
+
+    .receipt-footer-note { color: #94a3b8; }
+    .size-a4 .receipt-footer-note { font-size: 10px; }
+    .size-a5 .receipt-footer-note { font-size: 9px; }
+    .size-a6 .receipt-footer-note { font-size: 7px; }
+
+    .sign-block { text-align: center; }
+    .sign-name {
+      font-style: italic;
+      color: #334155;
+      border-bottom: 1px solid #475569;
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+    .size-a4 .sign-name { font-size: 20px; min-width: 130px; }
+    .size-a5 .sign-name { font-size: 15px; min-width: 100px; }
+    .size-a6 .sign-name { font-size: 10px; min-width: 65px; padding-bottom: 2px; }
+    .sign-label { font-weight: 700; margin-top: 5px; }
+    .size-a4 .sign-label { font-size: 11px; }
+    .size-a5 .sign-label { font-size: 9px; }
+    .size-a6 .sign-label { font-size: 7px; margin-top: 2px; }
+
+    /* MOBILE */
+    @media (max-width: 960px) {
       .workspace {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.92fr);
-        gap: 24px;
-        padding-bottom: 56px;
-      }
-      .card {
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        background: #ffffff;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-      }
-      .card-head {
-        padding: 24px;
-        border-bottom: 1px solid #e2e8f0;
-      }
-      .card-head h2, .preview-head h2 {
-        margin: 0;
-        font-size: 24px;
-        letter-spacing: -0.02em;
-      }
-      .card-head p, .preview-head p {
-        margin: 6px 0 0;
-        color: #64748b;
-        font-size: 14px;
-      }
-      .form-body {
-        padding: 24px;
-        display: grid;
-        gap: 32px;
-      }
-      .field-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-      .span-2 { grid-column: 1 / -1; }
-      h3 {
-        margin: 0 0 16px;
-        font-size: 16px;
-      }
-      label span {
-        display: block;
-        margin-bottom: 8px;
-        font-size: 14px;
-        font-weight: 700;
-        color: #1e293b;
-      }
-      input, textarea, select {
-        width: 100%;
-        border: 1px solid #e2e8f0;
-        border-radius: 6px;
-        min-height: 42px;
-        padding: 10px 12px;
-        font: inherit;
-        font-size: 14px;
-        color: #020817;
-        background: #ffffff;
-      }
-      textarea {
-        min-height: 94px;
-        resize: vertical;
-      }
-      input:focus, textarea:focus, select:focus {
-        outline: 2px solid #bfdbfe;
-        border-color: #2563eb;
-      }
-      .upload-box {
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
-        border-radius: 10px;
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-      }
-      .upload-thumb {
-        width: 112px;
-        height: 82px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        background: #ffffff;
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        color: #64748b;
-        font-size: 12px;
-        font-weight: 800;
-        text-align: center;
-      }
-      .upload-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-      .upload-btn {
-        display: inline-flex;
-        min-height: 42px;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #e2e8f0;
-        border-radius: 6px;
-        background: #ffffff;
-        padding: 0 18px;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .upload-btn input { display: none; }
-      .help { margin: 10px 0 0; color: #64748b; font-size: 14px; line-height: 1.5; }
-      .fee-item {
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        padding: 16px;
-        margin-bottom: 14px;
-      }
-      .fee-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-      }
-      .fee-head h4 { margin: 0; font-size: 14px; }
-      .remove {
-        border: 0;
-        background: transparent;
-        color: #dc2626;
-        font-weight: 700;
-        cursor: pointer;
-      }
-      .fee-grid {
-        display: grid;
-        grid-template-columns: 1fr 160px;
-        gap: 16px;
-      }
-      .secondary-btn, .primary-btn {
-        width: 100%;
-        min-height: 44px;
-        border-radius: 6px;
-        font-weight: 800;
-        cursor: pointer;
-      }
-      .secondary-btn {
-        border: 1px solid #e2e8f0;
-        background: #ffffff;
-        color: #020817;
-      }
-      .primary-btn {
-        border: 0;
-        background: #2563eb;
-        color: #ffffff;
-      }
-      .total-row {
-        margin-top: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #f8fafc;
-        border-radius: 6px;
-        padding: 12px 16px;
-      }
-      .total-row strong { font-size: 20px; }
-      .signature-tabs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        background: #f1f5f9;
-        border-radius: 10px;
-        padding: 4px;
-      }
-      .signature-tabs button {
-        border: 0;
-        border-radius: 8px;
-        padding: 10px;
-        background: transparent;
-        color: #64748b;
-        font-weight: 800;
-        text-transform: capitalize;
-        cursor: pointer;
-      }
-      .signature-tabs button.active {
-        background: #ffffff;
-        color: #020817;
-        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
-      }
-      .signature-box {
-        margin-top: 16px;
-        border: 1px solid #e2e8f0;
-        background: #f8fafc;
-        border-radius: 10px;
+        grid-template-columns: 1fr;
         padding: 16px;
       }
-      .signature-surface {
-        min-height: 82px;
-        border-radius: 6px;
-        background: #ffffff;
-        display: grid;
-        place-items: center;
-        font-size: 28px;
-        font-style: italic;
-        color: #334155;
+      .preview-shell { position: static; }
+      .field-grid { grid-template-columns: 1fr; }
+      .fee-grid { grid-template-columns: 1fr; }
+      .box-row { grid-template-columns: 1fr; gap: 6px !important; }
+    }
+    @media (max-width: 480px) {
+      .nav { padding: 0 14px; }
+      .tool-badge { display: none; }
+      .form-body { padding: 14px; gap: 22px; }
+      .card-head { padding: 14px 16px; }
+    }
+
+    /* ============================================================
+       PRINT
+       ============================================================ */
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
+
+      body { background: white; }
+
+      /* Hide everything except the receipt */
+      header,
+      .workspace > .card,
+      .preview-head,
+      .size-selector,
+      .size-note,
+      .a6-warning,
+      .print-note,
+      .validation-summary {
+        display: none !important;
+      }
+
+      /* Flatten layout */
+      .workspace {
+        display: block !important;
+        padding: 0 !important;
+        max-width: none !important;
+        margin: 0 !important;
+      }
+
       .preview-shell {
-        position: sticky;
-        top: 24px;
+        position: static !important;
+        width: 100% !important;
       }
-      .preview-card {
-        padding: 16px;
+
+      .preview-shell .card {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 !important;
       }
-      .preview-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 16px;
-      }
+
       .preview-frame {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        background: #f8fafc;
-        padding: 12px;
-        overflow: auto;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        overflow: visible !important;
       }
-      .receipt {
-        width: 640px;
-        min-height: 680px;
-        margin: 0 auto;
-        background: #ffffff;
-        padding: 28px;
-        color: #020817;
-      }
-      .receipt-border {
-        border: 1px solid #cbd5e1;
-      }
-      .receipt-top {
-        min-height: 142px;
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 26px;
-        border-bottom: 1px solid #cbd5e1;
-      }
-      .school-block {
-        display: flex;
-        gap: 18px;
-      }
-      .receipt-logo {
-        width: 90px;
-        height: 90px;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-        color: #64748b;
-        font-size: 12px;
-        font-weight: 800;
-        text-align: center;
-        flex-shrink: 0;
-      }
-      .receipt-logo img { width: 100%; height: 100%; object-fit: contain; }
-      .school-name {
-        margin: 0;
-        font-size: 32px;
-        line-height: 1.25;
-        text-transform: uppercase;
-      }
-      .school-address {
-        margin: 12px 0 0;
-        color: #64748b;
-        line-height: 1.45;
-        font-size: 18px;
-        text-transform: uppercase;
-      }
-      .receipt-meta { text-align: right; flex-shrink: 0; }
-      .meta-label {
-        color: #64748b;
-        font-weight: 800;
-        font-size: 16px;
-      }
-      .meta-value {
-        margin-top: 8px;
-        font-size: 18px;
-        font-weight: 800;
-      }
-      .receipt-title {
-        background: #f1f5f9;
-        border-bottom: 1px solid #cbd5e1;
-        text-align: center;
-        padding: 18px;
-        font-size: 26px;
-        font-weight: 900;
-        letter-spacing: 0.18em;
-      }
-      .details-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        border-bottom: 1px solid #cbd5e1;
-      }
-      .detail-cell {
-        padding: 18px 22px;
-        border-bottom: 1px solid #cbd5e1;
-      }
-      .detail-cell:nth-child(odd) { border-right: 1px solid #cbd5e1; }
-      .detail-cell:nth-last-child(-n + 2) { border-bottom: 0; }
-      .detail-label {
-        color: #64748b;
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-      .detail-value {
-        margin-top: 12px;
-        font-size: 17px;
-        font-weight: 900;
-      }
-      .receipt-body { padding: 26px; }
-      .fee-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 17px;
-      }
-      .fee-table th, .fee-table td {
-        border: 1px solid #cbd5e1;
-        padding: 13px 16px;
-      }
-      .fee-table th {
-        background: #f1f5f9;
-        text-align: left;
-      }
-      .fee-table th:last-child, .fee-table td:last-child { text-align: right; }
-      .receipt-boxes {
-        margin-top: 22px;
-        display: grid;
-        gap: 16px;
-      }
-      .receipt-box {
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
-        padding: 13px 16px;
-        font-size: 17px;
-      }
-      .box-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-      }
-      .sign-row {
-        margin-top: 78px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-      }
-      .sign-name {
-        min-width: 180px;
-        text-align: center;
-        font-size: 28px;
-        color: #334155;
-        font-style: italic;
-        border-bottom: 1px solid #475569;
-        padding-bottom: 10px;
-      }
-      .sign-label {
-        margin-top: 8px;
-        text-align: center;
-        font-weight: 800;
-      }
-      .features {
-        background: #f8fafc;
-        padding: 56px 0;
-      }
-      .features h2, .fee-types h2, .faq h2 {
-        text-align: center;
-        margin: 0;
-        font-size: 28px;
-      }
-      .feature-grid {
-        margin-top: 32px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-      .feature-card {
-        border: 1px solid #e2e8f0;
-        border-radius: 10px;
-        background: #ffffff;
-        padding: 24px;
-      }
-      .fee-types, .faq { padding: 56px 0; }
-      .fee-list {
-        max-width: 900px;
-        margin: 28px auto 0;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-      }
-      .fee-pill {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        background: #ffffff;
-        padding: 13px;
-        text-align: center;
-        font-weight: 700;
-      }
-      .faq {
-        border-top: 1px solid #e2e8f0;
-      }
-      .faq-list {
-        max-width: 860px;
-        margin: 32px auto 0;
-      }
-      .faq-item {
-        border-bottom: 1px solid #e2e8f0;
-        padding: 0 0 22px;
-        margin-bottom: 22px;
-      }
-      .faq-item h3 { margin-bottom: 8px; }
-      .faq-item p { margin: 0; color: #475569; line-height: 1.6; }
-      @media (max-width: 980px) {
-        .workspace { grid-template-columns: 1fr; }
-        .preview-shell { position: static; }
-        .field-grid, .fee-grid, .box-row, .feature-grid, .fee-list { grid-template-columns: 1fr; }
-        .receipt { width: 100%; min-width: 620px; }
-        .nav-actions { display: none; }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="nav">
-        <a class="brand" href="#">
-          <span class="brand-mark">K</span>
-          <span>
-            <span class="brand-title">KIDORA Receipts</span>
-            <span class="brand-subtitle">Professional Receipt Solutions</span>
-          </span>
-        </a>
-        <nav class="nav-actions">
-          <a href="#features">Templates</a>
-          <a href="#generator">Log in</a>
-          <a class="dark" href="#generator">Sign up</a>
-        </nav>
-      </div>
-    </header>
 
-    <main>
-      <section class="hero">
-        <h1>Preschool Fees Receipt Generator</h1>
-        <p>Create clean preschool fee receipts for tuition, registration, activity, daycare, transport, and other payments.</p>
-        <div class="badges">
-          <span class="badge">Professional Format</span>
-          <span class="badge">Instant PDF Download</span>
-          <span class="badge">Parent Ready</span>
+      /* Receipt fills the @page printable area */
+      .receipt,
+      .receipt.size-a4,
+      .receipt.size-a5,
+      .receipt.size-a6 {
+        width: 100% !important;
+        margin: 0 !important;
+      }
+
+      /* Prevent orphaned rows */
+      .fee-table tr { page-break-inside: avoid; }
+      .sign-row { page-break-inside: avoid; }
+    }
+  </style>
+
+  <!-- Page size rule updated dynamically by JS when user changes the selector -->
+  <style id="page-size-css">@page { size: A4 portrait; margin: 12mm; }</style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand-mark" aria-hidden="true">K</div>
+      <div>
+        <div class="brand-title">Kidora</div>
+        <div class="brand-subtitle">Fee Receipt Generator</div>
+      </div>
+      <span class="tool-badge">Internal staff tool</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="workspace">
+
+      <!-- ══════════════ LEFT — EDITOR FORM ══════════════ -->
+      <div class="card">
+        <div class="card-head">
+          <h1>Fee Receipt Details</h1>
+          <p>Fields marked * are required before printing.</p>
         </div>
-      </section>
+        <div class="form-body">
 
-      <div class="tabs" aria-label="Generator view">
-        <button class="active" type="button">Create Receipt</button>
-        <button type="button">Preview</button>
-      </div>
+          <!-- Validation summary -->
+          <div id="validationSummary" class="validation-summary" role="alert" aria-live="polite"></div>
 
-      <section id="generator" class="workspace">
-        <div class="card">
-          <div class="card-head">
-            <h2>Create Preschool Fees Receipt</h2>
-            <p>Fill in the details below to generate your receipt</p>
-          </div>
-          <div class="form-body">
-            <section>
-              <h3>School Information</h3>
-              <div class="field-grid">
-                <label>
-                  <span>School Name</span>
-                  <input id="schoolName" value="Kidora Preschool" />
-                </label>
-                <label class="span-2">
-                  <span>School Address</span>
-                  <textarea id="schoolAddress">SH-15/74 AK-8 NEW ASHOK VIHAR COLONY SHIVPUR</textarea>
-                </label>
-                <div class="span-2">
-                  <span style="display:block;margin-bottom:8px;font-size:14px;font-weight:700;">School Logo</span>
-                  <div class="upload-box">
-                    <div class="upload-thumb" id="logoThumb">School Logo</div>
-                    <div>
-                      <label class="upload-btn">
-                        Upload Logo
-                        <input id="logoInput" type="file" accept="image/png,image/jpeg,image/jpg" />
-                      </label>
-                      <p class="help">PNG, JPG, JPEG up to 5MB. Default logo will be used if none uploaded.</p>
-                    </div>
+          <!-- ── School Information ── -->
+          <section class="form-section" aria-labelledby="sec-school">
+            <h2 id="sec-school">School Information</h2>
+            <div class="field-grid">
+              <label class="span-2">
+                <span class="label-text">School Name *</span>
+                <input id="schoolName" type="text" value="Kidora Preschool"
+                       autocomplete="organization" aria-required="true" />
+                <span class="field-error" id="err-schoolName" role="alert"></span>
+              </label>
+              <label class="span-2">
+                <span class="label-text">School Address</span>
+                <textarea id="schoolAddress" rows="2" placeholder="Street, area, city"></textarea>
+              </label>
+              <div class="span-2">
+                <span class="label-text">School Logo</span>
+                <div class="upload-box">
+                  <div class="upload-thumb" id="logoThumb">
+                    <span>No logo</span>
+                  </div>
+                  <div class="upload-actions">
+                    <label class="upload-btn">
+                      Upload Logo
+                      <input id="logoInput" type="file"
+                             accept="image/png,image/jpeg,image/gif,image/webp"
+                             aria-label="Upload school logo" />
+                    </label>
+                    <p class="help">PNG, JPG, GIF, WebP — max 5 MB</p>
+                    <span class="field-error" id="err-logo" role="alert"></span>
                   </div>
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
 
-            <section>
-              <h3>Receipt Details</h3>
-              <div class="field-grid">
-                <label>
-                  <span>Receipt Number</span>
-                  <input id="receiptNumber" value="PS-2026-001" />
-                </label>
-                <label>
-                  <span>Receipt Date</span>
-                  <input id="receiptDate" type="date" value="2026-06-24" />
-                </label>
-              </div>
-            </section>
+          <!-- ── Receipt Details ── -->
+          <section class="form-section" aria-labelledby="sec-receipt">
+            <h2 id="sec-receipt">Receipt Details</h2>
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Receipt Number *</span>
+                <input id="receiptNumber" type="text" placeholder="e.g. REC-2026-001"
+                       aria-required="true" />
+                <span class="field-error" id="err-receiptNumber" role="alert"></span>
+              </label>
+              <label>
+                <span class="label-text">Receipt Date *</span>
+                <input id="receiptDate" type="date" aria-required="true" />
+                <span class="field-error" id="err-receiptDate" role="alert"></span>
+              </label>
+            </div>
+          </section>
 
-            <section>
-              <h3>Student & Parent Information</h3>
-              <div class="field-grid">
-                <label>
-                  <span>Parent Name (Received From)</span>
-                  <input id="parentName" value="Mr.Manish Shukla" />
-                </label>
-                <label>
-                  <span>Student Name</span>
-                  <input id="studentName" value="Mridha Shukla" />
-                </label>
-                <label>
-                  <span>Class</span>
-                  <select id="className">
-                    <option selected>Playgroup</option>
-                    <option>Nursery</option>
-                    <option>LKG</option>
-                    <option>UKG</option>
-                    <option>Daycare</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Roll Number (Optional)</span>
-                  <input id="rollNumber" value="01" />
-                </label>
-              </div>
-            </section>
+          <!-- ── Student & Parent ── -->
+          <section class="form-section" aria-labelledby="sec-student">
+            <h2 id="sec-student">Student &amp; Parent Information</h2>
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Parent / Payer Name *</span>
+                <input id="parentName" type="text" placeholder="Parent full name"
+                       aria-required="true" />
+                <span class="field-error" id="err-parentName" role="alert"></span>
+              </label>
+              <label>
+                <span class="label-text">Student Name *</span>
+                <input id="studentName" type="text" placeholder="Student full name"
+                       aria-required="true" />
+                <span class="field-error" id="err-studentName" role="alert"></span>
+              </label>
+              <label>
+                <span class="label-text">Class *</span>
+                <select id="className" aria-required="true">
+                  <option value="">Select class</option>
+                  <option>Playgroup</option>
+                  <option>Nursery</option>
+                  <option>LKG</option>
+                  <option>UKG</option>
+                  <option>Daycare</option>
+                </select>
+                <span class="field-error" id="err-className" role="alert"></span>
+              </label>
+              <label>
+                <span class="label-text">Roll / Admission Number</span>
+                <input id="rollNumber" type="text" placeholder="Optional" />
+              </label>
+            </div>
+          </section>
 
-            <section>
-              <h3>Fee Details</h3>
-              <div id="feeItems"></div>
-              <button class="secondary-btn" type="button" id="addFee">Add Fee Item</button>
-              <div class="total-row">
-                <span>Total Amount:</span>
-                <strong id="formTotal">₹ 0</strong>
-              </div>
-              <p class="help">In Words: <span id="formWords">Zero Only</span></p>
-            </section>
+          <!-- ── Fee Details ── -->
+          <section class="form-section" aria-labelledby="sec-fees">
+            <h2 id="sec-fees">Fee Details</h2>
+            <div id="feeItems" aria-label="Fee items list"></div>
+            <span class="field-error" id="err-fees" role="alert"></span>
+            <button class="secondary-btn" type="button" id="addFee"
+                    style="margin-top:8px;" aria-label="Add a new fee item">
+              + Add Fee Item
+            </button>
+            <div class="total-row">
+              <span class="total-label">Total Amount</span>
+              <span class="total-amount" id="formTotal" aria-live="polite">₹0.00</span>
+            </div>
+            <p class="words-row">
+              In Words: <strong id="formWords" aria-live="polite">—</strong>
+            </p>
+          </section>
 
-            <section>
-              <h3>Payment Details</h3>
-              <div class="field-grid">
-                <label>
-                  <span>Payment Method</span>
-                  <select id="paymentMethod">
-                    <option>Cash</option>
-                    <option selected>UPI</option>
-                    <option>Bank Transfer</option>
-                    <option>Cheque</option>
-                    <option>Card</option>
-                  </select>
-                </label>
-              </div>
-            </section>
+          <!-- ── Payment ── -->
+          <section class="form-section" aria-labelledby="sec-payment">
+            <h2 id="sec-payment">Payment Details</h2>
+            <div class="field-grid">
+              <label>
+                <span class="label-text">Payment Method</span>
+                <select id="paymentMethod">
+                  <option>Cash</option>
+                  <option selected>UPI</option>
+                  <option>Bank Transfer</option>
+                  <option>Cheque</option>
+                  <option>Card</option>
+                </select>
+              </label>
+            </div>
+          </section>
 
-            <section>
-              <h3>Additional Options</h3>
-              <div class="field-grid">
-                <label class="span-2">
-                  <span>Notes (Optional)</span>
-                  <textarea id="notes"></textarea>
-                </label>
-              </div>
-            </section>
-
-            <section>
-              <h3>Signature Options</h3>
-              <div class="signature-tabs">
-                <button class="active" type="button">default</button>
-                <button type="button">upload</button>
-                <button type="button">draw</button>
-              </div>
-              <div class="signature-box">
-                <div class="signature-surface" id="signaturePreview">Administrator</div>
-                <p class="help">Using default signature</p>
-              </div>
-              <div style="margin-top:16px;">
-                <label>
-                  <span>Signature Name</span>
-                  <input id="signatureName" value="Administrator" />
-                </label>
-              </div>
-            </section>
-
+          <!-- ── Notes ── -->
+          <section class="form-section" aria-labelledby="sec-notes">
+            <h2 id="sec-notes">Notes</h2>
             <label>
-              <span>Download File Name</span>
-              <input id="fileName" value="preschool-fee-receipt" />
+              <span class="label-text">Notes (Optional)</span>
+              <textarea id="notes" rows="2"
+                        placeholder="Any additional information for the parent"></textarea>
             </label>
+          </section>
 
-            <button class="primary-btn" type="button" onclick="window.print()">Generate Receipt</button>
-          </div>
-        </div>
+          <!-- ── Signature ── -->
+          <section class="form-section" aria-labelledby="sec-sig">
+            <h2 id="sec-sig">Authorized Signature</h2>
+            <label>
+              <span class="label-text">Signature Name</span>
+              <input id="signatureName" type="text" value="Administrator"
+                     placeholder="Name that appears on the signature line" />
+            </label>
+          </section>
 
-        <aside class="preview-shell">
-          <div class="card preview-card">
-            <div class="preview-head">
-              <div>
-                <h2>Preview</h2>
-                <p>Receipt updates as you type.</p>
-              </div>
-              <button class="primary-btn" style="width:auto;padding:0 18px;" type="button" onclick="window.print()">Download PDF</button>
+          <button class="primary-btn" type="button" id="printBtn">
+            Print Receipt / Save as PDF
+          </button>
+          <p class="help" style="text-align:center;margin-top:6px;">
+            Your browser's Print dialog will open. Choose <strong>Save as PDF</strong>
+            to save a digital copy. Manually select the matching paper size in the dialog.
+          </p>
+
+        </div><!-- /form-body -->
+      </div><!-- /left card -->
+
+
+      <!-- ══════════════ RIGHT — PREVIEW ══════════════ -->
+      <aside class="preview-shell" aria-label="Receipt preview">
+        <div class="card preview-card">
+
+          <div class="preview-head">
+            <div>
+              <h2>Preview</h2>
+              <p>Updates as you type.</p>
             </div>
-            <div class="preview-frame">
-              <article class="receipt" id="receipt">
-                <div class="receipt-border">
-                  <div class="receipt-top">
-                    <div class="school-block">
-                      <div class="receipt-logo" id="receiptLogo">School Logo</div>
-                      <div>
-                        <h2 class="school-name" id="pSchoolName">KIDORA PRESCHOOL</h2>
-                        <p class="school-address" id="pSchoolAddress">SH-15/74 AK-8 NEW ASHOK VIHAR COLONY SHIVPUR</p>
-                      </div>
+            <button class="primary-btn"
+                    style="width:auto;padding:0 16px;white-space:nowrap;"
+                    type="button" id="printBtnTop">
+              Print / Save as PDF
+            </button>
+          </div>
+
+          <!-- Page size selector -->
+          <div class="size-selector" aria-label="Paper size">
+            <span class="size-selector-label" id="size-label">Paper size:</span>
+            <div class="size-options" role="radiogroup" aria-labelledby="size-label">
+              <label title="210 × 297 mm">
+                <input type="radio" name="pageSize" value="a4" checked />
+                <span class="size-btn">A4</span>
+              </label>
+              <label title="148 × 210 mm">
+                <input type="radio" name="pageSize" value="a5" />
+                <span class="size-btn">A5</span>
+              </label>
+              <label title="105 × 148 mm">
+                <input type="radio" name="pageSize" value="a6" />
+                <span class="size-btn">A6</span>
+              </label>
+            </div>
+          </div>
+          <p class="size-note">
+            A4 = 210×297 mm &nbsp;·&nbsp; A5 = 148×210 mm &nbsp;·&nbsp; A6 = 105×148 mm — portrait.<br>
+            In the Print dialog, manually select the matching paper size for a correct printed output.
+          </p>
+
+          <div class="a6-warning" id="a6Warning" role="alert">
+            <strong>A6 size warning:</strong> The current content may exceed one A6 page.
+            Consider using A4 or A5, or shorten the notes and address before printing.
+          </div>
+
+          <!-- Receipt article — only this is printed -->
+          <div class="preview-frame">
+            <article class="receipt size-a4" id="receipt" aria-label="Receipt preview">
+              <div class="receipt-border">
+
+                <div class="receipt-top">
+                  <div class="school-block">
+                    <div class="receipt-logo" id="receiptLogo" role="img"
+                         aria-label="School logo placeholder"></div>
+                    <div class="school-info">
+                      <p class="school-name" id="pSchoolName"></p>
+                      <p class="school-address" id="pSchoolAddress"></p>
                     </div>
-                    <div class="receipt-meta">
+                  </div>
+                  <div class="receipt-meta">
+                    <div class="meta-group">
                       <div class="meta-label">Receipt No.</div>
-                      <div class="meta-value" id="pReceiptNumber">PS-2026-001</div>
-                      <div class="meta-label" style="margin-top:22px;">Date</div>
-                      <div class="meta-value" id="pReceiptDate">24/06/2026</div>
+                      <div class="meta-value" id="pReceiptNumber">—</div>
                     </div>
-                  </div>
-                  <div class="receipt-title">FEE RECEIPT</div>
-                  <div class="details-grid">
-                    <div class="detail-cell">
-                      <div class="detail-label">Received From</div>
-                      <div class="detail-value" id="pParentName">Mr.Manish Shukla</div>
-                    </div>
-                    <div class="detail-cell">
-                      <div class="detail-label">Student Name</div>
-                      <div class="detail-value" id="pStudentName">Mridha Shukla</div>
-                    </div>
-                    <div class="detail-cell">
-                      <div class="detail-label">Class</div>
-                      <div class="detail-value" id="pClassName">Playgroup</div>
-                    </div>
-                    <div class="detail-cell">
-                      <div class="detail-label">Roll Number</div>
-                      <div class="detail-value" id="pRollNumber">01</div>
-                    </div>
-                  </div>
-                  <div class="receipt-body">
-                    <table class="fee-table">
-                      <thead>
-                        <tr>
-                          <th>Fee Description</th>
-                          <th>Amount (₹)</th>
-                        </tr>
-                      </thead>
-                      <tbody id="pFeeRows"></tbody>
-                    </table>
-                    <div class="receipt-boxes">
-                      <div class="receipt-box"><strong>Amount in Words:</strong> <span id="pWords">Zero Only</span></div>
-                      <div class="box-row">
-                        <div class="receipt-box"><strong>Payment Method:</strong> <span id="pPaymentMethod">UPI</span></div>
-                        <div class="receipt-box"><strong>Receipt Date:</strong> <span id="pReceiptDateBox">24/06/2026</span></div>
-                      </div>
-                      <div class="receipt-box" id="pNotesBox" style="display:none;"><strong>Notes:</strong> <span id="pNotes"></span></div>
-                    </div>
-                    <div class="sign-row">
-                      <div style="font-size:12px;color:#64748b;">This receipt is generated for preschool fee record keeping.</div>
-                      <div>
-                        <div class="sign-name" id="pSignature">Administrator</div>
-                        <div class="sign-label">Authorized Signature</div>
-                      </div>
+                    <div class="meta-group">
+                      <div class="meta-label">Date</div>
+                      <div class="meta-value" id="pReceiptDate">—</div>
                     </div>
                   </div>
                 </div>
-              </article>
-            </div>
+
+                <div class="receipt-title">FEE RECEIPT</div>
+
+                <div class="details-grid">
+                  <div class="detail-cell">
+                    <div class="detail-label">Received From</div>
+                    <div class="detail-value" id="pParentName">—</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="detail-label">Student Name</div>
+                    <div class="detail-value" id="pStudentName">—</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="detail-label">Class</div>
+                    <div class="detail-value" id="pClassName">—</div>
+                  </div>
+                  <div class="detail-cell">
+                    <div class="detail-label">Roll Number</div>
+                    <div class="detail-value" id="pRollNumber">—</div>
+                  </div>
+                </div>
+
+                <div class="receipt-body">
+                  <table class="fee-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fee Description</th>
+                        <th scope="col">Amount (₹)</th>
+                      </tr>
+                    </thead>
+                    <tbody id="pFeeRows"></tbody>
+                  </table>
+
+                  <div class="receipt-boxes">
+                    <div class="receipt-box">
+                      <strong>Amount in Words:</strong>
+                      <span id="pWords">—</span>
+                    </div>
+                    <div class="box-row">
+                      <div class="receipt-box">
+                        <strong>Payment Method:</strong>
+                        <span id="pPaymentMethod">—</span>
+                      </div>
+                      <div class="receipt-box">
+                        <strong>Receipt Date:</strong>
+                        <span id="pReceiptDateBox">—</span>
+                      </div>
+                    </div>
+                    <div class="receipt-box" id="pNotesBox" style="display:none;">
+                      <strong>Notes:</strong>
+                      <span id="pNotes"></span>
+                    </div>
+                  </div>
+
+                  <div class="sign-row">
+                    <div class="receipt-footer-note">Fee receipt for school records.</div>
+                    <div class="sign-block">
+                      <div class="sign-name" id="pSignature">Administrator</div>
+                      <div class="sign-label">Authorized Signature</div>
+                    </div>
+                  </div>
+                </div><!-- /receipt-body -->
+
+              </div><!-- /receipt-border -->
+            </article>
+          </div><!-- /preview-frame -->
+
+          <div class="print-note">
+            When the Print dialog opens, select <strong>Save as PDF</strong> as destination.
+            Manually select the matching paper size (A4&nbsp;/&nbsp;A5&nbsp;/&nbsp;A6).
+            To hide browser-added headers and footers, uncheck "Headers and footers" in Print settings.
+            This tool cannot control those from inside the browser.
           </div>
-        </aside>
-      </section>
 
-      <section id="features" class="features">
-        <div class="section-inner">
-          <h2>Why use this preschool receipt generator?</h2>
-          <div class="feature-grid">
-            <div class="feature-card"><h3>Professional Format</h3><p>Structured receipt layout with logo, receipt number, date, fee rows, and signature area.</p></div>
-            <div class="feature-card"><h3>Student Details</h3><p>Capture parent name, student name, class, and roll/admission number for easy record keeping.</p></div>
-            <div class="feature-card"><h3>Multiple Fee Types</h3><p>Use separate rows for tuition, admission, daycare, transport, activity, meal, or custom fees.</p></div>
-          </div>
-        </div>
-      </section>
+        </div><!-- /preview-card -->
+      </aside>
 
-      <section class="fee-types">
-        <div class="section-inner">
-          <h2>Common Preschool Fee Types Supported</h2>
-          <div class="fee-list">
-            <div class="fee-pill">Tuition Fee</div>
-            <div class="fee-pill">Registration Fee</div>
-            <div class="fee-pill">Admission Fee</div>
-            <div class="fee-pill">Activity Fee</div>
-            <div class="fee-pill">Daycare Fee</div>
-            <div class="fee-pill">Meal Fee</div>
-            <div class="fee-pill">Transport Fee</div>
-            <div class="fee-pill">Uniform Fee</div>
-            <div class="fee-pill">Book Fee</div>
-            <div class="fee-pill">Annual Fee</div>
-            <div class="fee-pill">Event Fee</div>
-            <div class="fee-pill">Material Fee</div>
-          </div>
-        </div>
-      </section>
+    </div><!-- /workspace -->
+  </main>
 
-      <section class="faq">
-        <div class="section-inner">
-          <h2>Frequently Asked Questions</h2>
-          <div class="faq-list">
-            <div class="faq-item"><h3>Can preschools use these receipts for fee collection?</h3><p>Yes. The receipt includes the common fields a preschool office usually needs.</p></div>
-            <div class="faq-item"><h3>Can I customize the school name and address?</h3><p>Yes. Edit school details, logo, signature, notes, and all fee items before printing.</p></div>
-            <div class="faq-item"><h3>Does it include amount in words?</h3><p>Yes. The total is converted to words automatically in the receipt preview.</p></div>
-          </div>
-        </div>
-      </section>
-    </main>
+  <script>
+    // ================================================================
+    // STATE
+    // ================================================================
+    var state = {
+      fees: [{ id: uid(), description: "", paise: 0 }],
+      pageSize: "a4",
+    };
 
-    <script>
-      const state = {
-        fees: [
-          { id: crypto.randomUUID(), description: "Tuition Fee", amount: 1500 },
-          { id: crypto.randomUUID(), description: "Registration fee", amount: 600 },
-          { id: crypto.randomUUID(), description: "Aminites", amount: 1900 },
-          { id: crypto.randomUUID(), description: "activity", amount: 1000 },
-        ],
-      };
+    // ================================================================
+    // UTILITIES
+    // ================================================================
 
-      const ids = [
-        "schoolName", "schoolAddress", "receiptNumber", "receiptDate", "parentName",
-        "studentName", "className", "rollNumber", "paymentMethod", "notes", "signatureName"
+    function uid() {
+      return (typeof crypto !== "undefined" && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : Date.now().toString(36) + Math.random().toString(36).slice(2);
+    }
+
+    /**
+     * Parse a user-entered amount string to integer paise.
+     * Returns integer >= 0 on success, null if invalid or negative.
+     */
+    function parsePaise(str) {
+      if (str === null || str === undefined) return null;
+      var s = String(str).trim().replace(/,/g, "");
+      if (s === "") return null;
+      var n = parseFloat(s);
+      if (!isFinite(n) || isNaN(n)) return null;
+      if (n < 0) return null;
+      return Math.round(n * 100); // integer paise — avoids float summation errors
+    }
+
+    /**
+     * Format integer paise as Indian currency string.
+     * e.g. 10000000 → "₹1,00,000.00"
+     */
+    function formatInr(paise) {
+      if (!Number.isInteger(paise) || paise < 0) return "₹0.00";
+      var rupees = Math.floor(paise / 100);
+      var p = paise % 100;
+      var rupeeStr = rupees.toLocaleString("en-IN");
+      return "₹" + rupeeStr + "." + String(p).padStart(2, "0");
+    }
+
+    /**
+     * Convert integer paise to Indian amount-in-words.
+     * Examples:
+     *   100    → "One Rupee Only"
+     *   1050   → "Ten Rupees and Fifty Paise Only"
+     *   100000 → "One Thousand Rupees Only"  (100000 paise = ₹1,000)
+     */
+    function paiseToWords(totalPaise) {
+      if (!Number.isInteger(totalPaise) || totalPaise < 0) return "Invalid amount";
+      if (totalPaise === 0) return "Zero Rupees Only";
+
+      var ONES = [
+        "","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
+        "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen",
+        "Seventeen","Eighteen","Nineteen"
       ];
+      var TENS = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
 
-      function rupees(n) {
-        return "₹ " + Number(n || 0).toLocaleString("en-IN");
+      function underHundred(n) {
+        if (n < 20) return ONES[n];
+        return TENS[Math.floor(n / 10)] + (n % 10 ? " " + ONES[n % 10] : "");
       }
 
-      function formatDate(value) {
-        const date = new Date(value);
-        if (Number.isNaN(date.getTime())) return value || "—";
-        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "2-digit", year: "numeric" });
+      function underThousand(n) {
+        var h = Math.floor(n / 100);
+        var r = n % 100;
+        return (h ? ONES[h] + " Hundred" + (r ? " " : "") : "") + (r ? underHundred(r) : "");
       }
 
-      function words(value) {
-        if (!Number.isFinite(value) || value <= 0) return "Zero Only";
-        const ones = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
-        const tens = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-        const underHundred = n => n < 20 ? ones[n] : tens[Math.floor(n / 10)] + (n % 10 ? " " + ones[n % 10] : "");
-        const underThousand = n => {
-          const h = Math.floor(n / 100);
-          const r = n % 100;
-          return (h ? ones[h] + " Hundred" + (r ? " " : "") : "") + (r ? underHundred(r) : "");
-        };
-        let remaining = Math.floor(value);
-        const parts = [];
-        const crore = Math.floor(remaining / 10000000); remaining %= 10000000;
-        const lakh = Math.floor(remaining / 100000); remaining %= 100000;
-        const thousand = Math.floor(remaining / 1000); remaining %= 1000;
+      function rupeeWords(n) {
+        if (n === 0) return "";
+        var rem = n;
+        var crore = Math.floor(rem / 10000000); rem %= 10000000;
+        var lakh  = Math.floor(rem / 100000);   rem %= 100000;
+        var thou  = Math.floor(rem / 1000);      rem %= 1000;
+        var parts = [];
         if (crore) parts.push(underThousand(crore) + " Crore");
-        if (lakh) parts.push(underThousand(lakh) + " Lakh");
-        if (thousand) parts.push(underThousand(thousand) + " Thousand");
-        if (remaining) parts.push(underThousand(remaining));
-        return parts.join(" ") + " Only";
+        if (lakh)  parts.push(underThousand(lakh)  + " Lakh");
+        if (thou)  parts.push(underThousand(thou)  + " Thousand");
+        if (rem)   parts.push(underThousand(rem));
+        return parts.join(" ");
       }
 
-      function read(id) {
-        return document.getElementById(id).value;
+      var rupees = Math.floor(totalPaise / 100);
+      var paise  = totalPaise % 100;
+
+      var rWords = rupeeWords(rupees);
+      var rupeePart = rupees > 0
+        ? rWords + (rupees === 1 ? " Rupee" : " Rupees")
+        : "";
+      var paisePart = paise > 0
+        ? underHundred(paise) + " Paise"
+        : "";
+
+      if (rupeePart && paisePart) return rupeePart + " and " + paisePart + " Only";
+      if (rupeePart) return rupeePart + " Only";
+      return paisePart + " Only";
+    }
+
+    /**
+     * Convert date input value "YYYY-MM-DD" to "DD/MM/YYYY" without
+     * any timezone conversion — parses the string directly.
+     */
+    function formatDate(value) {
+      if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return value || "—";
+      var parts = value.split("-");
+      return parts[2] + "/" + parts[1] + "/" + parts[0];
+    }
+
+    function val(id) {
+      var el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    }
+
+    function setText(id, text) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    function setError(fieldId, message) {
+      var errEl   = document.getElementById("err-" + fieldId);
+      var inputEl = document.getElementById(fieldId);
+      if (errEl) errEl.textContent = message || "";
+      if (inputEl) {
+        if (message) inputEl.classList.add("invalid");
+        else inputEl.classList.remove("invalid");
+      }
+    }
+
+    function clearError(fieldId) {
+      setError(fieldId, "");
+    }
+
+    // ================================================================
+    // PAGE SIZE
+    // ================================================================
+    var PAGE_CSS = {
+      a4: "@page { size: A4 portrait; margin: 12mm; }",
+      a5: "@page { size: A5 portrait; margin: 9mm; }",
+      a6: "@page { size: A6 portrait; margin: 6mm; }",
+    };
+
+    function applyPageSize(size) {
+      state.pageSize = size;
+      var receipt = document.getElementById("receipt");
+      receipt.className = "receipt size-" + size;
+      document.getElementById("page-size-css").textContent = PAGE_CSS[size] || PAGE_CSS.a4;
+      try { sessionStorage.setItem("kidora-receipt-size", size); } catch (e) {}
+      checkA6Overflow();
+    }
+
+    function checkA6Overflow() {
+      var warn = document.getElementById("a6Warning");
+      if (!warn) return;
+      if (state.pageSize !== "a6") { warn.classList.remove("visible"); return; }
+      var feeCount = state.fees.length;
+      var notesLen = val("notes").length;
+      var addrLen  = val("schoolAddress").length;
+      var overflow = feeCount > 5 || notesLen > 80 || addrLen > 60;
+      warn.classList.toggle("visible", overflow);
+    }
+
+    // ================================================================
+    // RENDER FEE EDITOR ROWS — safe DOM, no innerHTML for user values
+    // ================================================================
+    function renderFees() {
+      var container = document.getElementById("feeItems");
+      while (container.firstChild) container.removeChild(container.firstChild);
+
+      state.fees.forEach(function (fee, index) {
+        var row = document.createElement("div");
+        row.className = "fee-item";
+        row.dataset.feeId = fee.id;
+
+        // Header row
+        var head = document.createElement("div");
+        head.className = "fee-head";
+
+        var h3 = document.createElement("h3");
+        h3.textContent = "Fee Item " + (index + 1);
+        head.appendChild(h3);
+
+        if (state.fees.length > 1) {
+          var btn = document.createElement("button");
+          btn.className = "remove-btn";
+          btn.type = "button";
+          btn.textContent = "Remove";
+          btn.dataset.remove = fee.id;
+          btn.setAttribute("aria-label", "Remove fee item " + (index + 1));
+          head.appendChild(btn);
+        }
+        row.appendChild(head);
+
+        // Grid: description + amount
+        var grid = document.createElement("div");
+        grid.className = "fee-grid";
+
+        // Description label + input + error
+        var descLabel = document.createElement("label");
+        var descSpan  = document.createElement("span");
+        descSpan.className = "label-text";
+        descSpan.textContent = "Fee Description *";
+        var descInput = document.createElement("input");
+        descInput.type = "text";
+        descInput.value = fee.description;
+        descInput.dataset.feeDesc = fee.id;
+        descInput.placeholder = "e.g. Tuition Fee";
+        descInput.setAttribute("aria-label", "Fee item " + (index + 1) + " description");
+        var descErr = document.createElement("span");
+        descErr.className = "field-error";
+        descErr.id = "err-desc-" + fee.id;
+        descErr.setAttribute("role", "alert");
+        descLabel.appendChild(descSpan);
+        descLabel.appendChild(descInput);
+        descLabel.appendChild(descErr);
+
+        // Amount label + input + error
+        var amtLabel = document.createElement("label");
+        var amtSpan  = document.createElement("span");
+        amtSpan.className = "label-text";
+        amtSpan.textContent = "Amount (₹) *";
+        var amtInput = document.createElement("input");
+        amtInput.type = "number";
+        amtInput.min  = "0";
+        amtInput.step = "0.01";
+        amtInput.value = fee.paise > 0 ? (fee.paise / 100).toFixed(2) : "";
+        amtInput.dataset.feeAmount = fee.id;
+        amtInput.placeholder = "0.00";
+        amtInput.setAttribute("aria-label", "Fee item " + (index + 1) + " amount in rupees");
+        var amtErr = document.createElement("span");
+        amtErr.className = "field-error";
+        amtErr.id = "err-amt-" + fee.id;
+        amtErr.setAttribute("role", "alert");
+        amtLabel.appendChild(amtSpan);
+        amtLabel.appendChild(amtInput);
+        amtLabel.appendChild(amtErr);
+
+        grid.appendChild(descLabel);
+        grid.appendChild(amtLabel);
+        row.appendChild(grid);
+        container.appendChild(row);
+      });
+    }
+
+    // ================================================================
+    // SYNC RECEIPT PREVIEW — textContent only for user-supplied values
+    // ================================================================
+    function syncPreview() {
+      var totalPaise = state.fees.reduce(function (sum, f) {
+        return sum + (f.paise || 0);
+      }, 0);
+
+      var dateStr = formatDate(val("receiptDate"));
+
+      setText("pSchoolName",    (val("schoolName").toUpperCase()) || "SCHOOL NAME");
+      setText("pSchoolAddress", val("schoolAddress").toUpperCase());
+      setText("pReceiptNumber", val("receiptNumber") || "—");
+      setText("pReceiptDate",   dateStr);
+      setText("pReceiptDateBox",dateStr);
+      setText("pParentName",    val("parentName")    || "—");
+      setText("pStudentName",   val("studentName")   || "—");
+      setText("pClassName",     val("className")     || "—");
+      setText("pRollNumber",    val("rollNumber")    || "—");
+      setText("pPaymentMethod", val("paymentMethod") || "—");
+      setText("pSignature",     val("signatureName") || "Authorized");
+
+      document.getElementById("formTotal").textContent = formatInr(totalPaise);
+      var wordsStr = totalPaise > 0 ? paiseToWords(totalPaise) : "—";
+      document.getElementById("formWords").textContent = wordsStr;
+      setText("pWords", wordsStr);
+
+      // Notes
+      var notes = val("notes");
+      document.getElementById("pNotesBox").style.display = notes ? "block" : "none";
+      setText("pNotes", notes);
+
+      // Fee table
+      var tbody = document.getElementById("pFeeRows");
+      while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+      state.fees.forEach(function (fee) {
+        var tr  = document.createElement("tr");
+        var td1 = document.createElement("td");
+        td1.textContent = fee.description || "—";
+        var td2 = document.createElement("td");
+        td2.textContent = formatInr(fee.paise || 0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tbody.appendChild(tr);
+      });
+
+      // Total row
+      var totalTr  = document.createElement("tr");
+      totalTr.className = "total-tr";
+      var ttd1 = document.createElement("td");
+      ttd1.textContent = "Total Amount";
+      var ttd2 = document.createElement("td");
+      ttd2.textContent = formatInr(totalPaise);
+      totalTr.appendChild(ttd1);
+      totalTr.appendChild(ttd2);
+      tbody.appendChild(totalTr);
+
+      checkA6Overflow();
+    }
+
+    // ================================================================
+    // VALIDATION — runs before every print attempt
+    // ================================================================
+    function validate() {
+      var errors = [];
+      var firstInvalidEl = null;
+
+      function markInvalid(fieldId, msg) {
+        setError(fieldId, msg);
+        errors.push(msg);
+        if (!firstInvalidEl) firstInvalidEl = document.getElementById(fieldId);
       }
 
-      function renderFees() {
-        const container = document.getElementById("feeItems");
-        container.innerHTML = "";
-        state.fees.forEach((fee, index) => {
-          const row = document.createElement("div");
-          row.className = "fee-item";
-          row.innerHTML = `
-            <div class="fee-head">
-              <h4>Fee Item ${index + 1}</h4>
-              ${state.fees.length > 1 ? `<button class="remove" type="button" data-remove="${fee.id}">Remove</button>` : ""}
-            </div>
-            <div class="fee-grid">
-              <label><span>Fee Description</span><input value="${fee.description}" data-fee-desc="${fee.id}" /></label>
-              <label><span>Amount (₹)</span><input type="number" value="${fee.amount}" data-fee-amount="${fee.id}" /></label>
-            </div>
-          `;
-          container.appendChild(row);
+      // Clear all field errors
+      ["schoolName","receiptNumber","receiptDate","parentName","studentName","className"]
+        .forEach(clearError);
+      var feesErrEl = document.getElementById("err-fees");
+      if (feesErrEl) feesErrEl.textContent = "";
+
+      // School name
+      if (!val("schoolName")) {
+        markInvalid("schoolName", "School name is required.");
+      }
+
+      // Receipt number
+      var rNum = val("receiptNumber");
+      if (!rNum) {
+        markInvalid("receiptNumber", "Receipt number is required.");
+      } else if (!/^[\x20-\x7E]+$/.test(rNum)) {
+        markInvalid("receiptNumber", "Receipt number must contain only printable characters.");
+      }
+
+      // Receipt date
+      if (!val("receiptDate")) {
+        markInvalid("receiptDate", "Receipt date is required.");
+      }
+
+      // Parent name
+      if (!val("parentName")) {
+        markInvalid("parentName", "Parent / payer name is required.");
+      }
+
+      // Student name
+      if (!val("studentName")) {
+        markInvalid("studentName", "Student name is required.");
+      }
+
+      // Class
+      if (!val("className")) {
+        markInvalid("className", "Class is required.");
+      }
+
+      // Fee rows
+      if (state.fees.length === 0) {
+        if (feesErrEl) feesErrEl.textContent = "At least one fee item is required.";
+        errors.push("At least one fee item is required.");
+      } else {
+        var feeRowHasError = false;
+        state.fees.forEach(function (fee, i) {
+          var descErrEl = document.getElementById("err-desc-" + fee.id);
+          var amtErrEl  = document.getElementById("err-amt-"  + fee.id);
+          var descInput = document.querySelector("[data-fee-desc=\"" + fee.id + "\"]");
+          var amtInput  = document.querySelector("[data-fee-amount=\"" + fee.id + "\"]");
+
+          if (descErrEl) descErrEl.textContent = "";
+          if (amtErrEl)  amtErrEl.textContent  = "";
+          if (descInput) descInput.classList.remove("invalid");
+          if (amtInput)  amtInput.classList.remove("invalid");
+
+          if (!fee.description.trim()) {
+            if (descErrEl) descErrEl.textContent = "Description is required.";
+            if (descInput) { descInput.classList.add("invalid"); if (!firstInvalidEl) firstInvalidEl = descInput; }
+            feeRowHasError = true;
+          }
+          if (!fee.paise || fee.paise <= 0) {
+            if (amtErrEl) amtErrEl.textContent = "Amount must be greater than zero.";
+            if (amtInput) { amtInput.classList.add("invalid"); if (!firstInvalidEl) firstInvalidEl = amtInput; }
+            feeRowHasError = true;
+          }
         });
+        if (feeRowHasError) {
+          errors.push("Each fee item must have a description and a positive amount.");
+        }
       }
 
-      function syncPreview() {
-        const total = state.fees.reduce((sum, fee) => sum + Number(fee.amount || 0), 0);
-        const receiptDate = formatDate(read("receiptDate"));
-        document.getElementById("pSchoolName").textContent = read("schoolName").toUpperCase();
-        document.getElementById("pSchoolAddress").textContent = read("schoolAddress").toUpperCase();
-        document.getElementById("pReceiptNumber").textContent = read("receiptNumber");
-        document.getElementById("pReceiptDate").textContent = receiptDate;
-        document.getElementById("pReceiptDateBox").textContent = receiptDate;
-        document.getElementById("pParentName").textContent = read("parentName");
-        document.getElementById("pStudentName").textContent = read("studentName");
-        document.getElementById("pClassName").textContent = read("className");
-        document.getElementById("pRollNumber").textContent = read("rollNumber") || "—";
-        document.getElementById("pPaymentMethod").textContent = read("paymentMethod");
-        document.getElementById("pSignature").textContent = read("signatureName") || "Authorized";
-        document.getElementById("signaturePreview").textContent = read("signatureName") || "Authorized";
-        document.getElementById("formTotal").textContent = rupees(total);
-        document.getElementById("formWords").textContent = words(total);
-        document.getElementById("pWords").textContent = words(total);
+      // Total > 0
+      var totalPaise = state.fees.reduce(function (s, f) { return s + (f.paise || 0); }, 0);
+      if (!feeRowHasError && totalPaise <= 0) {
+        errors.push("Total amount must be greater than zero.");
+      }
 
-        const notes = read("notes");
-        document.getElementById("pNotesBox").style.display = notes ? "block" : "none";
-        document.getElementById("pNotes").textContent = notes;
-
-        const tbody = document.getElementById("pFeeRows");
-        tbody.innerHTML = "";
-        state.fees.forEach(fee => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `<td>${fee.description || "Fee Item"}</td><td>${rupees(fee.amount)}</td>`;
-          tbody.appendChild(tr);
+      // Render summary
+      var summary = document.getElementById("validationSummary");
+      if (errors.length > 0) {
+        summary.classList.add("visible");
+        while (summary.firstChild) summary.removeChild(summary.firstChild);
+        var strong = document.createElement("strong");
+        strong.textContent = "Please fix the following before printing:";
+        summary.appendChild(strong);
+        var ul = document.createElement("ul");
+        errors.forEach(function (msg) {
+          var li = document.createElement("li");
+          li.textContent = msg;
+          ul.appendChild(li);
         });
-        const totalRow = document.createElement("tr");
-        totalRow.innerHTML = `<td style="text-align:right;font-weight:900;">Total Amount</td><td style="font-weight:900;">${rupees(total)}</td>`;
-        tbody.appendChild(totalRow);
+        summary.appendChild(ul);
+        if (firstInvalidEl) {
+          firstInvalidEl.focus();
+          firstInvalidEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        } else {
+          summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+        return false;
       }
 
-      function init() {
+      summary.classList.remove("visible");
+      while (summary.firstChild) summary.removeChild(summary.firstChild);
+      return true;
+    }
+
+    // ================================================================
+    // LOGO UPLOAD
+    // ================================================================
+    function handleLogoUpload(event) {
+      var file = event.target.files && event.target.files[0];
+      var errEl = document.getElementById("err-logo");
+      if (errEl) errEl.textContent = "";
+      if (!file) return;
+
+      var allowed = ["image/png","image/jpeg","image/gif","image/webp"];
+      if (!allowed.includes(file.type)) {
+        if (errEl) errEl.textContent = "Please upload a PNG, JPG, GIF, or WebP image.";
+        event.target.value = "";
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        if (errEl) errEl.textContent = "Logo file must be 5 MB or less.";
+        event.target.value = "";
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function () {
+        var src = reader.result;
+
+        var thumb = document.getElementById("logoThumb");
+        while (thumb.firstChild) thumb.removeChild(thumb.firstChild);
+        var thumbImg = document.createElement("img");
+        thumbImg.src = src;
+        thumbImg.alt = "Uploaded school logo";
+        thumb.appendChild(thumbImg);
+
+        var rLogo = document.getElementById("receiptLogo");
+        rLogo.setAttribute("aria-label", "School logo");
+        while (rLogo.firstChild) rLogo.removeChild(rLogo.firstChild);
+        var rImg = document.createElement("img");
+        rImg.src = src;
+        rImg.alt = "School logo";
+        rLogo.appendChild(rImg);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ================================================================
+    // PRINT
+    // ================================================================
+    function doPrint() {
+      if (!validate()) return;
+      window.print();
+    }
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    function init() {
+      // Restore saved page size from session
+      try {
+        var saved = sessionStorage.getItem("kidora-receipt-size");
+        if (saved && ["a4","a5","a6"].includes(saved)) {
+          var radio = document.querySelector("input[name=\"pageSize\"][value=\"" + saved + "\"]");
+          if (radio) radio.checked = true;
+          state.pageSize = saved;
+        }
+      } catch (e) {}
+
+      applyPageSize(state.pageSize);
+      renderFees();
+      syncPreview();
+
+      // Live preview for all text fields
+      var textFields = [
+        "schoolName","schoolAddress","receiptNumber","receiptDate",
+        "parentName","studentName","className","rollNumber",
+        "paymentMethod","notes","signatureName"
+      ];
+      textFields.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("input",  syncPreview);
+        el.addEventListener("change", syncPreview);
+        // Clear field error on correction
+        el.addEventListener("input", function () { clearError(id); });
+      });
+
+      // Add fee
+      document.getElementById("addFee").addEventListener("click", function () {
+        state.fees.push({ id: uid(), description: "", paise: 0 });
         renderFees();
         syncPreview();
-        ids.forEach(id => document.getElementById(id).addEventListener("input", syncPreview));
-        ids.forEach(id => document.getElementById(id).addEventListener("change", syncPreview));
-        document.getElementById("addFee").addEventListener("click", () => {
-          state.fees.push({ id: crypto.randomUUID(), description: "", amount: 0 });
-          renderFees();
-          syncPreview();
-        });
-        document.getElementById("feeItems").addEventListener("input", event => {
-          const descId = event.target.getAttribute("data-fee-desc");
-          const amountId = event.target.getAttribute("data-fee-amount");
-          const fee = state.fees.find(item => item.id === (descId || amountId));
-          if (!fee) return;
-          if (descId) fee.description = event.target.value;
-          if (amountId) fee.amount = Number(event.target.value || 0);
-          syncPreview();
-        });
-        document.getElementById("feeItems").addEventListener("click", event => {
-          const removeId = event.target.getAttribute("data-remove");
-          if (!removeId) return;
-          state.fees = state.fees.filter(item => item.id !== removeId);
-          renderFees();
-          syncPreview();
-        });
-        document.getElementById("logoInput").addEventListener("change", event => {
-          const file = event.target.files && event.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = () => {
-            const img = `<img alt="" src="${reader.result}" />`;
-            document.getElementById("logoThumb").innerHTML = img;
-            document.getElementById("receiptLogo").innerHTML = img;
-          };
-          reader.readAsDataURL(file);
-        });
-      }
+        var inputs = document.querySelectorAll("[data-fee-desc]");
+        if (inputs.length) inputs[inputs.length - 1].focus();
+        var feesErrEl = document.getElementById("err-fees");
+        if (feesErrEl) feesErrEl.textContent = "";
+      });
 
-      init();
-    </script>
-  </body>
+      // Fee field input (description + amount)
+      document.getElementById("feeItems").addEventListener("input", function (event) {
+        var descId   = event.target.dataset.feeDesc;
+        var amountId = event.target.dataset.feeAmount;
+        var feeId    = descId || amountId;
+        var fee      = state.fees.find(function (f) { return f.id === feeId; });
+        if (!fee) return;
+
+        if (descId) {
+          // Store raw string; rendered via textContent — never innerHTML
+          fee.description = event.target.value;
+          var descErr = document.getElementById("err-desc-" + feeId);
+          if (descErr && fee.description.trim()) {
+            descErr.textContent = "";
+            event.target.classList.remove("invalid");
+          }
+        }
+        if (amountId) {
+          var p = parsePaise(event.target.value);
+          fee.paise = (p !== null) ? p : 0;
+          var amtErr = document.getElementById("err-amt-" + feeId);
+          if (amtErr && fee.paise > 0) {
+            amtErr.textContent = "";
+            event.target.classList.remove("invalid");
+          }
+        }
+        syncPreview();
+      });
+
+      // Fee remove
+      document.getElementById("feeItems").addEventListener("click", function (event) {
+        var removeBtn = event.target.closest("[data-remove]");
+        if (!removeBtn) return;
+        var removeId = removeBtn.dataset.remove;
+        if (state.fees.length <= 1) return;
+        state.fees = state.fees.filter(function (f) { return f.id !== removeId; });
+        renderFees();
+        syncPreview();
+        document.getElementById("addFee").focus();
+      });
+
+      // Logo upload
+      document.getElementById("logoInput").addEventListener("change", handleLogoUpload);
+
+      // Page size selector
+      document.querySelectorAll("input[name=\"pageSize\"]").forEach(function (radio) {
+        radio.addEventListener("change", function () {
+          if (radio.checked) applyPageSize(radio.value);
+        });
+      });
+
+      // Print buttons
+      document.getElementById("printBtn").addEventListener("click",    doPrint);
+      document.getElementById("printBtnTop").addEventListener("click", doPrint);
+    }
+
+    init();
+  </script>
+</body>
 </html>
