@@ -215,7 +215,6 @@ Additional checks:
 | PS-7 | A5 landscape: font sizes visibly smaller than A4 | Yes — compact density |
 | PS-8 | A4 portrait with 10+ fee rows | No overflow warning (A4 holds long receipts) |
 | PS-9 | A5 portrait with 5 fee rows and short address | No overflow warning (false-positive fix) |
-| PS-10 | A6 radio button | Not present in UI — A6 is not supported |
 
 ---
 
