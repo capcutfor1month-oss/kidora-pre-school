@@ -804,10 +804,10 @@
 
     /* ── Mobile preview: Fit-width / Actual-size toggle ─────────── */
     .preview-fit-row {
-      display: none;   /* desktop: hidden; shown at ≤ 640 px */
+      display: none;   /* desktop: hidden; shown at ≤ 768 px */
       gap: 6px; margin-bottom: 8px;
     }
-    @media (max-width: 640px) { .preview-fit-row { display: flex; } }
+    @media (max-width: 768px) { .preview-fit-row { display: flex; } }
 
     .fit-toggle-btn {
       flex: 1; min-height: 36px;
@@ -1892,7 +1892,7 @@
       var receipt = document.getElementById("receipt");
       if (!frame || !receipt) return;
 
-      var isMob = window.innerWidth <= 640;
+      var isMob = window.innerWidth <= 768;
 
       // Desktop or actual-size: remove any fit transform
       if (!isMob || !previewFitMode) {
