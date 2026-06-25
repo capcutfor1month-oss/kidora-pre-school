@@ -206,3 +206,38 @@ Print safety: the theme block comes after the base `@media print` rule, so a ded
   single-click saving becomes a priority.
 - Confirm whether this prototype meets the school's immediate receipt workflow before
   building the full Kidora fees platform.
+
+## Live deployment
+
+| Field | Value |
+|---|---|
+| Platform | here.now (herenowcli v1.0.0) |
+| Slug | `silver-pepper-sydf` |
+| Live URL | https://silver-pepper-sydf.here.now/ |
+| Deployed commit | `4c5bac21ab8e9c6252cb2f69fcfaa1b1df649125` |
+| Deployed on | 2026-06-25 |
+| Password protection | Enabled (HTTP 401 gate — visitor password set server-side) |
+
+### Smoke-test result — 2026-06-25
+
+| Check | Result |
+|---|---|
+| Live URL HTTP status (unauthenticated) | 401 — password gate active ✓ |
+| App loads, no JS errors | ✓ |
+| Refresh clears all entered data | ✓ |
+| Fit width visible at 320 px | ✓ scale 0.417, no page scroll |
+| Fit width visible at 375 px | ✓ scale 0.509, no page scroll |
+| Fit width visible at 390 px | ✓ scale 0.534, no page scroll |
+| Fit width visible at 430 px | ✓ scale 0.595, no page scroll |
+| Fit width visible at 667×375 (landscape) | ✓ scale 0.966, no page scroll |
+| A4 portrait — one page, no overflow | ✓ scrollHeight 535 px |
+| A5 portrait — one page, no overflow | ✓ scrollHeight 484 px |
+| A5 landscape — one page, no overflow | ✓ scrollHeight 325 px |
+| Typed signature tab | ✓ |
+| Drawn signature — white-fill PNG | ✓ data:image/png;base64 |
+| Upload signature tab | ✓ |
+| Service worker registered and activated | ✓ (offline reload ready after first visit) |
+
+Password protection and post-unlock app behaviour confirmed by deploying user.
+Authenticated parts of smoke test (app load after unlock, offline reload) require
+visitor password and were confirmed by the deploying user outside this session.
