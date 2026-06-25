@@ -1639,9 +1639,15 @@
     function initPWA() {
       // Register SW only when served over HTTP/S — file:// cannot use SW or install as PWA.
       if ("serviceWorker" in navigator && location.protocol !== "file:") {
-        navigator.serviceWorker.register(new URL("sw.js", location.href).href)["catch"](function () {
-          // Silent — app works fully without the SW
-        });
+        navigator.serviceWorker.register(new URL("sw.js", location.href).href).then(function () {
+          // Post navigation URL to SW so it is cached on the very first load,
+          // without requiring a second online reload for offline to work.
+          navigator.serviceWorker.ready.then(function (reg) {
+            if (reg.active) {
+              reg.active.postMessage({ type: "CACHE_NAVIGATION", url: location.href });
+            }
+          });
+        })["catch"](function () {});
       }
 
       // Show install banner when browser deems the app installable

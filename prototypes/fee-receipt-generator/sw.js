@@ -40,6 +40,26 @@ self.addEventListener("activate", function (event) {
   self.clients.claim();
 });
 
+// ── Message: cache navigation URL on first unlock ────────────────────
+// The page posts { type: 'CACHE_NAVIGATION', url } after SW becomes active
+// so the app shell HTML is cached on the very first load — before a reload.
+// Only same-origin HTTP/HTTPS URLs are accepted; opaque responses are
+// rejected so a password-gate page is never accidentally cached.
+self.addEventListener("message", function (event) {
+  if (!event.data || event.data.type !== "CACHE_NAVIGATION") return;
+  var url = event.data.url;
+  if (!url || !/^https?:\/\//.test(url)) return;
+  try { if (new URL(url).origin !== self.location.origin) return; }
+  catch (e) { return; }
+  caches.open(CACHE_NAME).then(function (cache) {
+    fetch(url).then(function (response) {
+      if (response.ok && response.type !== "opaque") {
+        cache.put(url, response);
+      }
+    })["catch"](function () {});
+  });
+});
+
 // ── Fetch: network-first for shell, pass-through for everything else ─
 // Data URIs and blob: URLs (uploaded logos / signatures) never reach
 // the SW — they are not http/https requests — so they cannot be cached.

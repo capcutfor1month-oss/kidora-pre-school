@@ -298,3 +298,4 @@ Serve the file over HTTP (e.g. `python3 -m http.server 8080`) and open in Chrome
 | PWA-12 | Inspect service worker Cache Storage | No data URIs, no parent/child/payment/logo/signature data |
 | PWA-13 | Open file:// URL directly | SW not registered; app works normally without SW |
 | PWA-14 | Serve deployed shape with app as `/index.html` at site root | Manifest, SW, installability, and offline reload work; no request to `/school-fees-receipt-generator.html` |
+| PWA-15 | Load once online, do NOT reload → go offline → reload | App loads from cache after a single online visit (first-unlock cache via CACHE_NAVIGATION message) |
