@@ -237,10 +237,21 @@ Open the file in browser DevTools device emulation or on a real device.
 | # | Viewport | Check | Expected |
 |---|----------|-------|----------|
 | U-1 | 375 px (mobile) | All form inputs visible and reachable | Yes, single column layout |
-| U-2 | 375 px | Buttons tappable (min 42 px height) | Yes |
+| U-2 | 375 px | Touch targets ≥ 44 px (add/remove, tabs, uploads, size buttons, print) | Yes |
 | U-3 | 768 px (tablet) | Form readable, preview below | Yes |
-| U-4 | 375 px | No horizontal scroll on the form | No overflow |
-| U-5 | 375 px | Print preview receipt may scroll horizontally | Acceptable; print dimensions unchanged |
+| U-4 | 320 px | No horizontal scroll on form or page | No overflow |
+| U-5 | 375 px | Receipt preview scrolls horizontally within preview frame | Acceptable; print dimensions unchanged |
+| U-6 | 390 px | No horizontal scroll | No overflow |
+| U-7 | 430 px | No horizontal scroll | No overflow |
+| U-8 | 375 px portrait → landscape | Layout reflows, data intact | Yes |
+| U-9 | 375 px | Sticky action bar visible (Form / Preview / Print) | Yes — fixed bottom |
+| U-10 | 375 px | Tap Preview tab → receipt panel appears | Yes |
+| U-11 | 375 px | Tap Form tab → form panel appears | Yes |
+| U-12 | 375 px | Tap Print from Preview tab → validation runs | Yes — invalid fields switch back to Form |
+| U-13 | 375 px | Add/remove fee rows on mobile | Works; no layout break |
+| U-14 | 375 px | Signature tabs (Type / Upload / Draw) tappable | Yes — 44 px height |
+| U-15 | 375 px | Logo upload — tap Upload Logo button | File picker opens; no layout break |
+| U-16 | Desktop (> 640 px) | Action bar hidden; two-column layout | Yes |
 
 ---
 
@@ -261,6 +272,28 @@ Open the file in browser DevTools device emulation or on a real device.
 
 | # | Check | Expected |
 |---|-------|----------|
-| O-1 | Disconnect internet, open file | Fully functional |
+| O-1 | Disconnect internet, open file directly (file://) | Fully functional — no network needed |
 | O-2 | Check browser Network tab | Zero external requests |
 | O-3 | No CDN fonts or remote scripts | Confirmed by network tab |
+
+---
+
+## 15. PWA installability and service worker
+
+Serve the file over HTTP (e.g. `python3 -m http.server 8080`) and open in Chrome or Edge.
+
+| # | Check | Expected |
+|---|-------|----------|
+| PWA-1 | Lighthouse → PWA audit | Installable; all required criteria pass |
+| PWA-2 | Chrome address-bar install icon appears after first load | Yes (requires HTTPS or localhost) |
+| PWA-3 | Install banner appears in app | Yes — shown when `beforeinstallprompt` fires |
+| PWA-4 | Dismiss install banner | Banner hides; not shown again in session |
+| PWA-5 | Install app → open from home screen / desktop | Launches in standalone window, no browser chrome |
+| PWA-6 | DevTools → Application → Manifest | name, short_name, theme_color, icons 192 + 512 all present |
+| PWA-7 | DevTools → Application → Service Workers | sw.js registered and active |
+| PWA-8 | DevTools → Application → Cache Storage → kidora-fee-receipt-v1 | Contains HTML, manifest, icons only — no user data |
+| PWA-9 | Go offline (DevTools Network → Offline) then reload | App loads from cache |
+| PWA-10 | Refresh page while offline | All form fields empty — data not persisted |
+| PWA-11 | Fill in receipt data, refresh | All fields empty — memory cleared on refresh |
+| PWA-12 | Inspect service worker Cache Storage | No data URIs, no parent/child/payment/logo/signature data |
+| PWA-13 | Open file:// URL directly | SW not registered; app works normally without SW |

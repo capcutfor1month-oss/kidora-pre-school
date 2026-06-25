@@ -4,6 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kidora – Fee Receipt</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Kidora Receipt">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <style>
     /* BASE */
     *, *::before, *::after { box-sizing: border-box; }
@@ -413,6 +420,109 @@
     }
 
     /* ================================================================
+       MOBILE ACTION BAR
+       ================================================================ */
+    .mobile-action-bar {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: #ffffff; border-top: 2px solid #e2e8f0;
+      padding: 8px 12px;
+      padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+      gap: 6px; align-items: center;
+    }
+    .mobile-tab-btn {
+      flex: 1; min-height: 44px;
+      border: 1px solid #e2e8f0; border-radius: 8px;
+      background: #f8fafc; font-size: 13px; font-weight: 700; color: #475569;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
+    .mobile-tab-btn.active { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+    .mobile-tab-btn:focus  { outline: 2px solid #bfdbfe; outline-offset: 1px; }
+    .mobile-print-btn {
+      flex: 1.2; min-height: 44px;
+      border: none; border-radius: 8px;
+      background: #2563eb; color: #fff; font-size: 13px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .mobile-print-btn:focus { outline: 2px solid #bfdbfe; }
+
+    /* PWA install banner — hidden until beforeinstallprompt fires */
+    .pwa-install-bar {
+      background: #eff6ff; border-bottom: 1px solid #bfdbfe;
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-size: 13px; color: #1e40af;
+    }
+    .pwa-install-bar p { margin: 0; flex: 1; min-width: 160px; }
+    .pwa-install-btn {
+      border: none; background: #2563eb; color: #fff;
+      border-radius: 6px; padding: 7px 16px; font-size: 13px; font-weight: 700;
+      cursor: pointer; white-space: nowrap; min-height: 36px;
+    }
+    .pwa-install-btn:focus { outline: 2px solid #93c5fd; }
+    .pwa-dismiss-btn {
+      border: none; background: transparent; color: #64748b;
+      font-size: 18px; line-height: 1; cursor: pointer;
+      padding: 4px 8px; min-height: 36px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pwa-dismiss-btn:hover { background: #dbeafe; color: #1e40af; }
+    .pwa-dismiss-btn:focus { outline: 2px solid #bfdbfe; }
+
+    /* Panel switching — only active in screen media so @media print always
+       shows the receipt regardless of which tab the user is on */
+    @media screen {
+      .panel-hidden { display: none !important; }
+    }
+
+    /* ≤ 640 px ── mobile enhancements */
+    @media (max-width: 640px) {
+      .mobile-action-bar { display: flex; }
+      /* bottom padding so last card clears the action bar */
+      main { padding-bottom: 76px; }
+
+      /* Prevent page-level horizontal scroll; receipt scrolls inside preview-frame */
+      .workspace    { overflow-x: hidden; }
+      .preview-frame {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* Touch-target upgrades (≥ 44 px) */
+      .sig-tab       { min-height: 44px; }
+      .size-btn      { min-height: 44px; padding: 8px 16px; }
+      .orient-toggle { min-height: 44px; }
+      .upload-btn    { min-height: 48px; }
+      .remove-btn    { min-height: 44px; padding: 8px 12px; }
+      .secondary-btn,
+      .primary-btn   { min-height: 48px; }
+      #addFee        { min-height: 48px; }
+
+      /* Upload box: stack vertically on narrow screens */
+      .upload-box   { flex-direction: column; align-items: stretch; }
+      .upload-thumb { width: 100%; max-width: 220px; height: 80px; }
+
+      /* Tighten workspace */
+      .workspace    { padding: 12px; gap: 14px; }
+      .preview-card { padding: 12px; }
+      .preview-head { margin-bottom: 10px; }
+
+      /* Sig canvas actions stack on very small screens */
+      .sig-canvas-actions { flex-wrap: wrap; }
+    }
+
+    /* ≤ 400 px ── 320 px phones */
+    @media (max-width: 400px) {
+      .workspace  { padding: 10px; }
+      .form-body  { padding: 10px; gap: 18px; }
+      .card-head  { padding: 12px; }
+      .card-head h1 { font-size: 17px; }
+      .nav        { padding: 0 10px; }
+      .sig-canvas-actions { flex-direction: column; }
+      .sig-canvas-actions button { width: 100%; }
+    }
+
+    /* ================================================================
        PRINT
        ================================================================ */
     @media print {
@@ -440,6 +550,9 @@
 
       .fee-table tr { page-break-inside: avoid; }
       .sign-row { page-break-inside: avoid; }
+
+      /* Always show preview shell in print, even if mobile tab hid it */
+      #previewShell { display: block !important; }
     }
   </style>
 
@@ -458,11 +571,20 @@
     </div>
   </header>
 
+  <!-- PWA install banner — shown only when browser fires beforeinstallprompt -->
+  <div class="pwa-install-bar" id="pwaInstallBar" style="display:none;"
+       role="banner" aria-label="App installation">
+    <p>Install Kidora Receipt on your device for offline access.</p>
+    <button class="pwa-install-btn" type="button" id="pwaInstallBtn">Install</button>
+    <button class="pwa-dismiss-btn" type="button" id="pwaInstallDismiss"
+            aria-label="Dismiss install prompt">✕</button>
+  </div>
+
   <main>
     <div class="workspace">
 
       <!-- ══════════════ LEFT — EDITOR FORM ══════════════ -->
-      <div class="card">
+      <div class="card" id="editorCard">
         <div class="card-head">
           <h1>Fee Receipt Details</h1>
           <p>Fields marked * are required before printing.</p>
@@ -666,7 +788,7 @@
 
 
       <!-- ══════════════ RIGHT — PREVIEW ══════════════ -->
-      <aside class="preview-shell" aria-label="Receipt preview">
+      <aside class="preview-shell" id="previewShell" aria-label="Receipt preview">
         <div class="card preview-card">
 
           <div class="preview-head">
@@ -810,6 +932,22 @@
 
     </div><!-- /workspace -->
   </main>
+
+  <!-- Mobile sticky action bar — visible only on ≤ 640 px -->
+  <nav class="mobile-action-bar" id="mobileActionBar" aria-label="Page navigation">
+    <button class="mobile-tab-btn active" type="button" id="mobileFormTab"
+            aria-pressed="true" aria-controls="editorCard">
+      ✏ Form
+    </button>
+    <button class="mobile-tab-btn" type="button" id="mobilePreviewTab"
+            aria-pressed="false" aria-controls="previewShell">
+      👁 Preview
+    </button>
+    <button class="mobile-print-btn" type="button" id="mobilePrintBtn"
+            aria-label="Print receipt or save as PDF">
+      Print / PDF
+    </button>
+  </nav>
 
   <script>
     // ================================================================
@@ -1412,9 +1550,120 @@
     // ================================================================
     // PRINT
     // ================================================================
+    // Exposed by initMobileTabs so doPrint can switch panels when needed.
+    var showMobilePanel = null;
+
     function doPrint() {
-      if (!validate()) return;
+      // If validation fails, ensure the form tab is visible so errors show.
+      if (!validate()) {
+        if (showMobilePanel) showMobilePanel("form");
+        return;
+      }
       window.print();
+    }
+
+    // ================================================================
+    // MOBILE TABS
+    // ================================================================
+    var mobilePanelCurrent = "form";
+
+    function initMobileTabs() {
+      var formTab     = document.getElementById("mobileFormTab");
+      var previewTab  = document.getElementById("mobilePreviewTab");
+      var mobilePrint = document.getElementById("mobilePrintBtn");
+      var editor      = document.getElementById("editorCard");
+      var preview     = document.getElementById("previewShell");
+      var BREAK       = 640;
+
+      function isMobile() { return window.innerWidth <= BREAK; }
+
+      function showPanel(which) {
+        mobilePanelCurrent = which;
+        if (!isMobile()) {
+          editor.classList.remove("panel-hidden");
+          preview.classList.remove("panel-hidden");
+          return;
+        }
+        var isForm = (which === "form");
+        editor.classList.toggle("panel-hidden",  !isForm);
+        preview.classList.toggle("panel-hidden",   isForm);
+        formTab.classList.toggle("active",   isForm);
+        formTab.setAttribute("aria-pressed",  isForm ? "true" : "false");
+        previewTab.classList.toggle("active", !isForm);
+        previewTab.setAttribute("aria-pressed", isForm ? "false" : "true");
+        if (!isForm) {
+          // Scroll to top of the preview so the paper-size selector is visible
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+
+      showMobilePanel = showPanel;
+
+      formTab.addEventListener("click",    function () { showPanel("form"); });
+      previewTab.addEventListener("click", function () { showPanel("preview"); });
+      mobilePrint.addEventListener("click", doPrint);
+
+      // Restore correct visibility on orientation change / resize
+      window.addEventListener("resize", function () {
+        if (!isMobile()) {
+          editor.classList.remove("panel-hidden");
+          preview.classList.remove("panel-hidden");
+        } else {
+          showPanel(mobilePanelCurrent);
+        }
+      });
+
+      if (isMobile()) showPanel("form");
+    }
+
+    // ================================================================
+    // PWA
+    // ================================================================
+    var deferredInstallPrompt = null;
+
+    function initPWA() {
+      // Register SW only when served over HTTP/S — file:// cannot use SW or install as PWA.
+      if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        navigator.serviceWorker.register("./sw.js")["catch"](function () {
+          // Silent — app works fully without the SW
+        });
+      }
+
+      // Show install banner when browser deems the app installable
+      window.addEventListener("beforeinstallprompt", function (e) {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        var bar = document.getElementById("pwaInstallBar");
+        if (bar) bar.style.display = "";
+      });
+
+      var installBtn = document.getElementById("pwaInstallBtn");
+      if (installBtn) {
+        installBtn.addEventListener("click", function () {
+          if (!deferredInstallPrompt) return;
+          deferredInstallPrompt.prompt();
+          deferredInstallPrompt.userChoice.then(function () {
+            deferredInstallPrompt = null;
+            var bar = document.getElementById("pwaInstallBar");
+            if (bar) bar.style.display = "none";
+          });
+        });
+      }
+
+      var dismissBtn = document.getElementById("pwaInstallDismiss");
+      if (dismissBtn) {
+        dismissBtn.addEventListener("click", function () {
+          var bar = document.getElementById("pwaInstallBar");
+          if (bar) bar.style.display = "none";
+        });
+      }
+
+      // Hide banner after the user installs
+      window.addEventListener("appinstalled", function () {
+        deferredInstallPrompt = null;
+        var bar = document.getElementById("pwaInstallBar");
+        if (bar) bar.style.display = "none";
+      });
     }
 
     // ================================================================
@@ -1437,6 +1686,8 @@
       renderFees();
       syncPreview();
       initCanvas();
+      initMobileTabs();
+      initPWA();
 
       // Text field live sync
       var textFields = ["schoolName","schoolAddress","receiptNumber","receiptDate",

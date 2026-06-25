@@ -26,6 +26,11 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 | File | Purpose |
 |------|---------|
 | `school-fees-receipt-generator.html` | Complete standalone tool — HTML, CSS, JS in one file |
+| `manifest.json` | Web app manifest for PWA installation |
+| `sw.js` | Service worker — caches app shell only; never touches user data |
+| `icons/icon-192.png` | PWA icon 192 × 192 px |
+| `icons/icon-512.png` | PWA icon 512 × 512 px (maskable) |
+| `icons/icon.svg` | Scalable icon source |
 | `HANDOFF.md` | This file |
 | `TESTS.md` | Manual verification checklist |
 
@@ -129,6 +134,41 @@ prototypes/fee-receipt-generator/school-fees-receipt-generator.html
 
 See `TESTS.md` for the full manual verification checklist covering security, money, dates,
 validation, print, page sizes, logo upload, mobile, accessibility, and offline operation.
+
+## PWA / Offline use
+
+PWA features (install prompt, service worker, offline launch) activate only when the file is
+served over **HTTP or HTTPS** — they are silently skipped when opened as a `file://` URL.
+
+**Quick local server:**
+```
+cd prototypes/fee-receipt-generator
+python3 -m http.server 8080
+# Open http://localhost:8080/school-fees-receipt-generator.html
+```
+
+Chrome and Edge will show an install icon in the address bar after the first successful load.
+The in-app install banner appears when the browser fires `beforeinstallprompt`.
+
+**Cache policy** — the service worker (`sw.js`) caches only:
+- `school-fees-receipt-generator.html`
+- `manifest.json`
+- `icons/icon-192.png`, `icons/icon-512.png`, `icons/icon.svg`
+
+It never caches, persists, or transmits any user-entered data. Logos and signatures are
+uploaded as `data:` URIs (not HTTP requests) so the SW cannot intercept them. All receipt
+data lives in page memory only and is cleared automatically on refresh.
+
+## Mobile use
+
+On phones (≤ 640 px) a sticky bottom action bar replaces the in-page print button:
+- **✏ Form** tab — shows the entry form
+- **👁 Preview** tab — shows the live receipt preview
+- **Print / PDF** — validates and opens the browser print dialog
+
+The receipt preview scrolls horizontally within its frame when wider than the screen.
+Print output is unaffected — the `@media print` rules show the receipt regardless of which
+tab is active.
 
 ## Suggested next steps (not this task)
 
