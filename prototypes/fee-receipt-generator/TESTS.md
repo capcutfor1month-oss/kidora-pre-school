@@ -280,28 +280,39 @@ Open the file in browser DevTools device emulation or on a real device.
 
 ## 16. Visual theme
 
-Open `school-fees-receipt-generator.html` in a browser (served or `file://`).
+Open `school-fees-receipt-generator.html` served over HTTP.
 
 | # | Check | Expected |
 |---|-------|----------|
-| VT-1 | Header background colour | Deep navy (`#0d1b5e`) |
-| VT-2 | Header bottom edge | Thin gold (`#ffc107`) bar |
-| VT-3 | Brand mark (K square) | Gold background, navy K |
-| VT-4 | Brand title / subtitle | White text on navy |
-| VT-5 | Form section headings (School Info, Receipt Details…) | Navy text, blue left-rule stripe |
-| VT-6 | Total amount colour | Navy (not blue) |
-| VT-7 | Card borders | Indigo-tinted (`#c7d2fe`) |
-| VT-8 | Page background | Light indigo-tinted (`#eef1fb`) |
-| VT-9 | PWA install banner (trigger via DevTools `beforeinstallprompt`) | Navy bar, gold bottom edge, gold Install button |
-| VT-10 | Mobile action bar (≤ 640 px) | Navy bar, gold top edge, gold Print button |
-| VT-11 | Active Form/Preview tab on mobile | Blue background, gold border |
-| VT-12 | Receipt title strip (on-screen and printed) | Navy background, white uppercase text |
-| VT-13 | Fee table column headers | Navy background, white text |
-| VT-14 | Receipt outer border | Navy (`#0d1b5e`) |
-| VT-15 | School name in receipt | Navy text |
-| VT-16 | Print A4 portrait — greyscale PDF | Title and table headers print as dark fills; all text readable |
-| VT-17 | All focus outlines visible | Yes — unchanged from pre-theme |
-| VT-18 | All touch targets ≥ 44 px | Yes — unchanged from pre-theme |
+| VT-1 | Header background | White |
+| VT-2 | Header bottom edge | 4 px rainbow stripe: red → orange → yellow → green → blue → purple |
+| VT-3 | Brand mark (K square) | Navy `#1a237e` background, white K |
+| VT-4 | Brand title | Navy text on white |
+| VT-5 | Page background | Warm cream `#f8f8f2` with subtle dot grid |
+| VT-6 | Section heading — School Information | Green pill badge (`#2e7d32`) |
+| VT-7 | Section heading — Receipt Details | Blue pill badge (`#1565c0`) |
+| VT-8 | Section heading — Student & Parent | Orange pill badge (`#e65100`) |
+| VT-9 | Section heading — Fee Details | Purple pill badge (`#6a1b9a`) |
+| VT-10 | Section heading — Payment Details | Teal pill badge |
+| VT-11 | Section heading — Authorized Signature | Red pill badge |
+| VT-12 | Fee rows — left accent stripe | Cycles green → orange → blue → purple |
+| VT-13 | Add Fee Item button | Green pill, green text |
+| VT-14 | Print / Save as PDF button | Navy pill, white text, rounded |
+| VT-15 | Upload area | Light blue (`#e3f2fd`) with dashed indigo border |
+| VT-16 | Total amount | Navy text, light blue row background |
+| VT-17 | PWA install banner | Navy bg, gold bottom edge, gold Install pill button |
+| VT-18 | Mobile action bar (≤ 640 px) | Navy bg, gold top edge, gold Print pill, transparent tab buttons |
+| VT-19 | Card borders | Soft indigo `#c5cae9` |
+| VT-20 | Signature tabs | Pill group: active tab navy, white text |
+| VT-21 | Receipt title strip — on-screen | Light indigo `#e8eaf6` background, navy text |
+| VT-22 | Fee table column headers — on-screen | Light indigo `#e8eaf6` background, navy text |
+| VT-23 | Receipt outer border | Medium indigo `#3949ab`, 1.5 px |
+| VT-24 | School name in receipt | Navy text |
+| VT-25 | Print A4 portrait PDF | White background (no dot grid), receipt only, light indigo tints, no dark fills |
+| VT-26 | Print greyscale readability | All text readable; light tinted areas print as very light grey |
+| VT-27 | All focus outlines visible | Yes — unchanged |
+| VT-28 | All touch targets ≥ 44 px | Yes — unchanged |
+| VT-29 | App icon (192 + 512 PNG) | Navy `#1a237e` background, gold `#f9a825` K |
 
 ---
 

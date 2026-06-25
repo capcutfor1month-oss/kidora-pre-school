@@ -172,21 +172,33 @@ tab is active.
 
 ## Visual theme
 
-Brand tokens are defined as CSS custom properties in the `KIDORA BRAND THEME` block near the bottom of the `<style>` section:
+Brand tokens are defined as CSS custom properties in the `KIDORA BRAND THEME v2` block near the bottom of the `<style>` section.
+
+Visual language derived from Canva designs DAHNeK3kHHg (preschool flyer) and DAHNgxqlwpk (fee payment record):
 
 | Token | Value | Used for |
 |-------|-------|----------|
-| `--kid-navy` | `#0d1b5e` | Header bar, receipt title, fee-table header, receipt border |
-| `--kid-blue` | `#2563eb` | Primary interactive blue (buttons, focus rings, active states) |
-| `--kid-gold` | `#ffc107` | Accents — header bottom edge, install banner, mobile print button, active tab border |
-| `--kid-blue-lt` | `#eff6ff` | Total-row background tint |
-| `--kid-bg` | `#eef1fb` | Page background (light indigo-tinted) |
-| `--kid-border` | `#c7d2fe` | Card and form borders (indigo-tinted) |
+| `--kid-navy` | `#1a237e` | Brand mark, headings, receipt school name |
+| `--kid-blue` | `#1565c0` | Primary interactive blue, Receipt Details section |
+| `--kid-green` | `#2e7d32` | School Info section badge, Add Fee button (PLAYGROUP) |
+| `--kid-orange` | `#e65100` | Student section badge (NURSERY) |
+| `--kid-purple` | `#6a1b9a` | Fee Details section badge (UKG) |
+| `--kid-teal` | `#00695c` | Payment section badge |
+| `--kid-gold` | `#f9a825` | Header rainbow stripe, mobile bar top edge, Print button |
+| `--kid-bg` | `#f8f8f2` | Warm cream page background |
+| `--kid-border` | `#c5cae9` | Soft indigo card/input borders |
 
-Tokens are derived from Canva designs DAHNgxqlwpk (fee payment card) and DAHNeK3kHHg (preschool flyer).
-The receipt's dark-navy title and table header are print-safe: `print-color-adjust: exact` ensures they print as solid dark fills, readable in greyscale.
+Key visual elements:
+- **Header**: White background with 4px rainbow gradient stripe (K=red → I=orange → D=yellow → O=green → R=blue → A=purple), matching the KIDORA logo letter colours
+- **Background**: Warm cream `#f8f8f2` with subtle dot-grid texture (CSS radial-gradient)
+- **Section headings**: Pill badges with per-section class colour (green/blue/orange/purple/teal/gold/red), matching the PLAYGROUP/NURSERY/LKG/UKG row colours in the fee record
+- **Buttons**: Pill shape (24px radius), primary in navy
+- **Fee rows**: Left accent stripe cycling through class colours
+- **Mobile action bar**: Navy `#1a237e`, gold top edge, gold pill Print button
+- **Receipt (print)**: Light indigo tint `#e8eaf6` on title and table headers — no dark fills; low-ink; greyscale-safe
+- **Icons**: Navy `#1a237e` background, gold `#f9a825` K — PNGs regenerated to match
 
-The SVG app icon (`icons/icon.svg`) uses navy background with gold **K**.  The PNG icons (192/512) were generated from an earlier SVG revision; regenerate them if the icon appearance matters for a production rollout.
+Print safety: the theme block comes after the base `@media print` rule, so a dedicated `@media print { body { background: white !important; background-image: none !important; } }` override at the end of the theme block ensures the dot-grid does not print.
 
 ## Suggested next steps (not this task)
 

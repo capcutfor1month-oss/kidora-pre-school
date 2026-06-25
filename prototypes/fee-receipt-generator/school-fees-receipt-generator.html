@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kidora – Fee Receipt</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#0d1b5e">
+  <meta name="theme-color" content="#1a237e">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -555,56 +555,208 @@
       #previewShell { display: block !important; }
     }
     /* ================================================================
-       KIDORA BRAND THEME
-       Tokens derived from DAHNgxqlwpk (fee payment card) and
-       DAHNeK3kHHg (preschool flyer): deep navy header, gold accent,
-       indigo-tinted borders.  Print-safe: dark backgrounds print as
-       dark fills — high contrast, readable in greyscale.
+       KIDORA BRAND THEME  v2
+       Visual source: DAHNeK3kHHg (preschool flyer) + DAHNgxqlwpk
+       (fee payment record).
+
+       Key visual language:
+       • Header: white + 4-px rainbow stripe (KIDORA letter colours)
+       • Background: warm cream + subtle dot grid (matches flyer bg)
+       • Section headings: pill badges, per-section class colour
+       • Buttons/tabs: pill shape (24-px radius)
+       • Fee rows: cycling left-accent stripes (class row colours)
+       • Receipt: light indigo tint — NO dark fills; low-ink print
        ================================================================ */
+
+    /* ── Tokens ─────────────────────────────────────────────────── */
     :root {
-      --kid-navy:    #0d1b5e;   /* deep navy — header, receipt title, table head */
-      --kid-blue:    #2563eb;   /* primary interactive blue */
-      --kid-blue-dk: #1d4ed8;
-      --kid-blue-lt: #eff6ff;
-      --kid-gold:    #ffc107;   /* warm gold — accents, install bar, mobile print */
-      --kid-bg:      #eef1fb;   /* light blue-tinted page background */
-      --kid-border:  #c7d2fe;   /* indigo-tinted card borders */
+      --kid-navy:      #1a237e;   /* deep indigo-navy — brand, headings */
+      --kid-blue:      #1565c0;   /* primary interactive blue */
+      --kid-blue-dk:   #0d47a1;
+      --kid-blue-lt:   #e3f2fd;   /* total-row tint */
+      --kid-green:     #2e7d32;   /* PLAYGROUP */
+      --kid-green-lt:  #e8f5e9;
+      --kid-orange:    #e65100;   /* NURSERY */
+      --kid-orange-lt: #fff3e0;
+      --kid-purple:    #6a1b9a;   /* UKG */
+      --kid-purple-lt: #f3e5f5;
+      --kid-teal:      #00695c;   /* Payment */
+      --kid-teal-lt:   #e0f2f1;
+      --kid-gold:      #f9a825;   /* star accent */
+      --kid-gold-lt:   #fffde7;
+      --kid-red:       #c62828;   /* Signature / error accent */
+      --kid-red-lt:    #ffebee;
+      --kid-bg:        #f8f8f2;   /* warm cream page background */
+      --kid-border:    #c5cae9;   /* soft indigo card borders */
+      --kid-surface:   #ffffff;
+      --kid-muted:     #455a64;
     }
 
-    /* Page */
-    body { background: var(--kid-bg); }
+    /* ── Page background — warm cream + dot grid ──────────────── */
+    body {
+      background: var(--kid-bg);
+      background-image: radial-gradient(circle, #c5cae9 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
 
-    /* Header — navy bar with gold bottom edge */
-    header { background: var(--kid-navy); border-bottom: 3px solid var(--kid-gold); }
-    .brand-mark { background: var(--kid-gold); color: var(--kid-navy); }
-    .brand-title { color: #ffffff; }
-    .brand-subtitle { color: rgba(255,255,255,0.65); }
+    /* ── Header — white, rainbow bottom stripe ────────────────── */
+    header {
+      background: var(--kid-surface);
+      border-bottom: none;
+      position: relative;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 4px;
+      /* K=red  I=orange  D=yellow  O=green  R=blue  A=purple */
+      background: linear-gradient(
+        90deg,
+        #e53935 0%, #e53935 16.6%,
+        #f57c00 16.6%, #f57c00 33.2%,
+        #fdd835 33.2%, #fdd835 49.8%,
+        #43a047 49.8%, #43a047 66.4%,
+        #1e88e5 66.4%, #1e88e5 83%,
+        #8e24aa 83%, #8e24aa 100%
+      );
+    }
+    .brand-mark {
+      background: var(--kid-navy);
+      color: #ffffff;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .brand-title   { color: var(--kid-navy); font-weight: 900; }
+    .brand-subtitle { color: var(--kid-muted); }
     .tool-badge {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.22);
-      color: rgba(255,255,255,0.9);
-    }
-
-    /* Cards — indigo-tinted border */
-    .card { border-color: var(--kid-border); }
-    .card-head { border-bottom-color: var(--kid-border); }
-
-    /* Form section headings — navy text, blue left rule */
-    .form-section h2 {
+      background: var(--kid-blue-lt);
+      border-color: var(--kid-border);
       color: var(--kid-navy);
-      border-left: 3px solid var(--kid-blue);
-      padding-left: 10px;
-      margin-left: -2px;
+      border-radius: 20px;
     }
 
-    /* Fee total row */
-    .total-row { background: var(--kid-blue-lt); border-color: var(--kid-border); }
-    .total-amount { color: var(--kid-navy); }
+    /* ── Cards — rounder, warm shadow, indigo border ──────────── */
+    .card {
+      border-color: var(--kid-border);
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(26,35,126,0.07);
+    }
+    .card-head { border-bottom-color: var(--kid-border); }
+    .card-head h1 { color: var(--kid-navy); }
 
-    /* PWA install banner — navy with gold strip and button */
+    /* ── Form section headings — pill badges with class colours ── */
+    .form-section h2 {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      /* default (overridden per section) */
+      background: var(--kid-blue-lt);
+      color: var(--kid-blue);
+    }
+    /* Per-section class colours matching fee record row colours */
+    #sec-school  { background: var(--kid-green-lt);  color: var(--kid-green);  }
+    #sec-receipt { background: var(--kid-blue-lt);   color: var(--kid-blue);   }
+    #sec-student { background: var(--kid-orange-lt); color: var(--kid-orange); }
+    #sec-fees    { background: var(--kid-purple-lt); color: var(--kid-purple); }
+    #sec-payment { background: var(--kid-teal-lt);   color: var(--kid-teal);   }
+    #sec-notes   { background: var(--kid-gold-lt);   color: #8a6000;           }
+    #sec-sig     { background: var(--kid-red-lt);    color: var(--kid-red);    }
+
+    /* ── Inputs / selects ─────────────────────────────────────── */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select { border-color: var(--kid-border); border-radius: 8px; }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--kid-blue);
+      outline-color: #bbdefb;
+    }
+
+    /* ── Upload area ─────────────────────────────────────────── */
+    .upload-box {
+      background: var(--kid-blue-lt);
+      border: 1.5px dashed #9fa8da;
+      border-radius: 12px;
+    }
+    .upload-thumb { border-color: var(--kid-border); border-radius: 8px; }
+    .upload-btn {
+      border-color: var(--kid-border);
+      border-radius: 20px;
+      font-weight: 700;
+    }
+    .upload-btn:hover { background: var(--kid-blue-lt); }
+
+    /* ── Fee rows — cycling left accent stripes ───────────────── */
+    .fee-item {
+      border-color: var(--kid-border);
+      border-radius: 10px;
+    }
+    .fee-item:nth-child(4n+1) { border-left-width: 3px; border-left-color: var(--kid-green);  }
+    .fee-item:nth-child(4n+2) { border-left-width: 3px; border-left-color: var(--kid-orange); }
+    .fee-item:nth-child(4n+3) { border-left-width: 3px; border-left-color: var(--kid-blue);   }
+    .fee-item:nth-child(4n+4) { border-left-width: 3px; border-left-color: var(--kid-purple); }
+
+    /* ── Total row ──────────────────────────────────────────────  */
+    .total-row  { background: var(--kid-blue-lt); border-color: var(--kid-border); border-radius: 10px; }
+    .total-amount { color: var(--kid-navy); font-size: 22px; }
+
+    /* ── Buttons — pill shape ────────────────────────────────── */
+    .primary-btn {
+      background: var(--kid-navy);
+      border-radius: 24px;
+      letter-spacing: 0.02em;
+    }
+    .primary-btn:hover { background: var(--kid-blue-dk); }
+    .primary-btn:focus, .secondary-btn:focus { outline-color: #bbdefb; }
+    .secondary-btn {
+      border-color: var(--kid-border);
+      border-radius: 24px;
+      color: var(--kid-navy);
+    }
+    .secondary-btn:hover { background: var(--kid-blue-lt); border-color: var(--kid-blue); }
+
+    /* Add Fee button — green (PLAYGROUP) pill */
+    #addFee {
+      background: var(--kid-green-lt);
+      border-color: var(--kid-green);
+      color: var(--kid-green);
+      border-radius: 24px;
+      font-weight: 800;
+    }
+    #addFee:hover { background: #c8e6c9; }
+
+    /* Remove button */
+    .remove-btn { border-radius: 6px; }
+
+    /* ── Size / orient buttons ───────────────────────────────── */
+    .size-btn { border-radius: 20px; border-color: var(--kid-border); }
+    .size-options input[type="radio"]:checked + .size-btn {
+      background: var(--kid-navy);
+      border-color: var(--kid-navy);
+    }
+    .orient-toggle { border-radius: 20px; }
+    .orient-toggle.active { border-color: var(--kid-blue); color: var(--kid-blue); background: var(--kid-blue-lt); }
+
+    /* ── Signature tabs — pill group ────────────────────────── */
+    .sig-tabs { background: #eef0fb; border-radius: 24px; }
+    .sig-tab  { border-radius: 20px; color: var(--kid-muted); }
+    .sig-tab.active {
+      background: var(--kid-navy);
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(26,35,126,0.2);
+    }
+
+    /* ── PWA install banner ──────────────────────────────────── */
     .pwa-install-bar {
       background: var(--kid-navy);
-      border-bottom: 2px solid var(--kid-gold);
+      border-bottom: 3px solid var(--kid-gold);
       color: #ffffff;
     }
     .pwa-install-bar p { color: rgba(255,255,255,0.92); }
@@ -612,43 +764,69 @@
       background: var(--kid-gold);
       color: var(--kid-navy);
       font-weight: 800;
+      border-radius: 20px;
     }
-    .pwa-install-btn:focus { outline-color: rgba(255,201,7,0.5); }
-    .pwa-dismiss-btn { color: rgba(255,255,255,0.6); }
-    .pwa-dismiss-btn:hover { background: rgba(255,255,255,0.1); color: #ffffff; }
+    .pwa-install-btn:focus { outline-color: rgba(249,168,37,0.5); }
+    .pwa-dismiss-btn { color: rgba(255,255,255,0.65); border-radius: 6px; }
+    .pwa-dismiss-btn:hover { background: rgba(255,255,255,0.12); color: #ffffff; }
 
-    /* Mobile action bar — navy with gold bottom-edge, gold print button */
+    /* ── Mobile action bar — navy + gold + pill print button ─── */
     .mobile-action-bar {
       background: var(--kid-navy);
-      border-top: 2px solid var(--kid-gold);
+      border-top: 3px solid var(--kid-gold);
     }
     .mobile-tab-btn {
       background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.16);
-      color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.80);
+      border-radius: 20px;
     }
     .mobile-tab-btn.active {
-      background: var(--kid-blue);
+      background: rgba(255,255,255,0.18);
       border-color: var(--kid-gold);
       color: #ffffff;
     }
-    .mobile-tab-btn:focus { outline-color: rgba(255,255,255,0.35); }
+    .mobile-tab-btn:focus  { outline-color: rgba(255,255,255,0.4); }
     .mobile-print-btn {
       background: var(--kid-gold);
       color: var(--kid-navy);
       font-weight: 800;
+      border-radius: 20px;
     }
-    .mobile-print-btn:focus { outline-color: rgba(255,201,7,0.5); }
+    .mobile-print-btn:focus { outline-color: rgba(249,168,37,0.5); }
 
-    /* Receipt — navy border, navy title bar, navy table header */
-    .receipt-border { border-color: var(--kid-navy); }
-    .school-name    { color: var(--kid-navy); }
-    .receipt-title  {
-      background: var(--kid-navy);
-      color: #ffffff;
-      border-bottom-color: var(--kid-navy);
+    /* ── Overflow warning / validation summary ───────────────── */
+    .overflow-warning { border-color: var(--kid-gold); background: #fffde7; color: #4e3500; border-radius: 8px; }
+    .validation-summary { border-radius: 10px; }
+
+    /* ── Preview frame ───────────────────────────────────────── */
+    .preview-frame { background: #eef0fb; border-color: var(--kid-border); border-radius: 10px; }
+
+    /* ── Print: suppress decorative backgrounds (theme block loads
+          after the base @media print rule, so must re-declare here) */
+    @media print {
+      body { background: white !important; background-image: none !important; }
     }
-    .fee-table th   { background: var(--kid-navy); color: #ffffff; }
+
+    /* ── Receipt — restrained, low-ink, greyscale-safe ──────── */
+    /* Border: medium indigo — visible but not heavy fill */
+    .receipt-border { border-color: #3949ab; border-width: 1.5px; }
+    /* School name: navy for identity */
+    .school-name { color: var(--kid-navy); }
+    /* Title strip: light indigo tint — NOT solid dark fill */
+    .receipt-title {
+      background: #e8eaf6;
+      color: var(--kid-navy);
+      border-bottom-color: #c5cae9;
+    }
+    /* Fee table header: same light indigo tint */
+    .fee-table th { background: #e8eaf6; color: var(--kid-navy); }
+    /* Total row: very light blue */
+    .fee-table .total-tr td { background: #e3f2fd; color: var(--kid-navy); }
+    /* Detail labels: indigo muted */
+    .detail-label { color: #5c6bc0; }
+    /* Meta labels */
+    .meta-label { color: #5c6bc0; }
 
   </style>
 
