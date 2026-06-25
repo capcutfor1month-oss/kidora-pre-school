@@ -6,9 +6,10 @@
 
 var CACHE_NAME = "kidora-fee-receipt-v1";
 
-// App-shell files: static assets only — no user data.
-var SHELL = [
-  "./school-fees-receipt-generator.html",
+// Static app-shell assets only — no user data.
+// The HTML shell is cached from the actual navigation URL at runtime so the
+// app works whether it is served as "/", "/index.html", or another owned path.
+var SHELL_ASSETS = [
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -19,7 +20,7 @@ var SHELL = [
 self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(SHELL);
+      return cache.addAll(SHELL_ASSETS);
     })
   );
   self.skipWaiting();
@@ -47,11 +48,13 @@ self.addEventListener("fetch", function (event) {
   if (!event.request.url.startsWith(self.location.origin)) return;
 
   var reqPath = new URL(event.request.url).pathname;
-  var isShell = SHELL.some(function (path) {
+  var isShellAsset = SHELL_ASSETS.some(function (path) {
     return reqPath === new URL(path, self.location.href).pathname;
   });
+  var isHtmlNavigation = event.request.mode === "navigate" ||
+    (event.request.headers.get("accept") || "").indexOf("text/html") !== -1;
 
-  if (!isShell) return; // let browser handle non-shell requests normally
+  if (!isShellAsset && !isHtmlNavigation) return; // let browser handle non-shell requests normally
 
   // Network-first: serve fresh copy when online, cached copy when offline.
   event.respondWith(
@@ -66,7 +69,14 @@ self.addEventListener("fetch", function (event) {
         return response;
       })
       .catch(function () {
-        return caches.match(event.request);
+        return caches.match(event.request)
+          .then(function (cached) {
+            if (cached) return cached;
+            if (!isHtmlNavigation) return undefined;
+            return caches.match("./").then(function (rootCached) {
+              return rootCached || caches.match("./index.html");
+            });
+          });
       })
   );
 });

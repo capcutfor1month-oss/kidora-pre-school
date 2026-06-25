@@ -69,7 +69,7 @@
     textarea,
     select {
       width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;
-      min-height: 40px; padding: 8px 12px; font: inherit;
+      min-height: 44px; padding: 8px 12px; font: inherit;
       font-size: 14px; color: #020817; background: #ffffff; transition: border-color 0.15s;
     }
     textarea { min-height: 72px; resize: vertical; }
@@ -1297,7 +1297,9 @@
     // ================================================================
     // VALIDATION
     // ================================================================
-    function validate() {
+    function validate(options) {
+      options = options || {};
+      var shouldFocus = options.focus !== false;
       var errors = [], firstInvalid = null;
 
       function markInvalid(fid, msg) {
@@ -1366,13 +1368,21 @@
           var li = document.createElement("li"); li.textContent = msg; ul.appendChild(li);
         });
         summary.appendChild(ul);
-        if (firstInvalid) { firstInvalid.focus(); firstInvalid.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
-        else summary.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        if (shouldFocus) focusValidationTarget(firstInvalid || summary);
         return false;
       }
       summary.classList.remove("visible");
       while (summary.firstChild) summary.removeChild(summary.firstChild);
       return true;
+    }
+
+    function focusValidationTarget(target) {
+      if (!target) return;
+      if (target.focus) {
+        try { target.focus({ preventScroll: true }); }
+        catch (e) { target.focus(); }
+      }
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     // ================================================================
@@ -1555,8 +1565,13 @@
 
     function doPrint() {
       // If validation fails, ensure the form tab is visible so errors show.
-      if (!validate()) {
+      if (!validate({ focus: false })) {
         if (showMobilePanel) showMobilePanel("form");
+        window.setTimeout(function () {
+          var firstInvalid = document.querySelector(".invalid");
+          var summary = document.getElementById("validationSummary");
+          focusValidationTarget(firstInvalid || summary);
+        }, 0);
         return;
       }
       window.print();
@@ -1624,7 +1639,7 @@
     function initPWA() {
       // Register SW only when served over HTTP/S — file:// cannot use SW or install as PWA.
       if ("serviceWorker" in navigator && location.protocol !== "file:") {
-        navigator.serviceWorker.register("./sw.js")["catch"](function () {
+        navigator.serviceWorker.register(new URL("sw.js", location.href).href)["catch"](function () {
           // Silent — app works fully without the SW
         });
       }

@@ -2,7 +2,7 @@
   "name": "Kidora Fee Receipt Generator",
   "short_name": "Kidora Receipt",
   "description": "Internal staff tool — generate and print school fee receipts offline.",
-  "start_url": "./school-fees-receipt-generator.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

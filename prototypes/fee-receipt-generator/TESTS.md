@@ -297,3 +297,4 @@ Serve the file over HTTP (e.g. `python3 -m http.server 8080`) and open in Chrome
 | PWA-11 | Fill in receipt data, refresh | All fields empty — memory cleared on refresh |
 | PWA-12 | Inspect service worker Cache Storage | No data URIs, no parent/child/payment/logo/signature data |
 | PWA-13 | Open file:// URL directly | SW not registered; app works normally without SW |
+| PWA-14 | Serve deployed shape with app as `/index.html` at site root | Manifest, SW, installability, and offline reload work; no request to `/school-fees-receipt-generator.html` |
