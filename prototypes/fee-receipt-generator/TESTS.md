@@ -278,6 +278,33 @@ Open the file in browser DevTools device emulation or on a real device.
 
 ---
 
+## 16. Visual theme
+
+Open `school-fees-receipt-generator.html` in a browser (served or `file://`).
+
+| # | Check | Expected |
+|---|-------|----------|
+| VT-1 | Header background colour | Deep navy (`#0d1b5e`) |
+| VT-2 | Header bottom edge | Thin gold (`#ffc107`) bar |
+| VT-3 | Brand mark (K square) | Gold background, navy K |
+| VT-4 | Brand title / subtitle | White text on navy |
+| VT-5 | Form section headings (School Info, Receipt Details…) | Navy text, blue left-rule stripe |
+| VT-6 | Total amount colour | Navy (not blue) |
+| VT-7 | Card borders | Indigo-tinted (`#c7d2fe`) |
+| VT-8 | Page background | Light indigo-tinted (`#eef1fb`) |
+| VT-9 | PWA install banner (trigger via DevTools `beforeinstallprompt`) | Navy bar, gold bottom edge, gold Install button |
+| VT-10 | Mobile action bar (≤ 640 px) | Navy bar, gold top edge, gold Print button |
+| VT-11 | Active Form/Preview tab on mobile | Blue background, gold border |
+| VT-12 | Receipt title strip (on-screen and printed) | Navy background, white uppercase text |
+| VT-13 | Fee table column headers | Navy background, white text |
+| VT-14 | Receipt outer border | Navy (`#0d1b5e`) |
+| VT-15 | School name in receipt | Navy text |
+| VT-16 | Print A4 portrait — greyscale PDF | Title and table headers print as dark fills; all text readable |
+| VT-17 | All focus outlines visible | Yes — unchanged from pre-theme |
+| VT-18 | All touch targets ≥ 44 px | Yes — unchanged from pre-theme |
+
+---
+
 ## 15. PWA installability and service worker
 
 Serve the file over HTTP (e.g. `python3 -m http.server 8080`) and open in Chrome or Edge.

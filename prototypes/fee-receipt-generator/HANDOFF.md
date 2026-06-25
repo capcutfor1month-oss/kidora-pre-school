@@ -170,6 +170,24 @@ The receipt preview scrolls horizontally within its frame when wider than the sc
 Print output is unaffected — the `@media print` rules show the receipt regardless of which
 tab is active.
 
+## Visual theme
+
+Brand tokens are defined as CSS custom properties in the `KIDORA BRAND THEME` block near the bottom of the `<style>` section:
+
+| Token | Value | Used for |
+|-------|-------|----------|
+| `--kid-navy` | `#0d1b5e` | Header bar, receipt title, fee-table header, receipt border |
+| `--kid-blue` | `#2563eb` | Primary interactive blue (buttons, focus rings, active states) |
+| `--kid-gold` | `#ffc107` | Accents — header bottom edge, install banner, mobile print button, active tab border |
+| `--kid-blue-lt` | `#eff6ff` | Total-row background tint |
+| `--kid-bg` | `#eef1fb` | Page background (light indigo-tinted) |
+| `--kid-border` | `#c7d2fe` | Card and form borders (indigo-tinted) |
+
+Tokens are derived from Canva designs DAHNgxqlwpk (fee payment card) and DAHNeK3kHHg (preschool flyer).
+The receipt's dark-navy title and table header are print-safe: `print-color-adjust: exact` ensures they print as solid dark fills, readable in greyscale.
+
+The SVG app icon (`icons/icon.svg`) uses navy background with gold **K**.  The PNG icons (192/512) were generated from an earlier SVG revision; regenerate them if the icon appearance matters for a production rollout.
+
 ## Suggested next steps (not this task)
 
 - Add a one-click PDF export using `html2pdf.js` or `jsPDF + html2canvas` if offline

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kidora – Fee Receipt</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#0d1b5e">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -554,6 +554,102 @@
       /* Always show preview shell in print, even if mobile tab hid it */
       #previewShell { display: block !important; }
     }
+    /* ================================================================
+       KIDORA BRAND THEME
+       Tokens derived from DAHNgxqlwpk (fee payment card) and
+       DAHNeK3kHHg (preschool flyer): deep navy header, gold accent,
+       indigo-tinted borders.  Print-safe: dark backgrounds print as
+       dark fills — high contrast, readable in greyscale.
+       ================================================================ */
+    :root {
+      --kid-navy:    #0d1b5e;   /* deep navy — header, receipt title, table head */
+      --kid-blue:    #2563eb;   /* primary interactive blue */
+      --kid-blue-dk: #1d4ed8;
+      --kid-blue-lt: #eff6ff;
+      --kid-gold:    #ffc107;   /* warm gold — accents, install bar, mobile print */
+      --kid-bg:      #eef1fb;   /* light blue-tinted page background */
+      --kid-border:  #c7d2fe;   /* indigo-tinted card borders */
+    }
+
+    /* Page */
+    body { background: var(--kid-bg); }
+
+    /* Header — navy bar with gold bottom edge */
+    header { background: var(--kid-navy); border-bottom: 3px solid var(--kid-gold); }
+    .brand-mark { background: var(--kid-gold); color: var(--kid-navy); }
+    .brand-title { color: #ffffff; }
+    .brand-subtitle { color: rgba(255,255,255,0.65); }
+    .tool-badge {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Cards — indigo-tinted border */
+    .card { border-color: var(--kid-border); }
+    .card-head { border-bottom-color: var(--kid-border); }
+
+    /* Form section headings — navy text, blue left rule */
+    .form-section h2 {
+      color: var(--kid-navy);
+      border-left: 3px solid var(--kid-blue);
+      padding-left: 10px;
+      margin-left: -2px;
+    }
+
+    /* Fee total row */
+    .total-row { background: var(--kid-blue-lt); border-color: var(--kid-border); }
+    .total-amount { color: var(--kid-navy); }
+
+    /* PWA install banner — navy with gold strip and button */
+    .pwa-install-bar {
+      background: var(--kid-navy);
+      border-bottom: 2px solid var(--kid-gold);
+      color: #ffffff;
+    }
+    .pwa-install-bar p { color: rgba(255,255,255,0.92); }
+    .pwa-install-btn {
+      background: var(--kid-gold);
+      color: var(--kid-navy);
+      font-weight: 800;
+    }
+    .pwa-install-btn:focus { outline-color: rgba(255,201,7,0.5); }
+    .pwa-dismiss-btn { color: rgba(255,255,255,0.6); }
+    .pwa-dismiss-btn:hover { background: rgba(255,255,255,0.1); color: #ffffff; }
+
+    /* Mobile action bar — navy with gold bottom-edge, gold print button */
+    .mobile-action-bar {
+      background: var(--kid-navy);
+      border-top: 2px solid var(--kid-gold);
+    }
+    .mobile-tab-btn {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.75);
+    }
+    .mobile-tab-btn.active {
+      background: var(--kid-blue);
+      border-color: var(--kid-gold);
+      color: #ffffff;
+    }
+    .mobile-tab-btn:focus { outline-color: rgba(255,255,255,0.35); }
+    .mobile-print-btn {
+      background: var(--kid-gold);
+      color: var(--kid-navy);
+      font-weight: 800;
+    }
+    .mobile-print-btn:focus { outline-color: rgba(255,201,7,0.5); }
+
+    /* Receipt — navy border, navy title bar, navy table header */
+    .receipt-border { border-color: var(--kid-navy); }
+    .school-name    { color: var(--kid-navy); }
+    .receipt-title  {
+      background: var(--kid-navy);
+      color: #ffffff;
+      border-bottom-color: var(--kid-navy);
+    }
+    .fee-table th   { background: var(--kid-navy); color: #ffffff; }
+
   </style>
 
   <style id="page-size-css">@page { size: A4 portrait; margin: 12mm; }</style>
