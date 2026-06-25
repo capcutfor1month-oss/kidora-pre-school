@@ -406,8 +406,8 @@
 
     /* MOBILE */
     @media (max-width: 960px) {
-      .workspace { grid-template-columns: 1fr; padding: 16px; }
-      .preview-shell { position: static; }
+      .workspace { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+      .preview-shell { position: static; width: 100%; min-width: 0; }
       .field-grid { grid-template-columns: 1fr; }
       .fee-grid { grid-template-columns: 1fr; }
       .box-row { grid-template-columns: 1fr; gap: 6px !important; }
@@ -802,10 +802,41 @@
     /* ── Preview frame ───────────────────────────────────────── */
     .preview-frame { background: #eef0fb; border-color: var(--kid-border); border-radius: 10px; }
 
-    /* ── Print: suppress decorative backgrounds (theme block loads
-          after the base @media print rule, so must re-declare here) */
+    /* ── Mobile preview: Fit-width / Actual-size toggle ─────────── */
+    .preview-fit-row {
+      display: none;   /* desktop: hidden; shown at ≤ 640 px */
+      gap: 6px; margin-bottom: 8px;
+    }
+    @media (max-width: 640px) { .preview-fit-row { display: flex; } }
+
+    .fit-toggle-btn {
+      flex: 1; min-height: 36px;
+      border: 1px solid var(--kid-border); border-radius: 20px;
+      background: var(--kid-surface); color: var(--kid-muted);
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+    }
+    .fit-toggle-btn:focus { outline: 2px solid #bbdefb; outline-offset: 1px; }
+    .fit-toggle-btn[aria-pressed="true"] {
+      background: var(--kid-blue-lt); border-color: var(--kid-blue); color: var(--kid-blue);
+    }
+
+    /* In fit mode the frame hides the layout-space the transform left behind */
+    .preview-frame.preview-fit {
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* ── Print: suppress decorative backgrounds + reset fit-mode transforms ─
+          (theme block loads after base @media print, so must re-declare here) */
     @media print {
-      body { background: white !important; background-image: none !important; }
+      body            { background: white !important; background-image: none !important; }
+      .preview-fit-row{ display: none !important; }
+      .preview-frame  { height: auto !important; overflow: visible !important; }
+      #receipt        { transform: none !important; transform-origin: unset !important;
+                        margin-left: 0 !important; }
     }
 
     /* ── Receipt — restrained, low-ink, greyscale-safe ──────── */
@@ -1105,6 +1136,14 @@
           </p>
 
           <div class="overflow-warning" id="overflowWarning" role="alert"></div>
+
+          <!-- Mobile-only: Fit-width / Actual-size toggle -->
+          <div class="preview-fit-row" id="previewFitRow" role="group" aria-label="Preview zoom">
+            <button class="fit-toggle-btn" type="button" id="btnFitWidth"
+                    aria-pressed="true">⊡ Fit width</button>
+            <button class="fit-toggle-btn" type="button" id="btnActualSize"
+                    aria-pressed="false">1:1 Actual size</button>
+          </div>
 
           <!-- Receipt article — only this element is printed -->
           <div class="preview-frame">
@@ -1413,6 +1452,7 @@
       try { sessionStorage.setItem("kidora-landscape", state.landscape ? "1" : "0"); } catch (e) {}
 
       checkOverflow();
+      updatePreviewFit();
     }
 
     // Overflow check: compare actual rendered receipt height (scrollHeight) to
@@ -1566,6 +1606,7 @@
 
       syncSignaturePreview();
       checkOverflow();
+      updatePreviewFit();
     }
 
     // ================================================================
@@ -1826,9 +1867,84 @@
       });
 
       document.getElementById("sigApplyBtn").addEventListener("click", function () {
-        state.signatureImageUrl = canvas.toDataURL("image/png");
+        // Composite drawing onto a white-filled canvas before encoding.
+        // toDataURL("image/png") on a canvas with default transparent bg produces
+        // a PNG that some printer drivers render as blank — white background fixes this.
+        var tmp = document.createElement("canvas");
+        tmp.width  = canvas.width;
+        tmp.height = canvas.height;
+        var tc = tmp.getContext("2d");
+        tc.fillStyle = "#ffffff";
+        tc.fillRect(0, 0, tmp.width, tmp.height);
+        tc.drawImage(canvas, 0, 0);
+        state.signatureImageUrl = tmp.toDataURL("image/png");
         syncPreview();
       });
+    }
+
+    // ================================================================
+    // MOBILE PREVIEW FIT-TO-WIDTH
+    // ================================================================
+    var previewFitMode = true;   // true = Fit width (default); false = Actual size
+
+    function updatePreviewFit() {
+      var frame   = document.querySelector(".preview-frame");
+      var receipt = document.getElementById("receipt");
+      if (!frame || !receipt) return;
+
+      var isMob = window.innerWidth <= 640;
+
+      // Desktop or actual-size: remove any fit transform
+      if (!isMob || !previewFitMode) {
+        receipt.style.transform       = "";
+        receipt.style.transformOrigin = "";
+        frame.style.height            = "";
+        frame.classList.remove("preview-fit");
+        return;
+      }
+
+      // Fit-width mode:
+      // 1. Add class first — CSS width:100%/box-sizing:border-box constrains
+      //    the frame to its parent before we measure; without this the receipt
+      //    expands the frame and clientWidth returns a falsely-large value.
+      frame.classList.add("preview-fit");
+
+      // 2. Reset transform so measurements reflect the receipt's natural size
+      receipt.style.transform = "";
+
+      var receiptW = receipt.scrollWidth;
+      var receiptH = receipt.scrollHeight;
+
+      // 3. Available width = constrained frame width minus horizontal padding
+      var cs   = window.getComputedStyle(frame);
+      var padH = (parseFloat(cs.paddingLeft) || 12) + (parseFloat(cs.paddingRight) || 12);
+      var avail = frame.clientWidth - padH;
+
+      var scale = Math.min(1, avail / receiptW);
+
+      // 4. Scale from top-left — since scale = avail/receiptW, the scaled
+      //    receipt is exactly avail px wide, filling the frame left-to-right.
+      receipt.style.transformOrigin = "top left";
+      receipt.style.transform       = "scale(" + scale + ")";
+
+      // 5. Collapse the empty layout space left by the transform
+      frame.style.height = Math.ceil(receiptH * scale + padH) + "px";
+    }
+
+    function initPreviewFit() {
+      var btnFit    = document.getElementById("btnFitWidth");
+      var btnActual = document.getElementById("btnActualSize");
+      if (!btnFit || !btnActual) return;
+
+      function setMode(fit) {
+        previewFitMode = fit;
+        btnFit.setAttribute("aria-pressed",    fit ? "true"  : "false");
+        btnActual.setAttribute("aria-pressed", fit ? "false" : "true");
+        updatePreviewFit();
+      }
+
+      btnFit.addEventListener("click",    function () { setMode(true);  });
+      btnActual.addEventListener("click", function () { setMode(false); });
     }
 
     // ================================================================
@@ -1883,6 +1999,7 @@
         if (!isForm) {
           // Scroll to top of the preview so the paper-size selector is visible
           window.scrollTo({ top: 0, behavior: "smooth" });
+          updatePreviewFit();
         }
       }
 
@@ -1900,6 +2017,7 @@
         } else {
           showPanel(mobilePanelCurrent);
         }
+        updatePreviewFit();
       });
 
       if (isMobile()) showPanel("form");
@@ -1982,6 +2100,7 @@
       syncPreview();
       initCanvas();
       initMobileTabs();
+      initPreviewFit();
       initPWA();
 
       // Text field live sync

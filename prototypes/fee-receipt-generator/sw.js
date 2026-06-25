@@ -51,13 +51,16 @@ self.addEventListener("message", function (event) {
   if (!url || !/^https?:\/\//.test(url)) return;
   try { if (new URL(url).origin !== self.location.origin) return; }
   catch (e) { return; }
-  caches.open(CACHE_NAME).then(function (cache) {
-    fetch(url).then(function (response) {
-      if (response.ok && response.type !== "opaque") {
-        cache.put(url, response);
-      }
-    })["catch"](function () {});
-  });
+  // event.waitUntil keeps the SW alive until the cache write finishes.
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function (cache) {
+      return fetch(url).then(function (response) {
+        if (response.ok && response.type !== "opaque") {
+          return cache.put(url, response);
+        }
+      });
+    })["catch"](function () {})
+  );
 });
 
 // ── Fetch: network-first for shell, pass-through for everything else ─
